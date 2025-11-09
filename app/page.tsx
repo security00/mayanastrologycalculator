@@ -227,6 +227,13 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Explore More Astrology Tools</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Sample Reading</h3>
+              <p className="text-gray-600 mb-4">See what a complete Mayan astrology reading looks like with our example result page.</p>
+              <Link href="/result" className="text-orange-600 hover:text-orange-700 font-medium">
+                View Sample Reading →
+              </Link>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Daily Mayan Horoscope</h3>
               <p className="text-gray-600 mb-4">Get your daily guidance based on the current Tzolk'in energy and your personal Mayan astrology.</p>
               <span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">Read Today's Energy →
@@ -236,12 +243,6 @@ export default function Home() {
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Mayan Compatibility</h3>
               <p className="text-gray-600 mb-4">Discover how your Mayan astrology aligns with friends, family, and romantic partners.</p>
               <span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">Check Compatibility →
-              </span>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Mayan Calendar Today</h3>
-              <p className="text-gray-600 mb-4">See what day it is in the Mayan calendar and learn about today's spiritual energy.</p>
-              <span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">View Today's Date →
               </span>
             </div>
           </div>

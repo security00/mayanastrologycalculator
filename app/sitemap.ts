@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
-    { url: `${baseUrl}/result`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    // /result page excluded - dynamic content, not for indexing
     { url: `${baseUrl}/guide`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/day-signs`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },

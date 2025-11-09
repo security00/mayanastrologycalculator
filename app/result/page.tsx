@@ -22,6 +22,18 @@ export default function ResultPage() {
     setIsLoading(false);
   }, []);
 
+  // Add noindex meta tag dynamically
+  useEffect(() => {
+    const metaRobots = document.createElement('meta');
+    metaRobots.name = 'robots';
+    metaRobots.content = 'noindex, nofollow';
+    document.head.appendChild(metaRobots);
+
+    return () => {
+      document.head.removeChild(metaRobots);
+    };
+  }, []);
+
   const handleShare = (platform: string) => {
     if (!storedData) return;
 
@@ -74,8 +86,8 @@ export default function ResultPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-amber-900 via-orange-900 to-red-900 shadow-lg">
+        {/* Header */}
+        <header className="bg-gradient-to-r from-amber-900 via-orange-900 to-red-900 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">

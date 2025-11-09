@@ -29,8 +29,10 @@ Disallow: /private/
 Disallow: /*.json$
 Disallow: /api/
 
+# Block dynamic result pages (user-specific content)
+Disallow: /result
+
 # Allow important pages for SEO
 Allow: /
-Allow: /result
 Allow: /guide
 Allow: /about
