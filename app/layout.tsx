@@ -4,7 +4,6 @@ import "./globals.css";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import MicrosoftClarity from "./components/MicrosoftClarity";
 import AhrefsAnalytics from "./components/AhrefsAnalytics";
-import GoogleAdsense from "./components/GoogleAdsense";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -76,6 +75,11 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <meta name="theme-color" content="#ea580c" />
         <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1548791648803369"
+          crossOrigin="anonymous"
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -105,7 +109,6 @@ export default function RootLayout({
         <GoogleAnalytics />
         <MicrosoftClarity />
         <AhrefsAnalytics />
-        <GoogleAdsense />
       </body>
     </html>
   );
