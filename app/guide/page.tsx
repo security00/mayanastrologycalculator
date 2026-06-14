@@ -55,6 +55,8 @@ export default function GuidePage() {
             </div>
             <nav className="hidden md:flex space-x-6">
               <Link href="/" className="text-amber-100 hover:text-white transition-colors">Home</Link>
+              <Link href="/birth-chart" className="text-amber-100 hover:text-white transition-colors">Birth Chart</Link>
+              <Link href="/today" className="text-amber-100 hover:text-white transition-colors">Today</Link>
               <Link href="/guide" className="text-amber-100 hover:text-white transition-colors font-semibold">Guide</Link>
               <Link href="/about" className="text-amber-100 hover:text-white transition-colors">About</Link>
             </nav>
@@ -286,7 +288,9 @@ export default function GuidePage() {
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Today's Mayan Date</h3>
               <p className="text-gray-600 mb-4">See what day it is in the Mayan calendar and how today's energy affects you.</p>
-              <span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">View Today's Energy → </span>
+              <Link href="/today" className="text-orange-600 hover:text-orange-700 font-medium">
+                View Today's Energy →
+              </Link>
 
             </div>
           </div>
