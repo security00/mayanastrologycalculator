@@ -33,7 +33,7 @@ export interface MayanReading {
 }
 
 // The 20 day signs (Nawals) in the Tzolk'in calendar
-const DAY_SIGNS = [
+export const DAY_SIGNS = [
   {
     name: "Imix",
     spanish: "Lagarto",
@@ -337,7 +337,7 @@ const DAY_SIGNS = [
 ];
 
 // The 13 Galactic Tones
-const GALACTIC_TONES = [
+export const GALACTIC_TONES = [
   {
     number: 1,
     name: "Magnetic",
@@ -432,11 +432,11 @@ function calculateDaysSinceCorrelation(date: Date): number {
   const month = date.getMonth() + 1; // JavaScript months are 0-based
   const day = date.getDate();
 
-  let a = Math.floor((14 - month) / 12);
-  let y = year + 4800 - a;
-  let m = month + 12 * a - 3;
+  const a = Math.floor((14 - month) / 12);
+  const y = year + 4800 - a;
+  const m = month + 12 * a - 3;
 
-  let jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+  const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
 
   return jdn - correlationJDN;
 }
@@ -484,7 +484,7 @@ export function calculateTzolkinDate(birthDate: Date): MayanReading {
  * Get detailed interpretation for a Mayan reading
  */
 export function getDetailedInterpretation(reading: MayanReading): string {
-  const { tzolkin, galacticTone, nawal } = reading;
+  const { galacticTone, nawal } = reading;
 
   return `Your Mayan astrology reveals that you were born on ${galacticTone.number} ${nawal.name}, a powerful combination that shapes your spiritual essence and life path.
 

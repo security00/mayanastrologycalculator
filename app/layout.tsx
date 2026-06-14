@@ -4,6 +4,7 @@ import "./globals.css";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import MicrosoftClarity from "./components/MicrosoftClarity";
 import AhrefsAnalytics from "./components/AhrefsAnalytics";
+import GoogleAdsense from "./components/GoogleAdsense";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -59,9 +60,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 };
 
 export default function RootLayout({
@@ -97,12 +95,7 @@ export default function RootLayout({
                 "@type": "Organization",
                 "name": "Mayan Astrology Calculator"
               },
-              "keywords": "mayan astrology, tzolkin calculator, mayan calendar, nawal, day sign, galactic tone, ancient wisdom, sacred calendar",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "reviewCount": "1247"
-              }
+              "keywords": "mayan astrology, tzolkin calculator, mayan calendar, nawal, day sign, galactic tone, ancient wisdom, sacred calendar"
             })
           }}
         />
@@ -112,6 +105,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <MicrosoftClarity />
         <AhrefsAnalytics />
+        <GoogleAdsense />
       </body>
     </html>
   );

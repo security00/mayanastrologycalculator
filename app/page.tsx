@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { calculateTzolkinDate, validateDate } from './lib/mayan-calculator';
 
 export default function Home() {
+  const router = useRouter();
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
@@ -37,7 +39,7 @@ export default function Home() {
         birthDate: { day: dayNum, month: monthNum, year: yearNum }
       }));
 
-      window.location.href = '/result';
+      router.push(`/result?day=${dayNum}&month=${monthNum}&year=${yearNum}`);
     }, 1000);
   };
 
@@ -80,6 +82,7 @@ export default function Home() {
             </div>
             <nav className="hidden md:flex space-x-6">
               <Link href="/" className="text-amber-100 hover:text-white transition-colors">Home</Link>
+              <Link href="/birth-chart" className="text-amber-100 hover:text-white transition-colors">Birth Chart</Link>
               <Link href="/guide" className="text-amber-100 hover:text-white transition-colors">Guide</Link>
               <Link href="/about" className="text-amber-100 hover:text-white transition-colors">About</Link>
             </nav>
@@ -227,10 +230,10 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Explore More Astrology Tools</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Sample Reading</h3>
-              <p className="text-gray-600 mb-4">See what a complete Mayan astrology reading looks like with our example result page.</p>
-              <Link href="/result" className="text-orange-600 hover:text-orange-700 font-medium">
-                View Sample Reading →
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Free Birth Chart</h3>
+              <p className="text-gray-600 mb-4">Learn what appears in a Mayan astrology birth chart and how to read your Tzolk'in signature.</p>
+              <Link href="/birth-chart" className="text-orange-600 hover:text-orange-700 font-medium">
+                Explore Birth Charts →
               </Link>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
@@ -264,6 +267,7 @@ export default function Home() {
               <ul className="space-y-2 text-gray-400">
                 <li><span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">Daily Horoscope</span></li>
                 <li><span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">Compatibility</span></li>
+                <li><Link href="/birth-chart" className="hover:text-white">Birth Chart Calculator</Link></li>
                 <li><span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">Today's Mayan Date</span></li>
               </ul>
             </div>

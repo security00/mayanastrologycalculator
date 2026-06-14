@@ -28,6 +28,10 @@ export const metadata: Metadata = {
     description: "View your Mayan astrology result with Nawal day sign and Galactic Tone. Save, share, and learn what your Tzolk'in date says about your strengths and life path.",
     images: ['https://mayanastrologycalculator.com/ref-page/logo.png'],
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function ResultLayout({

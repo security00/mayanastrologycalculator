@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mayan Astrology Calculator
 
-## Getting Started
+A static Next.js site for calculating a Mayan Tzolk'in birth signature from a Gregorian birth date. The site targets search demand around:
 
-First, run the development server:
+- mayan astrology calculator
+- mayan zodiac sign calculator
+- mayan zodiac calculator
+- mayan astrology birth chart
+- mayan sign calculator
+- mayan calendar calculator
+
+## Stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- Static export for Cloudflare Pages
+
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality Checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+The deploy workflow runs both checks before publishing `out/` to Cloudflare Pages.
 
-To learn more about Next.js, take a look at the following resources:
+## Content Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/` - primary calculator and SEO landing page
+- `/birth-chart` - free Mayan astrology birth chart search intent
+- `/day-signs` - 20 Mayan zodiac/Nawal signs
+- `/galactic-tones` - 13 Galactic Tone meanings
+- `/guide` - broader interpretation guide
+- `/about` - background and methodology
+- `/result` - calculator result page, supports `?day=DD&month=MM&year=YYYY`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The GitHub Actions workflow builds a static export and deploys to Cloudflare Pages:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm ci
+npm run lint
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Required repository secrets:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+## Analytics
+
+Analytics components live in `app/components/`:
+
+- Google Analytics
+- Microsoft Clarity
+- Ahrefs Analytics
+
+Confirm tracking IDs before production changes.

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MayanReading, getDetailedInterpretation } from '../lib/mayan-calculator';
+import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
 
 interface StoredReading {
   reading: MayanReading;
@@ -11,16 +11,26 @@ interface StoredReading {
 }
 
 export default function ResultPage() {
-  const [storedData, setStoredData] = useState<StoredReading | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const data = sessionStorage.getItem('mayanReading');
-    if (data) {
-      setStoredData(JSON.parse(data));
+  const [storedData] = useState<StoredReading | null>(() => {
+    if (typeof window === 'undefined') {
+      return null;
     }
-    setIsLoading(false);
-  }, []);
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const day = Number(searchParams.get('day'));
+    const month = Number(searchParams.get('month'));
+    const year = Number(searchParams.get('year'));
+
+    if (validateDate(day, month, year)) {
+      const reading = calculateTzolkinDate(new Date(year, month - 1, day));
+      const nextData = { reading, birthDate: { day, month, year } };
+      sessionStorage.setItem('mayanReading', JSON.stringify(nextData));
+      return nextData;
+    }
+
+    const data = sessionStorage.getItem('mayanReading');
+    return data ? JSON.parse(data) : null;
+  });
 
   // Add noindex meta tag dynamically
   useEffect(() => {
@@ -50,17 +60,6 @@ export default function ResultPage() {
 
     window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600 mx-auto mb-4"></div>
-          <p className="text-xl text-gray-700">Loading your reading...</p>
-        </div>
-      </div>
-    );
-  }
 
   if (!storedData) {
     return (
