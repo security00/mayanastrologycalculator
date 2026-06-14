@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import CompatibilityTool from './CompatibilityTool';
 
 export const metadata: Metadata = {
@@ -21,15 +20,6 @@ export default function CompatibilityPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-6 flex flex-wrap gap-4">
-          <Link href="/" className="text-orange-700 hover:text-orange-800 font-medium">
-            Back to calculator
-          </Link>
-          <Link href="/day-signs" className="text-orange-700 hover:text-orange-800 font-medium">
-            Day signs guide
-          </Link>
-        </div>
-
         <section className="mb-10">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-950 mb-5">
             Mayan Compatibility Calculator

@@ -13,12 +13,6 @@ export default function DaySignsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-6">
-          <Link href="/" className="text-orange-700 hover:text-orange-800 font-medium">
-            Back to calculator
-          </Link>
-        </div>
-
         <section className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-950 mb-5">
             Mayan Zodiac Signs: The 20 Nawal Day Signs
