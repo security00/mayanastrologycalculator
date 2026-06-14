@@ -1,6 +1,7 @@
 ﻿'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { calculateTzolkinDate, validateDate } from './lib/mayan-calculator';
@@ -151,6 +152,44 @@ export default function Home() {
           </p>
         </div>
 
+        <section className="max-w-6xl mx-auto mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 items-center">
+            <div className="relative overflow-hidden rounded-2xl border-4 border-amber-200 shadow-2xl bg-amber-950">
+              <Image
+                src="/tzolkin-astrology-chart.png"
+                alt="Tzolk'in inspired Mayan astrology chart with day sign and tone markers"
+                width={1600}
+                height={900}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
+            <div className="bg-white/90 border border-amber-200 rounded-2xl p-6 md:p-8 shadow-lg">
+              <p className="text-sm font-semibold uppercase tracking-wide text-orange-700 mb-3">
+                Tzolk'in birth energy
+              </p>
+              <h2 className="text-3xl font-bold text-gray-950 mb-4">
+                A 260-day astrology wheel of signs and tones
+              </h2>
+              <p className="text-gray-700 mb-4">
+                Mayan astrology reads your birth date through the sacred Tzolk'in cycle: 20 Nawal day
+                signs moving with 13 Galactic Tones. Together they create a symbolic birth signature that
+                can be explored through personality themes, timing, and relationship patterns.
+              </p>
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="rounded-lg bg-amber-50 border border-amber-200 p-4">
+                  <p className="text-2xl font-bold text-orange-700">20</p>
+                  <p className="text-gray-700">Nawal day signs</p>
+                </div>
+                <div className="rounded-lg bg-amber-50 border border-amber-200 p-4">
+                  <p className="text-2xl font-bold text-orange-700">13</p>
+                  <p className="text-gray-700">Galactic Tones</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Introduction Content */}
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Understanding Mayan Astrology Calculator</h2>
@@ -204,8 +243,29 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Free Birth Chart</h3>
               <p className="text-gray-600 mb-4">Learn what appears in a Mayan astrology birth chart and how to read your Tzolk'in signature.</p>
-              <Link href="/birth-chart" className="text-orange-600 hover:text-orange-700 font-medium">
+              <Link href="/mayan-astrology-birth-chart-free" className="text-orange-600 hover:text-orange-700 font-medium">
                 Explore Birth Charts →
+              </Link>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Mayan Zodiac Sign</h3>
+              <p className="text-gray-600 mb-4">Find your Mayan zodiac sign and understand how the 20 Nawal day signs work.</p>
+              <Link href="/mayan-zodiac-calculator" className="text-orange-600 hover:text-orange-700 font-medium">
+                Find Your Mayan Sign →
+              </Link>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Mayan Calendar</h3>
+              <p className="text-gray-600 mb-4">Convert a birth date into the Tzolk'in calendar and understand the result.</p>
+              <Link href="/mayan-calendar-calculator" className="text-orange-600 hover:text-orange-700 font-medium">
+                Convert a Mayan Date →
+              </Link>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Mayan Sign Guide</h3>
+              <p className="text-gray-600 mb-4">Discover your Nawal day sign and learn how tones shape your Mayan profile.</p>
+              <Link href="/mayan-sign-calculator" className="text-orange-600 hover:text-orange-700 font-medium">
+                Read Mayan Signs →
               </Link>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
