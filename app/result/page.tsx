@@ -9,7 +9,12 @@ interface StoredReading {
   birthDate: { day: number; month: number; year: number };
 }
 
+type AnalyticsWindow = Window & {
+  gtag?: (command: string, eventName: string, params: Record<string, string | number>) => void;
+};
+
 export default function ResultPage() {
+  const [waitlistJoined, setWaitlistJoined] = useState(false);
   const [storedData] = useState<StoredReading | null>(() => {
     if (typeof window === 'undefined') {
       return null;
@@ -58,6 +63,19 @@ export default function ResultPage() {
     };
 
     window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
+  };
+
+  const handleWaitlistClick = () => {
+    if (!storedData) return;
+
+    const analyticsWindow = window as AnalyticsWindow;
+    analyticsWindow.gtag?.('event', 'paid_report_waitlist_click', {
+      report_type: 'birth_chart',
+      nawal: storedData.reading.nawal.name,
+      galactic_tone: storedData.reading.galacticTone.number,
+    });
+
+    setWaitlistJoined(true);
   };
 
   if (!storedData) {
@@ -195,25 +213,51 @@ export default function ResultPage() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-center text-white mb-12">
-          <h2 className="text-3xl font-bold mb-4">Want to Learn More?</h2>
-          <p className="text-xl mb-6 opacity-90">
-            This is just 10% of your complete profile. Discover deeper insights about your relationships, career path, and spiritual journey.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/guide"
-              className="bg-white text-orange-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Complete Mayan Guide
-            </Link>
-            <Link
-              href="/compatibility"
-              className="bg-orange-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-orange-800 transition-colors border-2 border-white"
-            >
-              Check Compatibility
-            </Link>
+        {/* Paid Report Waitlist */}
+        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-white mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-8 items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-orange-100 mb-3">
+                Early access waitlist
+              </p>
+              <h2 className="text-3xl font-bold mb-4">Want a deeper personalized Mayan birth chart?</h2>
+              <p className="text-lg mb-5 opacity-90">
+                We're exploring a full report with relationship style, strengths, challenges, career
+                themes, reflection prompts, and a printable PDF based on your {reading.galacticTone.number} {reading.nawal.name} profile.
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-orange-50">
+                <li>- One-time payment, no subscription</li>
+                <li>- Full Nawal and tone synthesis</li>
+                <li>- Relationship and life-path themes</li>
+                <li>- PDF copy for saving or printing</li>
+              </ul>
+            </div>
+            <div className="bg-white text-gray-900 rounded-2xl p-6 shadow-xl">
+              <h3 className="text-xl font-bold mb-3">Join the report waitlist</h3>
+              <p className="text-gray-700 mb-5">
+                If enough readers want this, we'll build the full report product before adding payments.
+              </p>
+              <button
+                onClick={handleWaitlistClick}
+                className="w-full bg-gray-950 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                I'm interested in a full report
+              </button>
+              {waitlistJoined && (
+                <div className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4">
+                  <p className="font-semibold text-gray-950 mb-2">Thanks, your interest was recorded.</p>
+                  <p className="text-sm text-gray-700 mb-3">
+                    To be notified first, send us a quick email and include your birth chart result.
+                  </p>
+                  <a
+                    href={`mailto:support@mayanastrologycalculator.com?subject=${encodeURIComponent('Full Mayan birth chart report waitlist')}&body=${encodeURIComponent(`Please add me to the full report waitlist.\n\nMy result: ${reading.galacticTone.number} ${reading.nawal.name}\nBirth date: ${birthDate.day}/${birthDate.month}/${birthDate.year}`)}`}
+                    className="text-orange-700 hover:text-orange-800 font-semibold"
+                  >
+                    Email us to join early access
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
