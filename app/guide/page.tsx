@@ -57,6 +57,7 @@ export default function GuidePage() {
               <Link href="/" className="text-amber-100 hover:text-white transition-colors">Home</Link>
               <Link href="/birth-chart" className="text-amber-100 hover:text-white transition-colors">Birth Chart</Link>
               <Link href="/today" className="text-amber-100 hover:text-white transition-colors">Today</Link>
+              <Link href="/compatibility" className="text-amber-100 hover:text-white transition-colors">Compatibility</Link>
               <Link href="/guide" className="text-amber-100 hover:text-white transition-colors font-semibold">Guide</Link>
               <Link href="/about" className="text-amber-100 hover:text-white transition-colors">About</Link>
             </nav>
@@ -282,7 +283,9 @@ export default function GuidePage() {
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Compatibility Check</h3>
               <p className="text-gray-600 mb-4">Compare Mayan astrology readings to understand relationship dynamics and compatibility.</p>
-              <span aria-disabled="true" className="text-gray-400 cursor-not-allowed select-none pointer-events-none">Check Compatibility → </span>
+              <Link href="/compatibility" className="text-orange-600 hover:text-orange-700 font-medium">
+                Check Compatibility →
+              </Link>
 
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">

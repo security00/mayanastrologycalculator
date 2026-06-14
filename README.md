@@ -40,6 +40,7 @@ The deploy workflow runs both checks before publishing `out/` to Cloudflare Page
 - `/` - primary calculator and SEO landing page
 - `/birth-chart` - free Mayan astrology birth chart search intent
 - `/today` - daily Mayan date and current Tzolk'in energy
+- `/compatibility` - compare two Mayan birth signs and relationship themes
 - `/day-signs` - 20 Mayan zodiac/Nawal signs
 - `/galactic-tones` - 13 Galactic Tone meanings
 - `/guide` - broader interpretation guide

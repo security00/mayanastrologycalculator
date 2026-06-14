@@ -106,6 +106,7 @@ export default function ResultPage() {
               <Link href="/" className="text-amber-100 hover:text-white transition-colors">Home</Link>
               <Link href="/birth-chart" className="text-amber-100 hover:text-white transition-colors">Birth Chart</Link>
               <Link href="/today" className="text-amber-100 hover:text-white transition-colors">Today</Link>
+              <Link href="/compatibility" className="text-amber-100 hover:text-white transition-colors">Compatibility</Link>
               <Link href="/guide" className="text-amber-100 hover:text-white transition-colors">Guide</Link>
               <Link href="/about" className="text-amber-100 hover:text-white transition-colors">About</Link>
             </nav>
@@ -237,11 +238,12 @@ export default function ResultPage() {
             >
               Complete Mayan Guide
             </Link>
-            <span
+            <Link
+              href="/compatibility"
               className="bg-orange-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-orange-800 transition-colors border-2 border-white"
             >
               Check Compatibility
-            </span>
+            </Link>
           </div>
         </div>
 
