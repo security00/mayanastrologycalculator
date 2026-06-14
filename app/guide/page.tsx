@@ -1,5 +1,4 @@
 ﻿import type { Metadata } from "next";
-import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -36,35 +35,6 @@ export const metadata: Metadata = {
 export default function GuidePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-amber-900 via-orange-900 to-red-900 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-3">
-              <Image
-                src="/ref-page/logo.png"
-                alt="Mayan Astrology Calculator Logo"
-                width={50}
-                height={50}
-                className="rounded-full"
-              />
-              <div>
-                <p className="text-xl font-bold text-amber-100">Mayan Astrology Calculator</p>
-                <p className="text-sm text-amber-200">Complete Guide</p>
-              </div>
-            </div>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-amber-100 hover:text-white transition-colors">Home</Link>
-              <Link href="/birth-chart" className="text-amber-100 hover:text-white transition-colors">Birth Chart</Link>
-              <Link href="/today" className="text-amber-100 hover:text-white transition-colors">Today</Link>
-              <Link href="/compatibility" className="text-amber-100 hover:text-white transition-colors">Compatibility</Link>
-              <Link href="/guide" className="text-amber-100 hover:text-white transition-colors font-semibold">Guide</Link>
-              <Link href="/about" className="text-amber-100 hover:text-white transition-colors">About</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -300,44 +270,6 @@ export default function GuidePage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Mayan Astrology Calculator</h3>
-              <p className="text-gray-400">
-                Discover the ancient wisdom of Mayan astrology through our accurate Tzolk'in calculator and comprehensive interpretations.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Tools</h4>
-              <ul className="space-y-2 text-gray-400">
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Learn</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/guide" className="hover:text-white">Mayan Astrology Guide</Link></li>
-                <li><Link href="/day-signs" className="hover:text-white">20 Day Signs</Link></li>
-                <li><Link href="/galactic-tones" className="hover:text-white">13 Galactic Tones</Link></li>
-                <li><Link href="/about" className="hover:text-white">About Mayan Calendar</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Connect</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/contact" className="hover:text-white">Contact Us</Link></li>
-                <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Mayan Astrology Calculator. All rights reserved. | Discover your ancient wisdom through authentic Mayan astrology calculations.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

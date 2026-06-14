@@ -4,6 +4,8 @@ import "./globals.css";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import MicrosoftClarity from "./components/MicrosoftClarity";
 import AhrefsAnalytics from "./components/AhrefsAnalytics";
+import SiteHeader from "./components/SiteHeader";
+import SiteFooter from "./components/SiteFooter";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -105,7 +107,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} antialiased`}>
+        <SiteHeader />
         {children}
+        <SiteFooter />
         <GoogleAnalytics />
         <MicrosoftClarity />
         <AhrefsAnalytics />
