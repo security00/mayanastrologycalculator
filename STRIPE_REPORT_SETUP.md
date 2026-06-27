@@ -63,6 +63,9 @@ When a payment arrives:
 2. Read birth date, Mayan signature, Nawal, Galactic Tone, and customer email.
 3. Generate or adapt the PDF report from the private report template.
 4. Email the PDF to the customer.
+5. Mark the order `delivery_status = delivered`.
+
+See `docs/REPORT_ORDER_OPERATIONS.md` for common D1 queries.
 
 ## Notes
 

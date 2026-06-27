@@ -26,20 +26,25 @@ export default function ReportSuccessPage() {
             include your Nawal, Galactic Tone, relationship themes, work and creativity themes, reflection
             prompts, and a short methodology note.
           </p>
-          <p className="text-gray-700 mb-6">
-            If your Stripe checkout did not collect your birth date or Mayan signature, please email us
-            with your result so we can match the payment to the right report.
-          </p>
           <div className="rounded-lg border border-amber-200 bg-amber-50 p-5 mb-6">
-            <h2 className="font-bold text-gray-950 mb-2">Send report details</h2>
+            <h2 className="font-bold text-gray-950 mb-2">What happens next</h2>
+            <ul className="space-y-2 text-gray-700">
+              <li>- Your payment and birth chart details have been recorded.</li>
+              <li>- We will prepare your PDF report manually.</li>
+              <li>- Your report will be sent to your Stripe checkout email within 24-48 hours.</li>
+            </ul>
+          </div>
+          <div className="rounded-lg border border-orange-200 bg-white p-5 mb-6">
+            <h2 className="font-bold text-gray-950 mb-2">Need help?</h2>
             <p className="text-gray-700 mb-3">
-              Include your birth date and Mayan signature, such as "12 Cib" or "1 Manik".
+              If you made a typo, used the wrong email, or have a question about your order, contact us
+              and include your Stripe checkout email.
             </p>
             <a
-              href="mailto:support@mayanastrologycalculator.com?subject=Full%20Mayan%20birth%20chart%20report%20details"
+              href="mailto:support@mayanastrologycalculator.com?subject=Full%20Mayan%20birth%20chart%20report%20order"
               className="text-orange-700 hover:text-orange-800 font-semibold"
             >
-              Email report details
+              Contact support
             </a>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
