@@ -14,7 +14,6 @@ type AnalyticsWindow = Window & {
 };
 
 export default function ResultPage() {
-  const [waitlistJoined, setWaitlistJoined] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
   const [storedData] = useState<StoredReading | null>(() => {
@@ -65,19 +64,6 @@ export default function ResultPage() {
     };
 
     window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
-  };
-
-  const handleWaitlistClick = () => {
-    if (!storedData) return;
-
-    const analyticsWindow = window as AnalyticsWindow;
-    analyticsWindow.gtag?.('event', 'paid_report_waitlist_click', {
-      report_type: 'birth_chart',
-      nawal: storedData.reading.nawal.name,
-      galactic_tone: storedData.reading.galacticTone.number,
-    });
-
-    setWaitlistJoined(true);
   };
 
   const handlePaidReportClick = async () => {
@@ -294,28 +280,14 @@ export default function ResultPage() {
                 </div>
               )}
               <p className="text-xs text-gray-500 mt-3">
-                One-time payment. No subscription. Early access reports are manually reviewed before delivery.
+                One-time payment. No subscription. Delivered by email within 24-48 hours.
               </p>
-              <button
-                onClick={handleWaitlistClick}
-                className="mt-4 w-full text-sm text-orange-700 hover:text-orange-800 font-semibold"
-              >
-                Prefer to join the waitlist first?
-              </button>
-              {waitlistJoined && (
-                <div className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4">
-                  <p className="font-semibold text-gray-950 mb-2">Thanks, your interest was recorded.</p>
-                  <p className="text-sm text-gray-700 mb-3">
-                    To be notified first, send us a quick email and include your birth chart result.
-                  </p>
-                  <a
-                    href={`mailto:support@mayanastrologycalculator.com?subject=${encodeURIComponent('Full Mayan birth chart report waitlist')}&body=${encodeURIComponent(`Please add me to the full report waitlist.\n\nMy result: ${reading.galacticTone.number} ${reading.nawal.name}\nBirth date: ${birthDate.day}/${birthDate.month}/${birthDate.year}`)}`}
-                    className="text-orange-700 hover:text-orange-800 font-semibold"
-                  >
-                    Email us to join early access
-                  </a>
-                </div>
-              )}
+              <div className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4">
+                <p className="text-sm text-gray-700">
+                  Your payment is processed securely by Stripe. Your birth date and Mayan signature are
+                  used only to prepare this report.
+                </p>
+              </div>
             </div>
           </div>
         </div>
