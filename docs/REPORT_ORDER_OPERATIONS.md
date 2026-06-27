@@ -65,3 +65,39 @@ ORDER BY paid_at DESC;
 3. Generate the PDF report from the private template.
 4. Email the PDF to `customer_email`.
 5. Mark the order as `delivered`.
+
+## Semi-automated local workflow
+
+Add these values to `.env` or your shell:
+
+```bash
+CLOUDFLARE_API_TOKEN=...
+CLOUDFLARE_ACCOUNT_ID=faae494a756090f5f9c0ad7b8d1ddb88
+D1_DATABASE_ID=6a392165-8261-4f5c-a304-a2888a140515
+```
+
+List paid reports waiting for delivery:
+
+```bash
+node scripts/list-paid-orders.mjs
+```
+
+By default, this only lists live Stripe orders. To include test orders for internal checks:
+
+```bash
+node scripts/list-paid-orders.mjs --include-test
+```
+
+Generate HTML and PDF for one order:
+
+```bash
+node scripts/generate-report.mjs ORDER_ID
+```
+
+The generator refuses test Stripe sessions by default. Use `--allow-test` only for internal testing.
+
+After manually emailing the PDF to the customer, mark it delivered:
+
+```bash
+node scripts/mark-report-delivered.mjs ORDER_ID
+```
