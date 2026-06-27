@@ -15,6 +15,8 @@ type AnalyticsWindow = Window & {
 
 export default function ResultPage() {
   const [waitlistJoined, setWaitlistJoined] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState('');
   const [storedData] = useState<StoredReading | null>(() => {
     if (typeof window === 'undefined') {
       return null;
@@ -76,6 +78,47 @@ export default function ResultPage() {
     });
 
     setWaitlistJoined(true);
+  };
+
+  const handlePaidReportClick = async () => {
+    if (!storedData) return;
+
+    setCheckoutLoading(true);
+    setCheckoutError('');
+
+    const analyticsWindow = window as AnalyticsWindow;
+    analyticsWindow.gtag?.('event', 'paid_report_checkout_click', {
+      report_type: 'birth_chart',
+      nawal: storedData.reading.nawal.name,
+      galactic_tone: storedData.reading.galacticTone.number,
+      price_usd: 7,
+    });
+
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          birthDate: storedData.birthDate,
+          reading: {
+            signature: `${storedData.reading.galacticTone.number} ${storedData.reading.nawal.name}`,
+            nawal: storedData.reading.nawal.name,
+            galacticTone: storedData.reading.galacticTone.number,
+          },
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || 'Unable to start checkout.');
+      }
+
+      window.location.href = data.url;
+    } catch (error) {
+      setCheckoutError(error instanceof Error ? error.message : 'Unable to start checkout.');
+      setCheckoutLoading(false);
+    }
   };
 
   if (!storedData) {
@@ -213,35 +256,51 @@ export default function ResultPage() {
           </div>
         </div>
 
-        {/* Paid Report Waitlist */}
+        {/* Paid Report Early Access */}
         <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-white mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-8 items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-orange-100 mb-3">
-                Early access waitlist
+                Early access report
               </p>
-              <h2 className="text-3xl font-bold mb-4">Want a deeper personalized Mayan birth chart?</h2>
+              <h2 className="text-3xl font-bold mb-4">Get your full personalized Mayan birth chart</h2>
               <p className="text-lg mb-5 opacity-90">
-                We're exploring a full report with relationship style, strengths, challenges, career
-                themes, reflection prompts, and a printable PDF based on your {reading.galacticTone.number} {reading.nawal.name} profile.
+                Order an early access PDF report with relationship style, strengths, challenges, career
+                themes, reflection prompts, and a methodology note based on your {reading.galacticTone.number} {reading.nawal.name} profile.
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-orange-50">
-                <li>- One-time payment, no subscription</li>
+                <li>- $7 early access price</li>
                 <li>- Full Nawal and tone synthesis</li>
                 <li>- Relationship and life-path themes</li>
-                <li>- PDF copy for saving or printing</li>
+                <li>- PDF delivered by email</li>
               </ul>
             </div>
             <div className="bg-white text-gray-900 rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold mb-3">Join the report waitlist</h3>
+              <h3 className="text-xl font-bold mb-3">Full report early access</h3>
               <p className="text-gray-700 mb-5">
-                If enough readers want this, we'll build the full report product before adding payments.
+                This is a manual early access product. After payment, we prepare your PDF and deliver it by email.
+              </p>
+              <button
+                onClick={handlePaidReportClick}
+                disabled={checkoutLoading}
+                className="w-full bg-gray-950 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {checkoutLoading ? 'Opening secure checkout...' : 'Order my full report - $7'}
+              </button>
+              {checkoutError && (
+                <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4">
+                  <p className="text-sm font-semibold text-red-800 mb-2">Checkout is not available right now.</p>
+                  <p className="text-sm text-red-700">{checkoutError}</p>
+                </div>
+              )}
+              <p className="text-xs text-gray-500 mt-3">
+                One-time payment. No subscription. Early access reports are manually reviewed before delivery.
               </p>
               <button
                 onClick={handleWaitlistClick}
-                className="w-full bg-gray-950 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors"
+                className="mt-4 w-full text-sm text-orange-700 hover:text-orange-800 font-semibold"
               >
-                I'm interested in a full report
+                Prefer to join the waitlist first?
               </button>
               {waitlistJoined && (
                 <div className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4">
