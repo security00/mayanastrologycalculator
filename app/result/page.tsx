@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
+import ReportUpgradeCard from '../components/ReportUpgradeCard';
 
 interface StoredReading {
   reading: MayanReading;
@@ -48,6 +49,16 @@ export default function ResultPage() {
       document.head.removeChild(metaRobots);
     };
   }, []);
+
+  useEffect(() => {
+    if (!storedData) return;
+
+    const analyticsWindow = window as AnalyticsWindow;
+    analyticsWindow.gtag?.('event', 'mayan_result_view', {
+      nawal: storedData.reading.nawal.name,
+      galactic_tone: storedData.reading.galacticTone.number,
+    });
+  }, [storedData]);
 
   const handleShare = (platform: string) => {
     if (!storedData) return;
@@ -202,6 +213,15 @@ export default function ResultPage() {
           </div>
         </div>
 
+        <ReportUpgradeCard
+          signature={`${reading.galacticTone.number} ${reading.nawal.name}`}
+          nawal={reading.nawal.name}
+          galacticTone={reading.galacticTone.number}
+          checkoutLoading={checkoutLoading}
+          checkoutError={checkoutError}
+          onCheckout={handlePaidReportClick}
+        />
+
         {/* Detailed Interpretation */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Your Complete Profile</h2>
@@ -239,56 +259,6 @@ export default function ResultPage() {
             >
               Share on WhatsApp
             </button>
-          </div>
-        </div>
-
-        {/* Paid Report Early Access */}
-        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 text-white mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-8 items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-orange-100 mb-3">
-                Early access report
-              </p>
-              <h2 className="text-3xl font-bold mb-4">Get your full personalized Mayan birth chart</h2>
-              <p className="text-lg mb-5 opacity-90">
-                Order an early access PDF report with relationship style, strengths, challenges, career
-                themes, reflection prompts, and a methodology note based on your {reading.galacticTone.number} {reading.nawal.name} profile.
-              </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-orange-50">
-                <li>- $7 early access price</li>
-                <li>- Full Nawal and tone synthesis</li>
-                <li>- Relationship and life-path themes</li>
-                <li>- PDF delivered by email</li>
-              </ul>
-            </div>
-            <div className="bg-white text-gray-900 rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold mb-3">Full report early access</h3>
-              <p className="text-gray-700 mb-5">
-                This is a manual early access product. After payment, we prepare your PDF and deliver it by email.
-              </p>
-              <button
-                onClick={handlePaidReportClick}
-                disabled={checkoutLoading}
-                className="w-full bg-gray-950 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {checkoutLoading ? 'Opening secure checkout...' : 'Order my full report - $7'}
-              </button>
-              {checkoutError && (
-                <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4">
-                  <p className="text-sm font-semibold text-red-800 mb-2">Checkout is not available right now.</p>
-                  <p className="text-sm text-red-700">{checkoutError}</p>
-                </div>
-              )}
-              <p className="text-xs text-gray-500 mt-3">
-                One-time payment. No subscription. Delivered by email within 24-48 hours.
-              </p>
-              <div className="mt-5 rounded-lg border border-amber-200 bg-amber-50 p-4">
-                <p className="text-sm text-gray-700">
-                  Your payment is processed securely by Stripe. Your birth date and Mayan signature are
-                  used only to prepare this report.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 

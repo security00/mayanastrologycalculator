@@ -1,155 +1,25 @@
 ﻿'use client';
 
-import { useState } from 'react';
+import BirthDateCalculator from './components/BirthDateCalculator';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { calculateTzolkinDate, validateDate } from './lib/mayan-calculator';
 
 export default function Home() {
-  const router = useRouter();
-  const [day, setDay] = useState('');
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-  const [isCalculating, setIsCalculating] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleCalculate = async () => {
-    setError('');
-
-    const dayNum = parseInt(day);
-    const monthNum = parseInt(month);
-    const yearNum = parseInt(year);
-
-    if (!validateDate(dayNum, monthNum, yearNum)) {
-      setError('Please enter a valid date');
-      return;
-    }
-
-    setIsCalculating(true);
-
-    // Add a small delay for better UX
-    setTimeout(() => {
-      const birthDate = new Date(yearNum, monthNum - 1, dayNum);
-      const reading = calculateTzolkinDate(birthDate);
-
-      // Store the result in sessionStorage and navigate to results
-      sessionStorage.setItem('mayanReading', JSON.stringify({
-        reading,
-        birthDate: { day: dayNum, month: monthNum, year: yearNum }
-      }));
-
-      router.push(`/result?day=${dayNum}&month=${monthNum}&year=${yearNum}`);
-    }, 1000);
-  };
-
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const months = [
-    { value: 1, name: 'January' },
-    { value: 2, name: 'February' },
-    { value: 3, name: 'March' },
-    { value: 4, name: 'April' },
-    { value: 5, name: 'May' },
-    { value: 6, name: 'June' },
-    { value: 7, name: 'July' },
-    { value: 8, name: 'August' },
-    { value: 9, name: 'September' },
-    { value: 10, name: 'October' },
-    { value: 11, name: 'November' },
-    { value: 12, name: 'December' }
-  ];
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       {/* Hero Section with Calculator */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Discover Your <span className="text-orange-600">Mayan Tzolk'in Date</span>
+            Free <span className="text-orange-600">Mayan Astrology Calculator</span>
           </h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-            Unlock the ancient wisdom of the 260-day sacred Mayan calendar. Enter your birth date to reveal your Nawal (day sign) and Galactic Tone, discovering the spiritual energies that guide your life path according to Mayan astrology traditions.
+            Enter your birth date to find your Mayan sign, Nawal day sign, Galactic Tone, and Tzolk'in birth chart. Use the result as a reflective guide to the symbolic themes connected with your date.
           </p>
         </div>
 
-        {/* Calculator Form - Above the Fold */}
-        <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 mb-16 border-4 border-amber-200">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Mayan Astrology Calculator</h2>
-            <p className="text-gray-600">Enter your birth date to calculate your Tzolk'in signature</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Day</label>
-              <select
-                value={day}
-                onChange={(e) => setDay(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none text-lg"
-              >
-                <option value="">Day</option>
-                {days.map(d => (
-                  <option key={d} value={d}>{d}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Month</label>
-              <select
-                value={month}
-                onChange={(e) => setMonth(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none text-lg"
-              >
-                <option value="">Month</option>
-                {months.map(m => (
-                  <option key={m.value} value={m.value}>{m.name}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
-              <select
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none text-lg"
-              >
-                <option value="">Year</option>
-                {years.map(y => (
-                  <option key={y} value={y}>{y}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-              {error}
-            </div>
-          )}
-
-          <button
-            onClick={handleCalculate}
-            disabled={!day || !month || !year || isCalculating}
-            className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold py-4 px-8 rounded-lg text-lg hover:from-orange-700 hover:to-red-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-          >
-            {isCalculating ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Calculating Your Mayan Sign...
-              </span>
-            ) : (
-              'Calculate My Mayan Astrology'
-            )}
-          </button>
-
-          <p className="text-center text-sm text-gray-500 mt-4">
-            Free instant calculation • No registration required
-          </p>
+        <div className="mb-16">
+          <BirthDateCalculator />
         </div>
 
         <section className="max-w-6xl mx-auto mb-16">
@@ -195,7 +65,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Understanding Mayan Astrology Calculator</h2>
 
           <p className="text-gray-700 mb-6">
-            The Mayan astrology calculator is a powerful tool that connects you with the ancient wisdom of the Maya civilization. Unlike Western astrology, which follows a 12-month solar calendar, Mayan astrology is based on the sacred Tzolk'in calendar—a 260-day cycle that combines 20 day signs (called Nawals) with 13 Galactic Tones.
+            This Mayan astrology calculator converts a Gregorian birth date into a modern Tzolk'in reading. Unlike Western astrology, which uses planetary positions and twelve zodiac signs, this tool uses a 260-day cycle that combines 20 day signs with 13 tones.
           </p>
 
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">What is the Tzolk'in Calendar?</h3>
@@ -225,14 +95,17 @@ export default function Home() {
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">Benefits of Knowing Your Mayan Astrology</h3>
 
           <p className="text-gray-700 mb-6">
-            Understanding your Mayan astrology can provide profound insights into your personality, relationships, and life purpose. Many people find that their Mayan astrology reading resonates deeply with their inner nature and helps them understand their strengths, challenges, and spiritual path. The ancient Maya believed that knowing your Tzolk'in signature helps you align with natural cycles and make decisions that honor your authentic self.
+            A Tzolk'in reading can offer prompts for reflecting on personality, relationships, and recurring patterns. It is a symbolic tradition rather than a scientific personality test or prediction. Treat the result as a starting point for reflection, not as a substitute for professional or factual guidance.
           </p>
 
           <div className="bg-amber-50 border-l-4 border-orange-500 p-6 my-8">
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">Did You Know?</h4>
-            <p className="text-gray-700">
-              The Mayan calendar system is so precise that it's more accurate than our current Gregorian calendar. The Maya calculated the solar year as 365.2420 days, while modern astronomy calculates it as 365.2422 days—a difference of only 0.0002 days!
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">Methodology and scope</h4>
+            <p className="text-gray-700 mb-3">
+              The calculation is deterministic: the same birth date always produces the same result. It uses the GMT correlation commonly used to map Gregorian dates to the Maya calendar count, while the English interpretation is reflective and non-predictive.
             </p>
+            <Link href="/about" className="text-orange-700 hover:text-orange-800 font-semibold">
+              Read how the calculator works →
+            </Link>
           </div>
         </div>
 
@@ -243,7 +116,7 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Free Birth Chart</h3>
               <p className="text-gray-600 mb-4">Learn what appears in a Mayan astrology birth chart and how to read your Tzolk'in signature.</p>
-              <Link href="/mayan-astrology-birth-chart-free" className="text-orange-600 hover:text-orange-700 font-medium">
+              <Link href="/birth-chart" className="text-orange-600 hover:text-orange-700 font-medium">
                 Explore Birth Charts →
               </Link>
             </div>

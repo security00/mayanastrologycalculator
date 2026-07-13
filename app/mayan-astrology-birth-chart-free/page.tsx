@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   title: 'Free Mayan Astrology Birth Chart - Tzolk\'in Reading',
   description: "Create a free Mayan astrology birth chart and learn how to read your Tzolk'in day sign, Galactic Tone, Nawal meaning, and birth energy.",
   keywords: 'mayan astrology birth chart free, free mayan birth chart, mayan astrology chart free, tzolkin birth chart, mayan birth chart calculator free',
-  alternates: { canonical: 'https://mayanastrologycalculator.com/mayan-astrology-birth-chart-free' },
+  alternates: { canonical: 'https://mayanastrologycalculator.com/birth-chart' },
   openGraph: {
     title: 'Free Mayan Astrology Birth Chart - Tzolk\'in Reading',
     description: "Create a free Mayan astrology birth chart from your birth date and read your Tzolk'in signature.",
-    url: 'https://mayanastrologycalculator.com/mayan-astrology-birth-chart-free',
+    url: 'https://mayanastrologycalculator.com/birth-chart',
     siteName: 'Mayan Astrology Calculator',
     locale: 'en_US',
     type: 'website',

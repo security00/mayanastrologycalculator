@@ -4,7 +4,7 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://mayanastrologycalculator.com";
-  const lastModified = new Date("2026-06-14");
+  const lastModified = new Date("2026-07-13");
 
   return [
     { url: baseUrl, lastModified, changeFrequency: "daily", priority: 1 },
@@ -13,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/mayan-zodiac-calculator`, lastModified, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-calendar-calculator`, lastModified, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-sign-calculator`, lastModified, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${baseUrl}/mayan-astrology-birth-chart-free`, lastModified, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/compatibility`, lastModified, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/guide`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/day-signs`, lastModified, changeFrequency: "monthly", priority: 0.75 },

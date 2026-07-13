@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import BirthDateCalculator from '../components/BirthDateCalculator';
 
 export const metadata: Metadata = {
   title: 'Free Mayan Astrology Birth Chart Calculator',
@@ -21,13 +22,15 @@ export default function BirthChartPage() {
             Nawal day sign based on your date of birth. This combination is often searched as a Mayan
             zodiac sign, Mayan sign, or Mayan calendar birth chart.
           </p>
-          <Link
-            href="/"
-            className="mt-6 inline-block bg-orange-600 text-white px-7 py-3 rounded-lg font-semibold hover:bg-orange-700"
-          >
-            Calculate Your Birth Chart
-          </Link>
         </section>
+
+        <div className="mb-12">
+          <BirthDateCalculator
+            title="Generate Your Mayan Birth Chart"
+            description="Enter your birth date to reveal your Nawal sign, Galactic Tone, and Tzolk'in profile."
+            buttonLabel="Generate My Birth Chart"
+          />
+        </div>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
           <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import BirthDateCalculator from '../components/BirthDateCalculator';
 
 export const metadata: Metadata = {
   title: 'Mayan Calendar Calculator - Convert Birth Date to Tzolk\'in',
@@ -64,13 +65,15 @@ export default function MayanCalendarCalculatorPage() {
             Tzolk'in calendar. Enter your birth date to find the Nawal day sign and Galactic Tone that
             form your Mayan astrology birth signature.
           </p>
-          <Link
-            href="/"
-            className="inline-block bg-orange-600 text-white px-7 py-3 rounded-lg font-semibold hover:bg-orange-700"
-          >
-            Use the Mayan Calendar Calculator
-          </Link>
         </section>
+
+        <div className="mb-12">
+          <BirthDateCalculator
+            title="Mayan Calendar Date Calculator"
+            description="Convert your Gregorian birth date to its Tzolk'in day sign and tone."
+            buttonLabel="Convert My Birth Date"
+          />
+        </div>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
           <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">
@@ -105,8 +108,8 @@ export default function MayanCalendarCalculatorPage() {
           </p>
           <p className="text-gray-700">
             People often search for a Mayan calendar calculator when they want to know their Mayan birth
-            date, Mayan zodiac sign, or Tzolk'in energy. The homepage calculator gives the actual result;
-            this page explains how to understand what the conversion means.
+            date, Mayan zodiac sign, or Tzolk'in energy. Use the calculator above for the conversion, then
+            read the sections below to understand what the result means.
           </p>
         </section>
 

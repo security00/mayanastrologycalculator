@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { DAY_SIGNS } from '../lib/mayan-calculator';
+import BirthDateCalculator from '../components/BirthDateCalculator';
 
 export const metadata: Metadata = {
   title: 'Mayan Zodiac Calculator - Find Your Mayan Zodiac Sign',
@@ -67,12 +68,6 @@ export default function MayanZodiacCalculatorPage() {
               Tzolk'in calendar, every person is connected with one of 20 day signs and one of 13 Galactic
               Tones, creating a birth signature with its own rhythm, gifts, and life themes.
             </p>
-            <Link
-              href="/"
-              className="inline-block bg-orange-600 text-white px-7 py-3 rounded-lg font-semibold hover:bg-orange-700"
-            >
-              Calculate Your Mayan Zodiac Sign
-            </Link>
           </div>
 
           <div className="bg-white border border-amber-200 rounded-lg p-6 shadow-sm">
@@ -85,6 +80,14 @@ export default function MayanZodiacCalculatorPage() {
             </ul>
           </div>
         </section>
+
+        <div className="mb-12">
+          <BirthDateCalculator
+            title="Mayan Zodiac Sign Calculator"
+            description="Enter your birth date to find your Nawal day sign and Galactic Tone."
+            buttonLabel="Find My Mayan Zodiac Sign"
+          />
+        </div>
 
         <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 mb-10 shadow-sm">
           <h2 className="text-2xl font-bold text-gray-950 mb-3">Is Mayan Zodiac the Same as Western Zodiac?</h2>

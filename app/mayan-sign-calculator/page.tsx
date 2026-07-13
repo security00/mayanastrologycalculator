@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import BirthDateCalculator from '../components/BirthDateCalculator';
 import { DAY_SIGNS, GALACTIC_TONES } from '../lib/mayan-calculator';
 
 export const metadata: Metadata = {
@@ -67,13 +68,15 @@ export default function MayanSignCalculatorPage() {
             calendar. It describes the symbolic energy, natural gifts, and recurring patterns associated
             with the day you were born.
           </p>
-          <Link
-            href="/"
-            className="inline-block bg-orange-600 text-white px-7 py-3 rounded-lg font-semibold hover:bg-orange-700"
-          >
-            Calculate My Mayan Sign
-          </Link>
         </section>
+
+        <div className="mb-12">
+          <BirthDateCalculator
+            title="Find Your Mayan Sign by Birth Date"
+            description="Calculate your Nawal day sign and Galactic Tone instantly."
+            buttonLabel="Calculate My Mayan Sign"
+          />
+        </div>
 
         <section className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 mb-10">
           <div className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
