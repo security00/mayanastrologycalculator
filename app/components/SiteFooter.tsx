@@ -19,7 +19,6 @@ export default function SiteFooter() {
               <li><Link href="/mayan-zodiac-calculator" className="hover:text-white">Mayan Zodiac Calculator</Link></li>
               <li><Link href="/mayan-calendar-calculator" className="hover:text-white">Mayan Calendar Calculator</Link></li>
               <li><Link href="/birth-chart" className="hover:text-white">Birth Chart Calculator</Link></li>
-              <li><Link href="/mayan-astrology-birth-chart-free" className="hover:text-white">Free Birth Chart</Link></li>
               <li><Link href="/today" className="hover:text-white">Today's Mayan Date</Link></li>
               <li><Link href="/compatibility" className="hover:text-white">Compatibility Calculator</Link></li>
             </ul>

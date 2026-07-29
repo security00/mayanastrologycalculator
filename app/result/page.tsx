@@ -263,7 +263,7 @@ export default function ResultPage() {
         </div>
 
         {/* Related Tools */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Calculate Another Date</h3>
             <p className="text-gray-600 mb-4">Calculate readings for family members, friends, or partners.</p>
@@ -272,18 +272,24 @@ export default function ResultPage() {
             </Link>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Daily Mayan Energy</h3>
-            <p className="text-gray-600 mb-4">See what the current Mayan calendar day means for your personal energy.</p>
-              <Link href="/today" className="text-orange-600 hover:text-orange-700 font-medium">
-                Today's Energy →
-              </Link>
-
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Understand Your Birth Chart</h3>
+            <p className="text-gray-600 mb-4">Learn how your Nawal and Galactic Tone form a Tzolk'in birth chart.</p>
+            <Link href="/birth-chart" className="text-orange-600 hover:text-orange-700 font-medium">
+              Read the Birth Chart Guide →
+            </Link>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Learn About Day Signs</h3>
-            <p className="text-gray-600 mb-4">Explore all 20 Mayan day signs and their meanings in detail.</p>
-            <Link href="/day-signs" className="text-orange-600 hover:text-orange-700 font-medium">
-              Explore Day Signs →
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Compare Two Signs</h3>
+            <p className="text-gray-600 mb-4">Compare your Mayan sign with a partner, friend, or family member.</p>
+            <Link href="/compatibility" className="text-orange-600 hover:text-orange-700 font-medium">
+              Check Compatibility →
+            </Link>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-amber-100 hover:border-orange-300 transition-colors">
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Daily Mayan Energy</h3>
+            <p className="text-gray-600 mb-4">See what the current Mayan calendar day means for your personal energy.</p>
+            <Link href="/today" className="text-orange-600 hover:text-orange-700 font-medium">
+              Today's Energy →
             </Link>
           </div>
         </div>

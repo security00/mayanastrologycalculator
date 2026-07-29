@@ -56,7 +56,39 @@ export default function BirthChartPage() {
           </article>
         </section>
 
-        <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
+        <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 mb-10 shadow-sm">
+          <h2 className="text-2xl font-bold text-gray-950 mb-5">
+            What Is Included in a Free Mayan Birth Chart?
+          </h2>
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="rounded-lg bg-amber-50 border border-amber-100 p-5">
+              <dt className="font-bold text-gray-950 mb-2">Nawal day sign</dt>
+              <dd className="text-gray-700">
+                One of 20 day signs, shown with its name, symbolic meaning, element, direction, and color.
+              </dd>
+            </div>
+            <div className="rounded-lg bg-blue-50 border border-blue-100 p-5">
+              <dt className="font-bold text-gray-950 mb-2">Galactic Tone</dt>
+              <dd className="text-gray-700">
+                A number from 1 to 13 that adds a rhythm and mode of expression to the day sign.
+              </dd>
+            </div>
+            <div className="rounded-lg bg-orange-50 border border-orange-100 p-5">
+              <dt className="font-bold text-gray-950 mb-2">Combined Tzolk'in signature</dt>
+              <dd className="text-gray-700">
+                The tone and Nawal combine into one of 260 repeating positions in the sacred day count.
+              </dd>
+            </div>
+            <div className="rounded-lg bg-stone-50 border border-stone-200 p-5">
+              <dt className="font-bold text-gray-950 mb-2">Reflective interpretation</dt>
+              <dd className="text-gray-700">
+                A concise reading of strengths, recurring themes, and relationship or timing prompts.
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 mb-10 shadow-sm">
           <h2 className="text-2xl font-bold text-gray-950 mb-4">What a Mayan Birth Chart Can Tell You</h2>
           <p className="text-gray-700 mb-4">
             Mayan astrology is different from Western astrology. It does not begin with twelve zodiac
@@ -68,6 +100,10 @@ export default function BirthChartPage() {
             The calculator uses the widely accepted GMT correlation for Gregorian-to-Mayan date conversion.
             Enter your day, month, and year of birth to generate your Mayan astrology chart instantly.
           </p>
+          <p className="text-sm text-gray-600 mb-5">
+            The calendar conversion is deterministic, but the personality and relationship text is a
+            modern reflective interpretation rather than a scientific assessment or fixed prediction.
+          </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/day-signs" className="text-orange-700 hover:text-orange-800 font-semibold">
               Read the 20 Mayan signs
@@ -75,7 +111,47 @@ export default function BirthChartPage() {
             <Link href="/galactic-tones" className="text-orange-700 hover:text-orange-800 font-semibold">
               Learn the 13 Galactic Tones
             </Link>
+            <Link href="/about" className="text-orange-700 hover:text-orange-800 font-semibold">
+              Review the calculation method
+            </Link>
           </div>
+        </section>
+
+        <section className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6">
+          <article className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-gray-950 mb-4">
+              Mayan Cosmology Chart vs. Western Birth Chart
+            </h2>
+            <p className="text-gray-700 mb-4">
+              People sometimes call this result a Mayan cosmology chart because it places a birth date
+              inside a sacred calendar cycle. It is not a wheel of planets, houses, and zodiac
+              constellations like a Western natal chart.
+            </p>
+            <p className="text-gray-700">
+              This calculator focuses on the Tzolk'in day count: one Nawal, one Galactic Tone, and their
+              combined symbolic signature. Birth time and location are not required for this calculation.
+            </p>
+          </article>
+          <article className="bg-orange-50 border border-orange-200 rounded-lg p-6 md:p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-gray-950 mb-4">Continue your reading</h2>
+            <ul className="space-y-4">
+              <li>
+                <Link href="/compatibility" className="text-orange-700 hover:text-orange-800 font-semibold">
+                  Compare two Mayan birth signs →
+                </Link>
+              </li>
+              <li>
+                <Link href="/today" className="text-orange-700 hover:text-orange-800 font-semibold">
+                  See today's Tzolk'in date →
+                </Link>
+              </li>
+              <li>
+                <Link href="/guide" className="text-orange-700 hover:text-orange-800 font-semibold">
+                  Read the Mayan astrology guide →
+                </Link>
+              </li>
+            </ul>
+          </article>
         </section>
       </main>
     </div>

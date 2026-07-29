@@ -1,7 +1,10 @@
 'use client';
 
+import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { calculateTzolkinDate } from '../lib/mayan-calculator';
+
+const subscribeToClient = () => () => {};
 
 function formatToday(date: Date) {
   return new Intl.DateTimeFormat('en', {
@@ -13,11 +16,32 @@ function formatToday(date: Date) {
 }
 
 export default function TodayReading() {
-  const today = new Date();
+  const isClient = useSyncExternalStore(
+    subscribeToClient,
+    () => true,
+    () => false
+  );
+  const today = isClient ? new Date() : null;
+
+  if (!today) {
+    return (
+      <section
+        id="today-reading"
+        className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm"
+      >
+        <p className="text-sm font-semibold text-orange-700 mb-2">Today in your local time</p>
+        <h2 className="text-3xl font-bold text-gray-950 mb-3">Calculating today's Tzolk'in day sign…</h2>
+        <p className="text-gray-600">
+          Your current Galactic Tone and Nawal will appear when the page loads.
+        </p>
+      </section>
+    );
+  }
+
   const reading = calculateTzolkinDate(today);
 
   return (
-    <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm" suppressHydrationWarning>
+    <section id="today-reading" className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
       <p className="text-sm font-semibold text-orange-700 mb-2">Today in your local time</p>
       <h2 className="text-3xl md:text-4xl font-bold text-gray-950 mb-2">
         {reading.galacticTone.number} {reading.nawal.name}
