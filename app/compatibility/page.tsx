@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     description: "Compare two Mayan astrology birth signs and discover their shared rhythm, contrast, and relationship themes.",
     url: 'https://mayanastrologycalculator.com/compatibility',
     siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Mayan Compatibility Calculator',
+    }],
     locale: 'en_US',
     type: 'website',
   },

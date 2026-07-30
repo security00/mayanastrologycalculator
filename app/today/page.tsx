@@ -12,6 +12,12 @@ export const metadata: Metadata = {
     description: "See today's Mayan calendar date and learn the current Nawal day sign and Galactic Tone.",
     url: 'https://mayanastrologycalculator.com/today',
     siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: "Today's Mayan Calendar Date and Tzolk'in Day Sign",
+    }],
     locale: 'en_US',
     type: 'website',
   },

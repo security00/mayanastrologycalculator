@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description: 'Read how Mayan Astrology Calculator collects, uses, and protects your data for free calculations, paid reports, analytics, and support.',
     url: 'https://mayanastrologycalculator.com/privacy',
     siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Mayan Astrology Calculator Privacy Policy',
+    }],
     locale: 'en_US',
     type: 'website',
   },

@@ -7,6 +7,20 @@ export const metadata: Metadata = {
   description: "Create a free Mayan astrology birth chart from your date of birth. Learn your Nawal day sign, Galactic Tone, and Tzolk'in birth energy.",
   keywords: 'mayan astrology birth chart, mayan birth chart free, mayan birth chart calculator, tzolkin birth chart, mayan astrology chart',
   alternates: { canonical: 'https://mayanastrologycalculator.com/birth-chart' },
+  openGraph: {
+    title: 'Free Mayan Astrology Birth Chart Calculator',
+    description: "Create a free Mayan astrology birth chart from your date of birth. Learn your Nawal day sign, Galactic Tone, and Tzolk'in birth energy.",
+    url: 'https://mayanastrologycalculator.com/birth-chart',
+    siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Free Mayan Astrology Birth Chart Calculator',
+    }],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function BirthChartPage() {

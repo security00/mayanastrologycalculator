@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: 'Mayan Astrology Calculator',
     images: [
       {
-        url: 'https://mayanastrologycalculator.com/ref-page/logo.png',
+        url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Mayan Astrology Calculator - Ancient Wisdom',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Mayan Astrology Calculator - Free Tzolk'in Date Calculator",
     description: "Calculate your Mayan astrology with a free Tzolk'in date calculator. Reveal your Nawal day sign and Galactic Tone with accurate Mayan calendar conversion.",
-    images: ['https://mayanastrologycalculator.com/ref-page/logo.png'],
+    images: ['https://mayanastrologycalculator.com/ref-page/og-image.webp'],
   },
   robots: {
     index: true,

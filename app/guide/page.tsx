@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     siteName: 'Mayan Astrology Calculator',
     images: [
       {
-        url: 'https://mayanastrologycalculator.com/ref-page/logo.png',
+        url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Mayan Astrology Guide - Complete Tzolk\'in Interpretation',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Mayan Astrology Guide - How to Read Your Tzolk'in Calendar",
     description: "A complete guide to Mayan astrology. Learn to interpret the Nawal day sign, Galactic Tone, and Tzolk'in date to understand readings and apply them for growth.",
-    images: ['https://mayanastrologycalculator.com/ref-page/logo.png'],
+    images: ['https://mayanastrologycalculator.com/ref-page/og-image.webp'],
   },
 };
 

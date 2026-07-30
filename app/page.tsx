@@ -26,7 +26,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 items-center">
             <div className="relative overflow-hidden rounded-2xl border-4 border-amber-200 shadow-2xl bg-amber-950">
               <Image
-                src="/tzolkin-astrology-chart.png"
+                src="/tzolkin-astrology-chart.webp"
                 alt="Tzolk'in inspired Mayan astrology chart with day sign and tone markers"
                 width={1600}
                 height={900}

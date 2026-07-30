@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description: 'The terms for using Mayan Astrology Calculator, including paid report delivery, refund policy, disclaimers, and contact information.',
     url: 'https://mayanastrologycalculator.com/terms',
     siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Mayan Astrology Calculator Terms of Service',
+    }],
     locale: 'en_US',
     type: 'website',
   },

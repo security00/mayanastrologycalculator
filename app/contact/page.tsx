@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description: 'Contact the Mayan Astrology Calculator team. For support or feedback, email support@mayanastrologycalculator.com and we will respond promptly.',
     url: 'https://mayanastrologycalculator.com/contact',
     siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Contact Mayan Astrology Calculator',
+    }],
     locale: 'en_US',
     type: 'website',
   },

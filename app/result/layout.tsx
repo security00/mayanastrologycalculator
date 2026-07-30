@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     siteName: 'Mayan Astrology Calculator',
     images: [
       {
-        url: 'https://mayanastrologycalculator.com/ref-page/logo.png',
+        url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Mayan Astrology Calculator - Your Reading',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Your Mayan Astrology Reading - Tzolk'in Result",
     description: "View your Mayan astrology result with Nawal day sign and Galactic Tone. Save, share, and learn what your Tzolk'in date says about your strengths and life path.",
-    images: ['https://mayanastrologycalculator.com/ref-page/logo.png'],
+    images: ['https://mayanastrologycalculator.com/ref-page/og-image.webp'],
   },
   robots: {
     index: false,

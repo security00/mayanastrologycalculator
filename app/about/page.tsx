@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     siteName: 'Mayan Astrology Calculator',
     images: [
       {
-        url: 'https://mayanastrologycalculator.com/ref-page/logo.png',
+        url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Mayan Astrology Calculator - About Ancient Wisdom',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "About Mayan Astrology Calculator - Ancient Wisdom",
     description: "Learn about Mayan Astrology Calculator and the sacred Tzolk'in calendar. See how the tool reveals your Nawal day sign and Galactic Tone with wisdom.",
-    images: ['https://mayanastrologycalculator.com/ref-page/logo.png'],
+    images: ['https://mayanastrologycalculator.com/ref-page/og-image.webp'],
   },
 };
 

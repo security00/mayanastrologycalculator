@@ -17,7 +17,7 @@ export default function SiteHeader() {
         <div className="flex flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between">
           <Link href="/" className="flex items-center space-x-3">
             <Image
-              src="/ref-page/logo.png"
+              src="/ref-page/logo.webp"
               alt="Mayan Astrology Calculator Logo"
               width={50}
               height={50}

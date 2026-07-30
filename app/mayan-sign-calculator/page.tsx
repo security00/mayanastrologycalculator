@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     description: "Find your Mayan sign, Nawal day sign, and Galactic Tone from your birth date.",
     url: 'https://mayanastrologycalculator.com/mayan-sign-calculator',
     siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'Mayan Sign Calculator',
+    }],
     locale: 'en_US',
     type: 'website',
   },

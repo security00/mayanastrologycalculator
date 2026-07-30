@@ -7,6 +7,20 @@ export const metadata: Metadata = {
   description: "Explore all 20 Mayan zodiac signs, also called Nawal day signs. Learn each sign's meaning, element, direction, color, and personality themes.",
   keywords: 'mayan zodiac signs, mayan sign, mayan day signs, nawal meanings, tzolkin signs, mayan astrology signs',
   alternates: { canonical: 'https://mayanastrologycalculator.com/day-signs' },
+  openGraph: {
+    title: 'Mayan Zodiac Signs - 20 Nawal Day Sign Meanings',
+    description: "Explore all 20 Mayan zodiac signs, also called Nawal day signs. Learn each sign's meaning, element, direction, color, and personality themes.",
+    url: 'https://mayanastrologycalculator.com/day-signs',
+    siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'The 20 Mayan Nawal Day Signs',
+    }],
+    locale: 'en_US',
+    type: 'article',
+  },
 };
 
 export default function DaySignsPage() {

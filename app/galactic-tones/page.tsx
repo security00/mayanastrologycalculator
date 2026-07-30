@@ -7,6 +7,20 @@ export const metadata: Metadata = {
   description: "Learn the 13 Mayan Galactic Tones used in Tzolk'in astrology. Understand what each number means in your Mayan birth chart.",
   keywords: 'mayan galactic tones, tzolkin tones, mayan astrology numbers, mayan birth chart number, galactic tone meaning',
   alternates: { canonical: 'https://mayanastrologycalculator.com/galactic-tones' },
+  openGraph: {
+    title: 'Mayan Galactic Tones - Meanings of Numbers 1 to 13',
+    description: "Learn the 13 Mayan Galactic Tones used in Tzolk'in astrology. Understand what each number means in your Mayan birth chart.",
+    url: 'https://mayanastrologycalculator.com/galactic-tones',
+    siteName: 'Mayan Astrology Calculator',
+    images: [{
+      url: 'https://mayanastrologycalculator.com/ref-page/og-image.webp',
+      width: 1200,
+      height: 630,
+      alt: 'The 13 Mayan Galactic Tones',
+    }],
+    locale: 'en_US',
+    type: 'article',
+  },
 };
 
 export default function GalacticTonesPage() {
