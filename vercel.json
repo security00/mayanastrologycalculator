@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/mayan-astrology-birth-chart-free",
+      "destination": "/birth-chart",
+      "statusCode": 301
+    },
+    {
+      "source": "/mayan-astrology-birth-chart-free/",
+      "destination": "/birth-chart",
+      "statusCode": 301
+    }
+  ]
+}
