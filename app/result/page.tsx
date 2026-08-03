@@ -78,7 +78,7 @@ export default function ResultPage() {
     window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
   };
 
-  const handlePaidReportClick = async () => {
+  const handlePaidReportClick = async (emailDeliveryConsent: boolean) => {
     if (!storedData) return;
 
     setCheckoutLoading(true);
@@ -97,7 +97,10 @@ export default function ResultPage() {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ birthDate: storedData.birthDate }),
+          body: JSON.stringify({
+            birthDate: storedData.birthDate,
+            emailDeliveryConsent,
+          }),
       });
 
       const data = await response.json() as { url?: string; error?: string };

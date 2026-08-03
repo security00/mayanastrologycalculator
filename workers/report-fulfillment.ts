@@ -173,11 +173,24 @@ async function reportStatus(request: Request, env: Env) {
   if (!orderId || !sessionId) return Response.json({ error: 'Missing order details.' }, { status: 400 });
 
   const order = await env.REPORT_DB.prepare(
-    `SELECT id, status, delivery_status, mayan_signature, delivered_at
+    `SELECT id, status, delivery_status, mayan_signature, delivered_at, report_object_key
      FROM report_orders WHERE id = ?1 AND stripe_checkout_session_id = ?2 LIMIT 1`,
-  ).bind(orderId, sessionId).first<Record<string, unknown>>();
+  ).bind(orderId, sessionId).first<Pick<ReportOrder, 'id' | 'status' | 'delivery_status' | 'mayan_signature' | 'report_object_key'> & { delivered_at: string | null }>();
   if (!order) return Response.json({ error: 'Order not found.' }, { status: 404 });
-  return Response.json(order, { headers: { 'Cache-Control': 'private, no-store' } });
+
+  const responseBody: Record<string, unknown> = {
+    id: order.id,
+    status: order.status,
+    delivery_status: order.delivery_status,
+    mayan_signature: order.mayan_signature,
+    delivered_at: order.delivered_at,
+  };
+  if (order.status === 'paid' && order.report_object_key) {
+    const token = await createDownloadToken(order.id, env.REPORT_LINK_SECRET, 7 * 24 * 60 * 60);
+    responseBody.download_url = `${env.SITE_URL.replace(/\/$/, '')}/api/report-download?token=${encodeURIComponent(token)}`;
+  }
+
+  return Response.json(responseBody, { headers: { 'Cache-Control': 'private, no-store' } });
 }
 
 async function reportDownload(request: Request, env: Env) {
@@ -187,7 +200,7 @@ async function reportDownload(request: Request, env: Env) {
   if (!payload) return new Response('This report link is invalid or has expired.', { status: 403 });
 
   const order = await getOrder(payload.orderId, env);
-  if (!order?.report_object_key || order.delivery_status !== 'delivered') return new Response('Report not found.', { status: 404 });
+  if (!order?.report_object_key || order.status !== 'paid') return new Response('Report not found.', { status: 404 });
   const object = await env.REPORT_FILES.get(order.report_object_key);
   if (!object) return new Response('Report file has expired.', { status: 410 });
 

@@ -57,6 +57,11 @@ export default function TermsPage() {
           may take longer if payment details are incomplete, a third-party service is delayed, we need to
           verify an order, or support follow-up is required.
         </p>
+        <p>
+          To place an order, you must confirm that we may send the purchased report and essential
+          transaction and delivery messages to the email address confirmed in Stripe. This consent does not
+          include marketing messages.
+        </p>
 
         <h2>Refund Policy</h2>
         <p>

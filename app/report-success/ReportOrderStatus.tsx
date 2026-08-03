@@ -7,6 +7,7 @@ type OrderStatus = {
   status?: string;
   delivery_status?: string;
   mayan_signature?: string;
+  download_url?: string;
 };
 
 type AnalyticsWindow = Window & {
@@ -40,7 +41,10 @@ export default function ReportOrderStatus() {
             offer_version: REPORT_PRODUCT.offerVersion,
           });
         }
-        if (REPORT_PRODUCT.instantDeliveryEnabled && nextOrder.delivery_status !== 'delivered') {
+        if (
+          REPORT_PRODUCT.instantDeliveryEnabled
+          && (!nextOrder.download_url || nextOrder.delivery_status !== 'delivered')
+        ) {
           timer = setTimeout(load, 5000);
         }
       } catch {
@@ -54,20 +58,53 @@ export default function ReportOrderStatus() {
     };
   }, []);
 
+  const reportReady = Boolean(order?.download_url);
   const delivered = order?.delivery_status === 'delivered';
+
+  const trackDownload = () => {
+    (window as AnalyticsWindow).gtag?.('event', 'paid_report_download_click', {
+      report_type: REPORT_PRODUCT.code,
+      source: 'payment_success_page',
+      offer_version: REPORT_PRODUCT.offerVersion,
+    });
+  };
 
   return (
     <div className="rounded-lg border border-amber-200 bg-amber-50 p-5 mb-6" aria-live="polite">
-      <h2 className="font-bold text-gray-950 mb-2">What happens next</h2>
+      <h2 className="font-bold text-gray-950 mb-2">
+        {reportReady ? 'Your report is ready' : 'We are generating your report'}
+      </h2>
       <ul className="space-y-2 text-gray-700">
         <li>✓ Your payment and birth date details are recorded securely.</li>
         <li>✓ Your report is calculated from the submitted date, not from editable browser values.</li>
-        <li>{delivered ? '✓ Your report has been emailed.' : `• Your private PDF is ${reportDeliveryCopy.toLowerCase()}.`}</li>
+        <li>
+          {delivered
+            ? '✓ A backup download link has been emailed to you.'
+            : reportReady
+              ? '• Your download is ready; the backup email is still being sent.'
+              : `• Your private PDF is ${reportDeliveryCopy.toLowerCase()}.`}
+        </li>
       </ul>
+      {order?.download_url && (
+        <a
+          href={order.download_url}
+          onClick={trackDownload}
+          className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-orange-600 px-6 py-3.5 font-bold text-white shadow-md transition-colors hover:bg-orange-700 sm:w-auto"
+        >
+          Download my PDF report
+        </a>
+      )}
+      {!reportReady && (
+        <p className="mt-4 text-sm font-medium text-orange-800">
+          This page updates automatically. The download button will appear as soon as the PDF is ready.
+        </p>
+      )}
       {order?.mayan_signature && (
         <p className="mt-3 text-sm font-semibold text-orange-800">Order signature: {order.mayan_signature}</p>
       )}
-      <p className="mt-3 text-sm text-gray-600">Check spam or promotions folders. Your download link is private and time-limited.</p>
+      <p className="mt-3 text-sm text-gray-600">
+        Keep this page open until the button appears. The private download link remains valid for 7 days.
+      </p>
     </div>
   );
 }

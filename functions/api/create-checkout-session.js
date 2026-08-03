@@ -13,6 +13,9 @@ export async function onRequestPost({ request, env }) {
 
     const authSession = await readAuthSession(request, env);
     const payload = await request.json();
+    if (payload.emailDeliveryConsent !== true) {
+      return json({ error: 'Please agree to email delivery before continuing.' }, 400);
+    }
     const birthDate = payload.birthDate || {};
     const day = Number(birthDate.day);
     const month = Number(birthDate.month);
@@ -36,10 +39,11 @@ export async function onRequestPost({ request, env }) {
       `INSERT INTO report_orders (
         id, status, report_type, birth_day, birth_month, birth_year,
         mayan_signature, nawal, galactic_tone, amount_usd, currency, customer_email,
+        email_delivery_consent_at, email_delivery_consent_version,
         created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), ?, datetime('now'), datetime('now'))`
     )
-      .bind(orderId, 'pending', REPORT_PRODUCT.code, day, month, year, signature, nawal, tone, REPORT_PRODUCT.priceUsd, 'usd', authSession?.email || null)
+      .bind(orderId, 'pending', REPORT_PRODUCT.code, day, month, year, signature, nawal, tone, REPORT_PRODUCT.priceUsd, 'usd', authSession?.email || null, 'v1_transactional_email_delivery')
       .run();
 
     const params = new URLSearchParams();

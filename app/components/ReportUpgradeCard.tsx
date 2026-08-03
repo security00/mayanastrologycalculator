@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
 import GoogleEmailSignIn from './GoogleEmailSignIn';
 
@@ -14,7 +14,7 @@ type ReportUpgradeCardProps = {
   galacticTone: number;
   checkoutLoading: boolean;
   checkoutError: string;
-  onCheckout: () => void;
+  onCheckout: (emailDeliveryConsent: boolean) => void;
 };
 
 const reportSections = [
@@ -36,6 +36,7 @@ export default function ReportUpgradeCard({
 }: ReportUpgradeCardProps) {
   const offerRef = useRef<HTMLElement>(null);
   const hasTrackedView = useRef(false);
+  const [emailDeliveryConsent, setEmailDeliveryConsent] = useState(false);
 
   useEffect(() => {
     const section = offerRef.current;
@@ -93,14 +94,37 @@ export default function ReportUpgradeCard({
             relationship, work, decision, and seven-day reflection practices.
           </p>
           <GoogleEmailSignIn />
+          <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-white/30 bg-black/10 p-3.5 text-sm text-orange-50">
+            <input
+              type="checkbox"
+              checked={emailDeliveryConsent}
+              onChange={(event) => setEmailDeliveryConsent(event.target.checked)}
+              className="mt-0.5 h-5 w-5 shrink-0 accent-orange-500"
+              required
+            />
+            <span>
+              I agree to receive my personalized PDF and essential order and delivery emails at the
+              email address confirmed in Stripe. See the{' '}
+              <a href="/privacy" className="font-semibold text-white underline underline-offset-2">Privacy Policy</a>
+              {' '}and{' '}
+              <a href="/terms" className="font-semibold text-white underline underline-offset-2">Terms</a>.
+              <span className="mt-1 block text-xs text-orange-100">Required to continue. No marketing emails.</span>
+            </span>
+          </label>
           <button
             type="button"
-            onClick={onCheckout}
-            disabled={checkoutLoading}
+            onClick={() => onCheckout(emailDeliveryConsent)}
+            disabled={checkoutLoading || !emailDeliveryConsent}
+            aria-describedby={!emailDeliveryConsent ? 'checkout-consent-help' : undefined}
             className="w-full sm:w-auto rounded-xl bg-white px-7 py-3.5 font-bold text-gray-950 shadow-lg transition-colors hover:bg-orange-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {checkoutLoading ? 'Opening secure checkout…' : `Get my 11-page report — $${REPORT_PRODUCT.priceUsd}`}
           </button>
+          {!emailDeliveryConsent && (
+            <span id="checkout-consent-help" className="mt-2 block text-xs text-orange-100 sm:inline sm:ml-3">
+              Check the delivery consent box to continue.
+            </span>
+          )}
           <a
             href="/samples/personal-mayan-signature-report-sample.pdf"
             target="_blank"

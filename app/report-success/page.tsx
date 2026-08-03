@@ -3,8 +3,8 @@ import Link from 'next/link';
 import ReportOrderStatus from './ReportOrderStatus';
 
 export const metadata: Metadata = {
-  title: 'Report Order Received - Mayan Astrology Calculator',
-  description: 'Your Mayan birth chart report order has been received. We will prepare your early access PDF report and deliver it by email.',
+  title: 'Download Your Mayan Report - Mayan Astrology Calculator',
+  description: 'Your payment is confirmed. Download your personalized Mayan report here and receive a backup link by email.',
   robots: {
     index: false,
     follow: false,

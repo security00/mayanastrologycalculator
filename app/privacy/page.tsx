@@ -64,6 +64,11 @@ export default function PrivacyPage() {
           code. Stripe may collect and process payment information according to its own privacy policy and
           security practices.
         </p>
+        <p>
+          Before checkout, we ask you to consent to receiving the purchased PDF and essential order and
+          delivery messages at the email address confirmed in Stripe. We record the time and version of
+          this consent with the order. This consent is not permission to send marketing emails.
+        </p>
 
         <h2>Analytics and Advertising</h2>
         <p>

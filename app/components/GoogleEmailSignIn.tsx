@@ -127,7 +127,7 @@ export default function GoogleEmailSignIn() {
         text: 'continue_with',
         shape: 'rectangular',
         logo_alignment: 'left',
-        width: 320,
+        width: 230,
       });
     };
 
@@ -172,37 +172,37 @@ export default function GoogleEmailSignIn() {
   if (!sessionLoaded || (!googleClientId && !user)) return null;
 
   return (
-    <div className="mb-5 rounded-2xl border border-white/25 bg-white/10 p-4 backdrop-blur-sm">
+    <div className="mb-4 rounded-xl border border-orange-100 bg-white/95 p-3 text-gray-800 shadow-sm">
       {user ? (
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold text-white">Signed in as {user.email}</p>
-            <p className="mt-1 text-xs text-orange-100">
-              This verified email will be prefilled securely in Stripe.
+            <p className="text-sm font-semibold text-gray-950">Delivery email: {user.email}</p>
+            <p className="mt-1 text-xs text-gray-600">
+              Google verified this address. You can confirm it again in Stripe.
             </p>
           </div>
           <button
             type="button"
             onClick={handleLogout}
             disabled={authLoading}
-            className="self-start text-sm font-semibold text-white underline decoration-orange-200 underline-offset-4 disabled:opacity-60"
+            className="self-start text-sm font-semibold text-orange-700 underline decoration-orange-300 underline-offset-4 disabled:opacity-60"
           >
             Use another email
           </button>
         </div>
       ) : (
-        <>
-          <p className="mb-3 text-sm font-semibold text-white">
-            Save a step at checkout
-          </p>
-          <div ref={buttonRef} className="min-h-10 max-w-full overflow-hidden" aria-label="Continue with Google" />
-          <p className="mt-2 text-xs text-orange-100">
-            Optional - you can continue as a guest and enter any delivery email in Stripe.
-          </p>
-        </>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0 sm:pr-3">
+            <p className="text-sm font-semibold text-gray-950">Delivery email</p>
+            <p className="mt-1 text-xs text-gray-600">
+              Enter it in Stripe, or optionally prefill it with Google.
+            </p>
+          </div>
+          <div ref={buttonRef} className="min-h-10 max-w-full shrink-0 overflow-hidden" aria-label="Continue with Google" />
+        </div>
       )}
-      {authLoading && <p className="mt-2 text-xs text-orange-100">Confirming your email...</p>}
-      {authError && <p className="mt-2 text-xs font-medium text-yellow-100">{authError}</p>}
+      {authLoading && <p className="mt-2 text-xs text-gray-600">Confirming your email...</p>}
+      {authError && <p className="mt-2 text-xs font-medium text-red-700">{authError}</p>}
     </div>
   );
 }
