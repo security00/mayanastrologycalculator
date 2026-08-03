@@ -21,7 +21,7 @@ export async function onRequestPost({ request, env }) {
     const session = event.data.object;
     const orderId = session.client_reference_id || session.metadata?.order_id;
 
-    if (orderId) {
+    if (orderId && session.payment_status === 'paid') {
       await env.REPORT_DB.prepare(
         `UPDATE report_orders
          SET status = ?,
@@ -44,6 +44,14 @@ export async function onRequestPost({ request, env }) {
           orderId
         )
         .run();
+
+      if (env.REPORT_QUEUE) {
+        await env.REPORT_QUEUE.send({
+          orderId,
+          stripeEventId: event.id,
+          checkoutSessionId: session.id,
+        }, { contentType: 'json' });
+      }
     }
   }
 
@@ -71,14 +79,15 @@ function json(data, status = 200) {
 }
 
 async function verifyStripeSignature(body, signatureHeader, secret) {
-  const parts = Object.fromEntries(
-    signatureHeader.split(',').map((part) => {
-      const [key, value] = part.split('=');
-      return [key, value];
-    })
-  );
+  const parts = signatureHeader.split(',').reduce((result, part) => {
+    const [key, value] = part.split('=');
+    if (key && value) result[key] = [...(result[key] || []), value];
+    return result;
+  }, {});
 
-  if (!parts.t || !parts.v1) return false;
+  const timestamp = Number(parts.t?.[0]);
+  if (!timestamp || !parts.v1?.length) return false;
+  if (Math.abs(Math.floor(Date.now() / 1000) - timestamp) > 300) return false;
 
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
@@ -88,11 +97,11 @@ async function verifyStripeSignature(body, signatureHeader, secret) {
     false,
     ['sign']
   );
-  const signedPayload = `${parts.t}.${body}`;
+  const signedPayload = `${timestamp}.${body}`;
   const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(signedPayload));
   const expected = [...new Uint8Array(signature)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 
-  return timingSafeEqual(expected, parts.v1);
+  return parts.v1.some((candidate) => timingSafeEqual(expected, candidate));
 }
 
 function timingSafeEqual(a, b) {

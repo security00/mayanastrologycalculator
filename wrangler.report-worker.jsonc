@@ -1,0 +1,40 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "mayan-report-fulfillment",
+  "main": "workers/report-fulfillment.ts",
+  "compatibility_date": "2026-08-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "mayanastrologycalculator.com/api/report-status*", "zone_name": "mayanastrologycalculator.com" },
+    { "pattern": "mayanastrologycalculator.com/api/report-download*", "zone_name": "mayanastrologycalculator.com" }
+  ],
+  "vars": {
+    "SITE_URL": "https://mayanastrologycalculator.com",
+    "REPORT_FROM_EMAIL": "Mayan Astrology Calculator <reports@mayanastrologycalculator.com>"
+  },
+  "browser": { "binding": "BROWSER" },
+  "d1_databases": [
+    {
+      "binding": "REPORT_DB",
+      "database_name": "mayan-report-orders",
+      "database_id": "6a392165-8261-4f5c-a304-a2888a140515"
+    }
+  ],
+  "r2_buckets": [
+    { "binding": "REPORT_FILES", "bucket_name": "mayan-report-files" }
+  ],
+  "queues": {
+    "consumers": [
+      {
+        "queue": "mayan-report-fulfillment",
+        "max_batch_size": 1,
+        "max_batch_timeout": 5,
+        "max_retries": 5,
+        "dead_letter_queue": "mayan-report-fulfillment-dlq"
+      }
+    ]
+  },
+  "triggers": { "crons": ["17 3 * * *"] },
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
+}

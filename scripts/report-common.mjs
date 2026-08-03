@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { renderReportHtml as renderReportHtmlV2 } from '../shared/report-engine.js';
 
 const rootDir = resolve(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'));
 
@@ -206,6 +207,11 @@ export const tones = {
 };
 
 export function renderReportHtml(order) {
+  const imagePath = resolve(config.rootDir, 'public', 'tzolkin-astrology-chart.png').replace(/\\/g, '/');
+  return renderReportHtmlV2(order, { coverImageUrl: `file:///${imagePath}` });
+}
+
+function renderLegacyReportHtml(order) {
   const sign = daySigns[order.nawal] || daySigns.Imix;
   const tone = tones[order.galactic_tone] || tones[1];
   const title = `${order.mayan_signature}: The ${tone.name} ${sign.animal}`;
@@ -218,11 +224,11 @@ export function renderReportHtml(order) {
   <meta charset="utf-8" />
   <title>Full Mayan Birth Chart Report - ${escapeHtml(order.mayan_signature)}</title>
   <style>
-    @page { size: A4; margin: 18mm; }
+    @page { size: A4; margin: 0; }
     * { box-sizing: border-box; }
     body { margin: 0; color: #1f2933; font-family: Georgia, "Times New Roman", serif; background: #f8f0df; line-height: 1.55; }
     .report { max-width: 820px; margin: 0 auto; background: #fffaf0; }
-    .page { min-height: 260mm; padding: 24mm 18mm; page-break-after: always; position: relative; }
+    .page { min-height: 297mm; padding: 22mm 20mm; page-break-after: always; position: relative; }
     .page:last-child { page-break-after: auto; }
     .cover { background: linear-gradient(rgba(45,25,10,.38), rgba(45,25,10,.72)), url("file:///${imagePath}") center / cover no-repeat; color: #fff8e8; display: flex; flex-direction: column; justify-content: flex-end; }
     .cover-card { background: rgba(17,24,39,.72); border: 1px solid rgba(254,215,170,.42); border-radius: 18px; padding: 28px; }
@@ -242,7 +248,8 @@ export function renderReportHtml(order) {
     .meta-label { color: #92400e; display: block; font-family: Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
     .meta-value { color: #111827; display: block; font-size: 22px; font-weight: 700; margin-top: 4px; }
     .quote { border-left: 5px solid #ea580c; color: #3f2a12; font-size: 20px; font-style: italic; margin: 22px 0; padding: 10px 0 10px 18px; }
-    .section-label { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 999px; color: #9a3412; display: inline-block; font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 18px; padding: 7px 12px; }
+    .section-label { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 999px; color: #9a3412; display: block; font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 0; padding: 7px 12px; width: max-content; }
+    .section-label + h2 { margin-top: 24px; }
     .footer-note,.muted { color: #8a6b45; font-family: Arial, sans-serif; font-size: 10px; }
   </style>
 </head>
@@ -367,6 +374,8 @@ export function renderReportHtml(order) {
 </body>
 </html>`;
 }
+
+void renderLegacyReportHtml;
 
 function loadDotEnv() {
   const envPath = join(rootDir, '.env');

@@ -16,7 +16,7 @@ jobs:
       
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       
       - name: Install dependencies
@@ -24,6 +24,12 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Test report engine
+        run: npm run test:report
+
+      - name: Validate report Worker bundle
+        run: npx wrangler deploy --config wrangler.report-worker.jsonc --dry-run
       
       - name: Build
         run: npm run build

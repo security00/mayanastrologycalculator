@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
+import { REPORT_PRODUCT } from '../lib/report-product';
 
 interface StoredReading {
   reading: MayanReading;
@@ -85,27 +86,21 @@ export default function ResultPage() {
 
     const analyticsWindow = window as AnalyticsWindow;
     analyticsWindow.gtag?.('event', 'paid_report_checkout_click', {
-      report_type: 'birth_chart',
+      report_type: REPORT_PRODUCT.code,
       nawal: storedData.reading.nawal.name,
       galactic_tone: storedData.reading.galacticTone.number,
-      price_usd: 7,
+      price_usd: REPORT_PRODUCT.priceUsd,
+      offer_version: REPORT_PRODUCT.offerVersion,
     });
 
     try {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          birthDate: storedData.birthDate,
-          reading: {
-            signature: `${storedData.reading.galacticTone.number} ${storedData.reading.nawal.name}`,
-            nawal: storedData.reading.nawal.name,
-            galacticTone: storedData.reading.galacticTone.number,
-          },
-        }),
+        body: JSON.stringify({ birthDate: storedData.birthDate }),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { url?: string; error?: string };
 
       if (!response.ok || !data.url) {
         throw new Error(data.error || 'Unable to start checkout.');

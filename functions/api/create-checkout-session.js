@@ -1,3 +1,5 @@
+import { REPORT_PRODUCT, calculateMayanSignature, isValidBirthDate } from '../../shared/report-engine.js';
+
 export async function onRequestPost({ request, env }) {
   try {
     if (!env.REPORT_DB) {
@@ -10,18 +12,18 @@ export async function onRequestPost({ request, env }) {
 
     const payload = await request.json();
     const birthDate = payload.birthDate || {};
-    const reading = payload.reading || {};
-
     const day = Number(birthDate.day);
     const month = Number(birthDate.month);
     const year = Number(birthDate.year);
-    const tone = Number(reading.galacticTone);
-    const nawal = String(reading.nawal || '').trim();
-    const signature = String(reading.signature || `${tone} ${nawal}`).trim();
 
-    if (!validDate(day, month, year) || !tone || !nawal || !signature) {
+    if (!isValidBirthDate(day, month, year)) {
       return json({ error: 'Missing or invalid report details.' }, 400);
     }
+
+    const calculated = calculateMayanSignature({ day, month, year });
+    const tone = calculated.tone.number;
+    const nawal = calculated.sign.name;
+    const signature = calculated.signature;
 
     const orderId = crypto.randomUUID();
     const siteUrl = env.SITE_URL || new URL(request.url).origin;
@@ -34,7 +36,7 @@ export async function onRequestPost({ request, env }) {
         mayan_signature, nawal, galactic_tone, amount_usd, currency, created_at, updated_at
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`
     )
-      .bind(orderId, 'pending', 'birth_chart', day, month, year, signature, nawal, tone, 7, 'usd')
+      .bind(orderId, 'pending', REPORT_PRODUCT.code, day, month, year, signature, nawal, tone, REPORT_PRODUCT.priceUsd, 'usd')
       .run();
 
     const params = new URLSearchParams();
@@ -45,11 +47,12 @@ export async function onRequestPost({ request, env }) {
     params.set('success_url', successUrl);
     params.set('cancel_url', cancelUrl);
     params.set('metadata[order_id]', orderId);
-    params.set('metadata[report_type]', 'birth_chart');
+    params.set('metadata[report_type]', REPORT_PRODUCT.code);
+    params.set('metadata[report_version]', String(REPORT_PRODUCT.version));
     params.set('metadata[mayan_signature]', signature);
     params.set('metadata[birth_date]', `${day}/${month}/${year}`);
     params.set('payment_intent_data[metadata][order_id]', orderId);
-    params.set('payment_intent_data[metadata][report_type]', 'birth_chart');
+    params.set('payment_intent_data[metadata][report_type]', REPORT_PRODUCT.code);
 
     const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
@@ -89,10 +92,4 @@ function json(data, status = 200) {
     status,
     headers: { 'Content-Type': 'application/json' },
   });
-}
-
-function validDate(day, month, year) {
-  if (year < 1 || year > 9999 || month < 1 || month > 12 || day < 1 || day > 31) return false;
-  const date = new Date(year, month - 1, day);
-  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
 }
