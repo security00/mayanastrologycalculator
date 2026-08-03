@@ -61,7 +61,7 @@ Run a Stripe test-mode purchase and verify all of the following before enabling 
 - the R2 bucket is not publicly browsable;
 - a duplicate Stripe event does not create a second delivery.
 
-After the production smoke test passes, set the Pages build variable `NEXT_PUBLIC_INSTANT_REPORTS=true` and redeploy. Until then, leave it false so the website continues to promise the existing 24–48 hour fulfillment window.
+After the production smoke test passes, redeploy with the default instant-delivery promise enabled. Set `NEXT_PUBLIC_INSTANT_REPORTS=false` only when a temporary rollback is required.
 
 ## Rollback
 
