@@ -11,7 +11,8 @@
   ],
   "vars": {
     "SITE_URL": "https://mayanastrologycalculator.com",
-    "REPORT_FROM_EMAIL": "Mayan Astrology Calculator <reports@mayanastrologycalculator.com>"
+    "REPORT_FROM_EMAIL": "Mayan Astrology Calculator <support@mayanastrologycalculator.com>",
+    "REPORT_REPLY_TO_EMAIL": "support@mayanastrologycalculator.com"
   },
   "browser": { "binding": "BROWSER" },
   "d1_databases": [

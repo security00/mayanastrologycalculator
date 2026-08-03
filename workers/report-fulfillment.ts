@@ -7,6 +7,7 @@ interface Env {
   RESEND_API_KEY: string;
   REPORT_LINK_SECRET: string;
   REPORT_FROM_EMAIL: string;
+  REPORT_REPLY_TO_EMAIL: string;
   SITE_URL: string;
 }
 
@@ -148,6 +149,7 @@ async function sendReportEmail(order: ReportOrder, downloadUrl: string, env: Env
     },
     body: JSON.stringify({
       from: env.REPORT_FROM_EMAIL,
+      reply_to: env.REPORT_REPLY_TO_EMAIL,
       to: [order.customer_email],
       subject: `Your ${order.mayan_signature} Mayan Signature Report is ready`,
       html: `<div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;color:#292524"><h1>Your report is ready</h1><p>Your private <strong>${escapeHtml(order.mayan_signature)}</strong> report has been generated.</p><p><a href="${escapeHtml(downloadUrl)}" style="display:inline-block;background:#c2410c;color:white;text-decoration:none;padding:14px 22px;border-radius:9px;font-weight:bold">Download your PDF report</a></p><p>This secure link expires in 7 days. The private report file is retained for 90 days so support can issue a fresh link if needed.</p><p>If the report is missing or unusable, reply within 7 days for a replacement or refund.</p><p>— Mayan Astrology Calculator</p></div>`,

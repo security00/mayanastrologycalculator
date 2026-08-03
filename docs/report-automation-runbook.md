@@ -32,7 +32,7 @@ Do not remove the existing `REPORT_DB` binding or Stripe secrets.
 
 ## Resend and Worker secrets
 
-Verify `mayanastrologycalculator.com` in Resend and authorize `reports@mayanastrologycalculator.com`. Then add both Worker secrets interactively:
+Verify `mayanastrologycalculator.com` in Resend and authorize `support@mayanastrologycalculator.com`. The Worker uses this address for both From and Reply-To. Then add both Worker secrets interactively:
 
 ```powershell
 npx wrangler secret put RESEND_API_KEY --config wrangler.report-worker.jsonc
