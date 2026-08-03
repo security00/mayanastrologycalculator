@@ -1,4 +1,5 @@
 import { REPORT_PRODUCT, calculateMayanSignature, isValidBirthDate } from '../../shared/report-engine.js';
+import { readAuthSession } from '../_lib/auth.js';
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -10,6 +11,7 @@ export async function onRequestPost({ request, env }) {
       return json({ error: 'Stripe checkout is not configured yet.' }, 500);
     }
 
+    const authSession = await readAuthSession(request, env);
     const payload = await request.json();
     const birthDate = payload.birthDate || {};
     const day = Number(birthDate.day);
@@ -33,10 +35,11 @@ export async function onRequestPost({ request, env }) {
     await env.REPORT_DB.prepare(
       `INSERT INTO report_orders (
         id, status, report_type, birth_day, birth_month, birth_year,
-        mayan_signature, nawal, galactic_tone, amount_usd, currency, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`
+        mayan_signature, nawal, galactic_tone, amount_usd, currency, customer_email,
+        created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`
     )
-      .bind(orderId, 'pending', REPORT_PRODUCT.code, day, month, year, signature, nawal, tone, REPORT_PRODUCT.priceUsd, 'usd')
+      .bind(orderId, 'pending', REPORT_PRODUCT.code, day, month, year, signature, nawal, tone, REPORT_PRODUCT.priceUsd, 'usd', authSession?.email || null)
       .run();
 
     const params = new URLSearchParams();
@@ -53,6 +56,9 @@ export async function onRequestPost({ request, env }) {
     params.set('metadata[birth_date]', `${day}/${month}/${year}`);
     params.set('payment_intent_data[metadata][order_id]', orderId);
     params.set('payment_intent_data[metadata][report_type]', REPORT_PRODUCT.code);
+    if (authSession?.email) {
+      params.set('customer_email', authSession.email);
+    }
 
     const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',

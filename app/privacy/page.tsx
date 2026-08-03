@@ -32,7 +32,7 @@ export default function PrivacyPage() {
         </div>
 
         <h1>Privacy Policy</h1>
-        <p>Last updated: June 28, 2026</p>
+        <p>Last updated: August 3, 2026</p>
 
         <p>
           Mayan Astrology Calculator provides free Mayan Tzolk'in calculations and optional paid PDF
@@ -44,8 +44,14 @@ export default function PrivacyPage() {
         <p>
           If you order a paid report, we store the information needed to prepare and deliver that report,
           including your birth date, Mayan signature, Nawal day sign, Galactic Tone, Stripe checkout
-          session ID, payment status, delivery status, and the email address provided during Stripe
-          checkout.
+          session ID, payment status, delivery status, and the delivery email provided through optional
+          Google sign-in or during Stripe checkout.
+        </p>
+        <p>
+          If you use the optional Continue with Google feature, Google provides a verified account
+          identifier, email address, and, when available, your name and profile image. We use this
+          information only to maintain a signed session and prefill your report delivery email. We do not
+          receive or store your Google password. You may continue as a guest without Google sign-in.
         </p>
         <p>
           If you contact us by email, we collect the information you choose to send, such as your email
@@ -82,8 +88,8 @@ export default function PrivacyPage() {
         <h2>Data Sharing</h2>
         <p>
           We do not sell your personal information. We share limited information with service providers
-          only as needed to operate the site, process payments, deliver reports, measure analytics, provide
-          advertising, or respond to support requests.
+          only as needed to operate the site, verify optional Google sign-in, process payments, deliver
+          reports, measure analytics, provide advertising, or respond to support requests.
         </p>
 
         <h2>Data Retention</h2>
@@ -95,9 +101,10 @@ export default function PrivacyPage() {
 
         <h2>Your Choices</h2>
         <p>
-          You can choose not to purchase a paid report. You can block cookies or analytics scripts through
-          your browser settings or privacy tools. You can contact us to request access, correction, or
-          deletion of personal information associated with your report order.
+          You can choose not to purchase a paid report or not to use Google sign-in. You can sign out and
+          continue as a guest, block cookies or analytics scripts through your browser settings or privacy
+          tools, or contact us to request access, correction, or deletion of personal information associated
+          with your report order.
         </p>
 
         <h2>Children</h2>

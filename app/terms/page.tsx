@@ -32,7 +32,7 @@ export default function TermsPage() {
         </div>
 
         <h1>Terms of Service</h1>
-        <p>Last updated: June 28, 2026</p>
+        <p>Last updated: August 3, 2026</p>
 
         <p>
           By using Mayan Astrology Calculator, you agree to these terms. If you do not agree, please do
@@ -48,13 +48,14 @@ export default function TermsPage() {
 
         <h2>Paid PDF Reports</h2>
         <p>
-          We may offer optional paid early access PDF reports. A paid report is a one-time purchase, not a
-          subscription. After payment, we prepare the report manually and send it to the email address used
-          during Stripe checkout.
+          We may offer optional paid PDF reports. A paid report is a one-time purchase, not a subscription.
+          After successful payment, our automated fulfillment system generates the personalized report and
+          sends it to the delivery email associated with the Stripe checkout.
         </p>
         <p>
-          Standard delivery time is 24-48 hours after successful payment. Delivery time may be longer if
-          payment details are incomplete, if we need to verify an order, or if support follow-up is needed.
+          Reports are normally generated and emailed within a few minutes after successful payment. Delivery
+          may take longer if payment details are incomplete, a third-party service is delayed, we need to
+          verify an order, or support follow-up is required.
         </p>
 
         <h2>Refund Policy</h2>
@@ -93,11 +94,18 @@ export default function TermsPage() {
           represent a traditional lineage.
         </p>
 
+        <h2>Optional Google Sign-In</h2>
+        <p>
+          You may use Continue with Google to prefill a verified email address for checkout. Google sign-in
+          is optional, does not create a subscription, and is not required to use the free calculator or buy
+          a report. You remain responsible for confirming that the delivery email shown in Stripe is correct.
+        </p>
+
         <h2>Payments and Third Parties</h2>
         <p>
-          Payments are processed by Stripe. Your use of Stripe checkout may be subject to Stripe's own
-          terms and privacy policy. We are not responsible for outages, delays, or errors caused by third
-          party providers.
+          Payments are processed by Stripe, and optional identity verification is provided by Google. Your
+          use of these services may be subject to their own terms and privacy policies. We are not responsible
+          for outages, delays, or errors caused by third-party providers.
         </p>
 
         <h2>Acceptable Use</h2>

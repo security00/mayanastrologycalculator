@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
+import GoogleEmailSignIn from './GoogleEmailSignIn';
 
 type AnalyticsWindow = Window & {
   gtag?: (command: string, eventName: string, params: Record<string, string | number>) => void;
@@ -91,6 +92,7 @@ export default function ReportUpgradeCard({
             Keep the free result. Add a private 11-page guide that turns your Nawal and Tone into
             relationship, work, decision, and seven-day reflection practices.
           </p>
+          <GoogleEmailSignIn />
           <button
             type="button"
             onClick={onCheckout}
