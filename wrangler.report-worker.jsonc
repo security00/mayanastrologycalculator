@@ -17,7 +17,7 @@
   "d1_databases": [
     {
       "binding": "REPORT_DB",
-      "database_name": "mayan-report-orders",
+      "database_name": "mayanastrologycalculator-reports",
       "database_id": "6a392165-8261-4f5c-a304-a2888a140515"
     }
   ],

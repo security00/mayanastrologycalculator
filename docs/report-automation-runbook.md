@@ -21,7 +21,7 @@ npx wrangler queues create mayan-report-fulfillment
 npx wrangler queues create mayan-report-fulfillment-dlq
 ```
 
-Apply `migrations/003_automated_report_fulfillment.sql` once to D1 database `6a392165-8261-4f5c-a304-a2888a140515`. Confirm the five new columns exist before deploying the consumer.
+Apply `migrations/003_automated_report_fulfillment.sql` once to D1 database `mayanastrologycalculator-reports` (`6a392165-8261-4f5c-a304-a2888a140515`). Confirm the five new columns exist before deploying the consumer.
 
 In the Cloudflare Pages project settings for `mayanastrologycalculator`, add a Queue producer binding:
 
