@@ -10,6 +10,10 @@ type BirthDateCalculatorProps = {
   buttonLabel?: string;
 };
 
+type ConversionWindow = Window & {
+  gtag_report_conversion?: (url?: string) => boolean;
+};
+
 export default function BirthDateCalculator({
   title = 'Mayan Astrology Calculator',
   description = "Enter your birth date to calculate your Tzolk'in signature",
@@ -50,6 +54,7 @@ export default function BirthDateCalculator({
       birthDate: { day: dayNumber, month: monthNumber, year: yearNumber },
     }));
 
+    (window as ConversionWindow).gtag_report_conversion?.();
     router.push(`/result?day=${dayNumber}&month=${monthNumber}&year=${yearNumber}`);
   };
 
