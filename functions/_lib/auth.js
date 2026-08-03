@@ -123,12 +123,14 @@ export function validateCsrf(request) {
   return Boolean(cookieToken && headerToken && cookieToken === headerToken);
 }
 
-export function isSameOriginRequest(request) {
+export function isSameOriginRequest(request, env = {}) {
   const origin = request.headers.get('Origin');
   if (!origin) return false;
 
   try {
-    return new URL(origin).origin === new URL(request.url).origin;
+    const allowedOrigins = new Set([new URL(request.url).origin]);
+    if (env.SITE_URL) allowedOrigins.add(new URL(env.SITE_URL).origin);
+    return allowedOrigins.has(new URL(origin).origin);
   } catch {
     return false;
   }

@@ -12,7 +12,7 @@ export async function onRequestPost({ request, env }) {
     return authJson({ error: 'Google sign-in is not configured.' }, 503);
   }
 
-  if (!isSameOriginRequest(request) || !validateCsrf(request)) {
+  if (!isSameOriginRequest(request, env) || !validateCsrf(request)) {
     return authJson({ error: 'Invalid sign-in request.' }, 403);
   }
 

@@ -75,3 +75,15 @@ test('CSRF validation requires matching cookie and header tokens', () => {
   assert.equal(validateCsrf(invalidRequest), false);
   assert.equal(isSameOriginRequest(invalidRequest), false);
 });
+
+test('same-origin validation accepts the configured custom domain behind Pages', () => {
+  const request = new Request('https://internal-project.pages.dev/api/auth/google', {
+    method: 'POST',
+    headers: { Origin: 'https://mayanastrologycalculator.com' },
+  });
+
+  assert.equal(
+    isSameOriginRequest(request, { SITE_URL: 'https://mayanastrologycalculator.com' }),
+    true,
+  );
+});
