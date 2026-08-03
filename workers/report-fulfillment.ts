@@ -111,9 +111,10 @@ async function fulfillOrder(orderId: string, env: Env) {
       pdfOptions: { format: 'a4', printBackground: true, preferCSSPageSize: true },
     });
     if (!pdfResponse.ok) throw new Error(`Browser Run returned ${pdfResponse.status}.`);
+    const pdfBytes = await pdfResponse.arrayBuffer();
 
     const expiresAt = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
-    await env.REPORT_FILES.put(objectKey, pdfResponse.body, {
+    await env.REPORT_FILES.put(objectKey, pdfBytes, {
       httpMetadata: { contentType: 'application/pdf', contentDisposition: 'attachment' },
       customMetadata: { orderId: order.id, expiresAt: expiresAt.toISOString(), productVersion: String(REPORT_PRODUCT.version) },
     });
