@@ -21,17 +21,13 @@ export default function GoogleAnalytics() {
             gtag('config', '${GOOGLE_ANALYTICS_ID}');
             gtag('config', '${GOOGLE_ADS_ID}');
 
-            window.gtag_report_conversion = function(url) {
-              var callback = function() {
-                if (typeof url !== 'undefined') {
-                  window.location = url;
-                }
-              };
+            window.gtag_report_purchase_conversion = function(transactionId, value, currency) {
               gtag('event', 'conversion', {
                 'send_to': '${GOOGLE_ADS_ID}/jDGbCNbhsNscELSHttdB',
-                'event_callback': callback
+                'transaction_id': transactionId,
+                'value': value,
+                'currency': currency
               });
-              return false;
             };
           `,
         }}

@@ -10,8 +10,8 @@ type BirthDateCalculatorProps = {
   buttonLabel?: string;
 };
 
-type ConversionWindow = Window & {
-  gtag_report_conversion?: (url?: string) => boolean;
+type AnalyticsWindow = Window & {
+  gtag?: (command: string, eventName: string, params: Record<string, string | number>) => void;
 };
 
 export default function BirthDateCalculator({
@@ -54,7 +54,10 @@ export default function BirthDateCalculator({
       birthDate: { day: dayNumber, month: monthNumber, year: yearNumber },
     }));
 
-    (window as ConversionWindow).gtag_report_conversion?.();
+    (window as AnalyticsWindow).gtag?.('event', 'mayan_calculator_submit', {
+      nawal: reading.nawal.name,
+      galactic_tone: reading.galacticTone.number,
+    });
     router.push(`/result?day=${dayNumber}&month=${monthNumber}&year=${yearNumber}`);
   };
 

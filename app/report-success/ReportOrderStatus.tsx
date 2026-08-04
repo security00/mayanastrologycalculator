@@ -11,7 +11,12 @@ type OrderStatus = {
 };
 
 type AnalyticsWindow = Window & {
-  gtag?: (command: string, eventName: string, params: Record<string, string | number>) => void;
+  gtag?: (command: string, eventName: string, params: Record<string, unknown>) => void;
+  gtag_report_purchase_conversion?: (
+    transactionId: string,
+    value: number,
+    currency: string,
+  ) => void;
 };
 
 export default function ReportOrderStatus() {
@@ -35,11 +40,21 @@ export default function ReportOrderStatus() {
         setOrder(nextOrder);
         if (nextOrder.status === 'paid' && !purchaseTracked.current) {
           purchaseTracked.current = true;
-          (window as AnalyticsWindow).gtag?.('event', 'paid_report_purchase_confirmed', {
+          const analyticsWindow = window as AnalyticsWindow;
+          const purchaseParams = {
+            transaction_id: orderId,
+            value: REPORT_PRODUCT.priceUsd,
+            currency: 'USD',
             report_type: REPORT_PRODUCT.code,
-            price_usd: REPORT_PRODUCT.priceUsd,
             offer_version: REPORT_PRODUCT.offerVersion,
-          });
+          };
+          analyticsWindow.gtag?.('event', 'purchase', purchaseParams);
+          analyticsWindow.gtag?.('event', 'paid_report_purchase_confirmed', purchaseParams);
+          analyticsWindow.gtag_report_purchase_conversion?.(
+            orderId,
+            REPORT_PRODUCT.priceUsd,
+            'USD',
+          );
         }
         if (
           REPORT_PRODUCT.instantDeliveryEnabled
