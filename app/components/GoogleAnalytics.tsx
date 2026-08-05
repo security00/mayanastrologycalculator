@@ -7,16 +7,13 @@ export default function GoogleAnalytics() {
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script
         id="google-tag"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+            var gtag = window.gtag;
             gtag('js', new Date());
             gtag('config', '${GOOGLE_ANALYTICS_ID}');
             gtag('config', '${GOOGLE_ADS_ID}');
@@ -31,6 +28,10 @@ export default function GoogleAnalytics() {
             };
           `,
         }}
+      />
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+        strategy="afterInteractive"
       />
     </>
   );

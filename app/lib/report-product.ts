@@ -6,6 +6,13 @@ export const REPORT_PRODUCT = {
   instantDeliveryEnabled: process.env.NEXT_PUBLIC_INSTANT_REPORTS !== 'false',
 } as const;
 
+export const REPORT_ANALYTICS_ITEM = {
+  item_id: REPORT_PRODUCT.code,
+  item_name: REPORT_PRODUCT.name,
+  price: REPORT_PRODUCT.priceUsd,
+  quantity: 1,
+} as const;
+
 export const reportDeliveryCopy = REPORT_PRODUCT.instantDeliveryEnabled
   ? 'Generated privately and emailed within minutes'
   : 'Prepared privately and emailed within 24–48 hours';

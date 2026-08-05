@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
-import { REPORT_PRODUCT } from '../lib/report-product';
+import { REPORT_ANALYTICS_ITEM, REPORT_PRODUCT } from '../lib/report-product';
 
 interface StoredReading {
   reading: MayanReading;
@@ -12,7 +12,7 @@ interface StoredReading {
 }
 
 type AnalyticsWindow = Window & {
-  gtag?: (command: string, eventName: string, params: Record<string, string | number>) => void;
+  gtag?: (command: string, eventName: string, params: Record<string, unknown>) => void;
 };
 
 export default function ResultPage() {
@@ -103,11 +103,25 @@ export default function ResultPage() {
           }),
       });
 
-      const data = await response.json() as { url?: string; error?: string };
+      const data = await response.json() as { orderId?: string; url?: string; error?: string };
 
       if (!response.ok || !data.url) {
         throw new Error(data.error || 'Unable to start checkout.');
       }
+
+      analyticsWindow.gtag?.('event', 'begin_checkout', {
+        currency: 'USD',
+        value: REPORT_PRODUCT.priceUsd,
+        items: [REPORT_ANALYTICS_ITEM],
+        report_type: REPORT_PRODUCT.code,
+        offer_version: REPORT_PRODUCT.offerVersion,
+      });
+
+      analyticsWindow.gtag?.('event', 'checkout_session_created', {
+        order_id: data.orderId || 'unknown',
+        report_type: REPORT_PRODUCT.code,
+        offer_version: REPORT_PRODUCT.offerVersion,
+      });
 
       window.location.href = data.url;
     } catch (error) {

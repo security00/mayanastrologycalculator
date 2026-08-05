@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
+import { REPORT_ANALYTICS_ITEM, REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
 
 type OrderStatus = {
   status?: string;
@@ -45,6 +45,7 @@ export default function ReportOrderStatus() {
             transaction_id: orderId,
             value: REPORT_PRODUCT.priceUsd,
             currency: 'USD',
+            items: [REPORT_ANALYTICS_ITEM],
             report_type: REPORT_PRODUCT.code,
             offer_version: REPORT_PRODUCT.offerVersion,
           };
