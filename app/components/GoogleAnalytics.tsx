@@ -20,7 +20,7 @@ export default function GoogleAnalytics() {
 
             window.gtag_report_purchase_conversion = function(transactionId, value, currency) {
               gtag('event', 'conversion', {
-                'send_to': '${GOOGLE_ADS_ID}/jDGbCNbhsNscELSHttdB',
+                'send_to': '${GOOGLE_ADS_ID}/N7RCCOarotwcELSHttdB',
                 'transaction_id': transactionId,
                 'value': value,
                 'currency': currency
