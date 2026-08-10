@@ -28,6 +28,9 @@ jobs:
       - name: Test report engine
         run: npm run test:report
 
+      - name: Test checkout versioning
+        run: npm run test:checkout
+
       - name: Validate report Worker bundle
         run: npx wrangler deploy --config wrangler.report-worker.jsonc --dry-run
       

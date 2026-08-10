@@ -1,4 +1,5 @@
 import { REPORT_PRODUCT, calculateMayanSignature, isValidBirthDate } from '../../shared/report-engine.js';
+import { resolveReportOfferVariant } from '../../shared/report-versions.js';
 import { readAuthSession } from '../_lib/auth.js';
 
 export async function onRequestPost({ request, env }) {
@@ -26,6 +27,7 @@ export async function onRequestPost({ request, env }) {
     }
 
     const calculated = calculateMayanSignature({ day, month, year });
+    const reportOffer = resolveReportOfferVariant(payload.offerVariant);
     const tone = calculated.tone.number;
     const nawal = calculated.sign.name;
     const signature = calculated.signature;
@@ -35,16 +37,19 @@ export async function onRequestPost({ request, env }) {
     const successUrl = `${siteUrl}/report-success?order_id=${encodeURIComponent(orderId)}&session_id={CHECKOUT_SESSION_ID}`;
     const cancelUrl = `${siteUrl}/result?day=${day}&month=${month}&year=${year}`;
 
-    await env.REPORT_DB.prepare(
-      `INSERT INTO report_orders (
-        id, status, report_type, birth_day, birth_month, birth_year,
-        mayan_signature, nawal, galactic_tone, amount_usd, currency, customer_email,
-        email_delivery_consent_at, email_delivery_consent_version,
-        created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), ?, datetime('now'), datetime('now'))`
-    )
-      .bind(orderId, 'pending', REPORT_PRODUCT.code, day, month, year, signature, nawal, tone, REPORT_PRODUCT.priceUsd, 'usd', authSession?.email || null, 'v1_transactional_email_delivery')
-      .run();
+    await insertReportOrder(env.REPORT_DB, {
+      orderId,
+      day,
+      month,
+      year,
+      signature,
+      nawal,
+      tone,
+      customerEmail: authSession?.email || null,
+      reportOffer,
+      calculationVersion: calculated.calculationVersion,
+      correlationConstant: calculated.correlationConstant,
+    });
 
     const params = new URLSearchParams();
     params.set('mode', 'payment');
@@ -55,7 +60,11 @@ export async function onRequestPost({ request, env }) {
     params.set('cancel_url', cancelUrl);
     params.set('metadata[order_id]', orderId);
     params.set('metadata[report_type]', REPORT_PRODUCT.code);
-    params.set('metadata[report_version]', String(REPORT_PRODUCT.version));
+    params.set('metadata[report_version]', String(reportOffer.reportVersion));
+    params.set('metadata[calculation_version]', calculated.calculationVersion);
+    params.set('metadata[interpretation_version]', reportOffer.interpretationVersion);
+    params.set('metadata[offer_version]', reportOffer.offerVersion);
+    params.set('metadata[experiment_variant]', reportOffer.key);
     params.set('metadata[mayan_signature]', signature);
     params.set('metadata[birth_date]', `${day}/${month}/${year}`);
     params.set('payment_intent_data[metadata][order_id]', orderId);
@@ -94,6 +103,61 @@ export async function onRequestPost({ request, env }) {
     return json({ orderId, url: session.url });
   } catch (error) {
     return json({ error: error instanceof Error ? error.message : 'Unexpected checkout error.' }, 500);
+  }
+}
+
+async function insertReportOrder(database, order) {
+  const commonBindings = [
+    order.orderId,
+    'pending',
+    REPORT_PRODUCT.code,
+    order.day,
+    order.month,
+    order.year,
+    order.signature,
+    order.nawal,
+    order.tone,
+    REPORT_PRODUCT.priceUsd,
+    'usd',
+    order.customerEmail,
+    'v1_transactional_email_delivery',
+  ];
+
+  try {
+    await database.prepare(
+      `INSERT INTO report_orders (
+        id, status, report_type, birth_day, birth_month, birth_year,
+        mayan_signature, nawal, galactic_tone, amount_usd, currency, customer_email,
+        email_delivery_consent_at, email_delivery_consent_version,
+        report_version, calculation_version, interpretation_version, correlation_constant,
+        offer_version, experiment_variant, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`
+    )
+      .bind(
+        ...commonBindings,
+        order.reportOffer.reportVersion,
+        order.calculationVersion,
+        order.reportOffer.interpretationVersion,
+        order.correlationConstant,
+        order.reportOffer.offerVersion,
+        order.reportOffer.key,
+      )
+      .run();
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    if (!/no column named|has no column named/i.test(detail)) throw error;
+
+    // Safe rollout fallback: checkout remains available before migration 005 is applied.
+    await database.prepare(
+      `INSERT INTO report_orders (
+        id, status, report_type, birth_day, birth_month, birth_year,
+        mayan_signature, nawal, galactic_tone, amount_usd, currency, customer_email,
+        email_delivery_consent_at, email_delivery_consent_version, report_version,
+        created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), ?, ?, datetime('now'), datetime('now'))`
+    )
+      .bind(...commonBindings, order.reportOffer.reportVersion)
+      .run();
   }
 }
 

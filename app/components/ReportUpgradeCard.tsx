@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
+import { getReportOfferMetadata, type ReportOfferVariant } from '../lib/report-experiment';
 import GoogleEmailSignIn from './GoogleEmailSignIn';
 
 type AnalyticsWindow = Window & {
@@ -14,10 +15,11 @@ type ReportUpgradeCardProps = {
   galacticTone: number;
   checkoutLoading: boolean;
   checkoutError: string;
+  offerVariant: ReportOfferVariant;
   onCheckout: (emailDeliveryConsent: boolean) => void;
 };
 
-const reportSections = [
+const legacyReportSections = [
   '11-page personalized PDF for your exact birth date',
   'Nawal, Galactic Tone, and their integrated pattern',
   'Relationships, communication, work, and purpose',
@@ -26,17 +28,30 @@ const reportSections = [
   'Methodology and cultural-scope note',
 ];
 
+const transparentReportSections = [
+  '11-page personalized PDF for your exact birth date',
+  'Nawal and Tzolk’in number, with the modern Dreamspell name clearly labeled',
+  'Relationships, communication, work, and purpose',
+  'Stress signals and a signature-based decision filter',
+  'Reflection prompts and a seven-day practice',
+  'Transparent calculation method, sources, and cultural-scope note',
+];
+
 export default function ReportUpgradeCard({
   signature,
   nawal,
   galacticTone,
   checkoutLoading,
   checkoutError,
+  offerVariant,
   onCheckout,
 }: ReportUpgradeCardProps) {
   const offerRef = useRef<HTMLElement>(null);
   const hasTrackedView = useRef(false);
   const [emailDeliveryConsent, setEmailDeliveryConsent] = useState(false);
+  const offerMetadata = getReportOfferMetadata(offerVariant);
+  const isTransparentOffer = offerVariant === 'transparent_v3';
+  const reportSections = isTransparentOffer ? transparentReportSections : legacyReportSections;
 
   useEffect(() => {
     const section = offerRef.current;
@@ -53,7 +68,10 @@ export default function ReportUpgradeCard({
           nawal,
           galactic_tone: galacticTone,
           price_usd: REPORT_PRODUCT.priceUsd,
-          offer_version: REPORT_PRODUCT.offerVersion,
+          offer_version: offerMetadata.offerVersion,
+          experiment_name: 'report_transparency_v1',
+          experiment_variant: offerVariant,
+          report_version: offerMetadata.reportVersion,
         });
         observer.disconnect();
       },
@@ -62,7 +80,7 @@ export default function ReportUpgradeCard({
 
     observer.observe(section);
     return () => observer.disconnect();
-  }, [galacticTone, nawal]);
+  }, [galacticTone, nawal, offerMetadata.offerVersion, offerMetadata.reportVersion, offerVariant]);
 
   const trackSampleClick = () => {
     const analyticsWindow = window as AnalyticsWindow;
@@ -71,7 +89,10 @@ export default function ReportUpgradeCard({
       nawal,
       galactic_tone: galacticTone,
       price_usd: REPORT_PRODUCT.priceUsd,
-      offer_version: REPORT_PRODUCT.offerVersion,
+      offer_version: offerMetadata.offerVersion,
+      experiment_name: 'report_transparency_v1',
+      experiment_variant: offerVariant,
+      report_version: offerMetadata.reportVersion,
     });
   };
 
@@ -90,8 +111,9 @@ export default function ReportUpgradeCard({
             Go deeper than your free {signature} result
           </h2>
           <p className="text-orange-50 text-lg mb-6">
-            Keep the free result. Add a private 11-page guide that turns your Nawal and Tone into
-            relationship, work, decision, and seven-day reflection practices.
+            {isTransparentOffer
+              ? 'Keep the free result. Add a private 11-page guide that turns your Nawal and Tzolk’in number into relationship, work, decision, and seven-day reflection practices—with the modern interpretive layer clearly labeled.'
+              : 'Keep the free result. Add a private 11-page guide that turns your Nawal and Tone into relationship, work, decision, and seven-day reflection practices.'}
           </p>
           <GoogleEmailSignIn />
           <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-white/30 bg-black/10 p-3.5 text-sm text-orange-50">
@@ -126,7 +148,9 @@ export default function ReportUpgradeCard({
             </span>
           )}
           <a
-            href="/samples/personal-mayan-signature-report-sample.pdf"
+            href={isTransparentOffer
+              ? '/samples/personal-mayan-signature-report-sample-transparent-v3.pdf'
+              : '/samples/personal-mayan-signature-report-sample.pdf'}
             target="_blank"
             rel="noopener noreferrer"
             onClick={trackSampleClick}
@@ -158,7 +182,11 @@ export default function ReportUpgradeCard({
         <div className="p-6 md:p-8 bg-gray-50">
           <h3 className="text-lg font-bold text-gray-950 mb-3">Included in your free result</h3>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li>• Nawal day sign and Galactic Tone</li>
+            <li>
+              {isTransparentOffer
+                ? '• Nawal day sign and Tzolk’in number, plus its modern Dreamspell name'
+                : '• Nawal day sign and Galactic Tone'}
+            </li>
             <li>• Core meaning, characteristics, element, and direction</li>
             <li>• A concise combined interpretation</li>
           </ul>
@@ -180,7 +208,10 @@ export default function ReportUpgradeCard({
           <p><strong className="text-gray-900">Protected:</strong> Unusable or undelivered reports are covered for 7 days.</p>
         </div>
         <p className="mt-4 text-xs text-gray-500">
-          The report is a reflective interpretation, not scientific, medical, legal, financial, or psychological advice.
+          The report is a reflective interpretation, not scientific, medical, legal, financial, or psychological advice.{' '}
+          <a href="/methodology" className="font-semibold text-gray-700 underline underline-offset-2">
+            See calculation methodology and cultural scope.
+          </a>
         </p>
 
         {checkoutError && (

@@ -8,9 +8,6 @@ const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const temporaryDir = join(rootDir, 'tmp', 'pdfs');
 const outputDir = join(rootDir, 'output', 'pdf');
 const publicDir = join(rootDir, 'public', 'samples');
-const htmlPath = join(temporaryDir, 'personal-mayan-signature-report-sample.html');
-const outputPath = join(outputDir, 'personal-mayan-signature-report-sample.pdf');
-const publicPath = join(publicDir, 'personal-mayan-signature-report-sample.pdf');
 const coverPath = join(rootDir, 'public', 'tzolkin-astrology-chart.png').replace(/\\/g, '/');
 
 for (const directory of [temporaryDir, outputDir, publicDir]) mkdirSync(directory, { recursive: true });
@@ -22,20 +19,33 @@ const order = {
   birth_year: 2000,
 };
 
-writeFileSync(htmlPath, renderReportHtml(order, { coverImageUrl: `file:///${coverPath}` }), 'utf8');
-
 const browser = findBrowser();
-execFileSync(browser, [
-  '--headless=new',
-  '--disable-gpu',
-  '--no-pdf-header-footer',
-  `--print-to-pdf=${outputPath}`,
-  `file:///${htmlPath.replace(/\\/g, '/')}`,
-], { stdio: 'ignore' });
 
-copyFileSync(outputPath, publicPath);
-console.log(`Sample PDF: ${outputPath}`);
-console.log(`Public copy: ${publicPath}`);
+for (const sample of [
+  { suffix: '', offerVariant: 'legacy_v2' },
+  { suffix: '-transparent-v3', offerVariant: 'transparent_v3' },
+]) {
+  const basename = `personal-mayan-signature-report-sample${sample.suffix}`;
+  const htmlPath = join(temporaryDir, `${basename}.html`);
+  const outputPath = join(outputDir, `${basename}.pdf`);
+  const publicPath = join(publicDir, `${basename}.pdf`);
+
+  writeFileSync(
+    htmlPath,
+    renderReportHtml(order, { coverImageUrl: `file:///${coverPath}`, offerVariant: sample.offerVariant }),
+    'utf8',
+  );
+  execFileSync(browser, [
+    '--headless=new',
+    '--disable-gpu',
+    '--no-pdf-header-footer',
+    `--print-to-pdf=${outputPath}`,
+    `file:///${htmlPath.replace(/\\/g, '/')}`,
+  ], { stdio: 'ignore' });
+  copyFileSync(outputPath, publicPath);
+  console.log(`Sample PDF: ${outputPath}`);
+  console.log(`Public copy: ${publicPath}`);
+}
 
 function findBrowser() {
   const candidates = [

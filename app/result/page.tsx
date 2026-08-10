@@ -5,6 +5,11 @@ import Link from 'next/link';
 import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
 import { REPORT_ANALYTICS_ITEM, REPORT_PRODUCT } from '../lib/report-product';
+import {
+  getOrAssignReportOfferVariant,
+  getReportOfferMetadata,
+  type ReportOfferVariant,
+} from '../lib/report-experiment';
 
 interface StoredReading {
   reading: MayanReading;
@@ -18,6 +23,7 @@ type AnalyticsWindow = Window & {
 export default function ResultPage() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
+  const [offerVariant, setOfferVariant] = useState<ReportOfferVariant | null>(null);
   const [storedData] = useState<StoredReading | null>(() => {
     if (typeof window === 'undefined') {
       return null;
@@ -52,6 +58,10 @@ export default function ResultPage() {
   }, []);
 
   useEffect(() => {
+    setOfferVariant(getOrAssignReportOfferVariant());
+  }, []);
+
+  useEffect(() => {
     if (!storedData) return;
 
     const analyticsWindow = window as AnalyticsWindow;
@@ -79,7 +89,9 @@ export default function ResultPage() {
   };
 
   const handlePaidReportClick = async (emailDeliveryConsent: boolean) => {
-    if (!storedData) return;
+    if (!storedData || !offerVariant) return;
+
+    const offerMetadata = getReportOfferMetadata(offerVariant);
 
     setCheckoutLoading(true);
     setCheckoutError('');
@@ -90,7 +102,10 @@ export default function ResultPage() {
       nawal: storedData.reading.nawal.name,
       galactic_tone: storedData.reading.galacticTone.number,
       price_usd: REPORT_PRODUCT.priceUsd,
-      offer_version: REPORT_PRODUCT.offerVersion,
+      offer_version: offerMetadata.offerVersion,
+      experiment_name: 'report_transparency_v1',
+      experiment_variant: offerVariant,
+      report_version: offerMetadata.reportVersion,
     });
 
     try {
@@ -100,6 +115,7 @@ export default function ResultPage() {
           body: JSON.stringify({
             birthDate: storedData.birthDate,
             emailDeliveryConsent,
+            offerVariant,
           }),
       });
 
@@ -114,13 +130,19 @@ export default function ResultPage() {
         value: REPORT_PRODUCT.priceUsd,
         items: [REPORT_ANALYTICS_ITEM],
         report_type: REPORT_PRODUCT.code,
-        offer_version: REPORT_PRODUCT.offerVersion,
+        offer_version: offerMetadata.offerVersion,
+        experiment_name: 'report_transparency_v1',
+        experiment_variant: offerVariant,
+        report_version: offerMetadata.reportVersion,
       });
 
       analyticsWindow.gtag?.('event', 'checkout_session_created', {
         order_id: data.orderId || 'unknown',
         report_type: REPORT_PRODUCT.code,
-        offer_version: REPORT_PRODUCT.offerVersion,
+        offer_version: offerMetadata.offerVersion,
+        experiment_name: 'report_transparency_v1',
+        experiment_variant: offerVariant,
+        report_version: offerMetadata.reportVersion,
       });
 
       window.location.href = data.url;
@@ -191,8 +213,15 @@ export default function ResultPage() {
             {/* Galactic Tone */}
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Galactic Tone {reading.galacticTone.number}: {reading.galacticTone.name}
+                {offerVariant === 'transparent_v3'
+                  ? `Tzolk’in Number ${reading.galacticTone.number}`
+                  : `Galactic Tone ${reading.galacticTone.number}: ${reading.galacticTone.name}`}
               </h3>
+              {offerVariant === 'transparent_v3' && (
+                <p className="mb-3 text-sm font-semibold text-indigo-800">
+                  Modern Dreamspell name: {reading.galacticTone.name}
+                </p>
+              )}
               <p className="text-gray-700 mb-4">{reading.galacticTone.meaning}</p>
               <div className="flex flex-wrap gap-2">
                 {reading.galacticTone.keywords.map((keyword, index) => (
@@ -225,14 +254,19 @@ export default function ResultPage() {
           </div>
         </div>
 
-        <ReportUpgradeCard
-          signature={`${reading.galacticTone.number} ${reading.nawal.name}`}
-          nawal={reading.nawal.name}
-          galacticTone={reading.galacticTone.number}
-          checkoutLoading={checkoutLoading}
-          checkoutError={checkoutError}
-          onCheckout={handlePaidReportClick}
-        />
+        {offerVariant ? (
+          <ReportUpgradeCard
+            signature={`${reading.galacticTone.number} ${reading.nawal.name}`}
+            nawal={reading.nawal.name}
+            galacticTone={reading.galacticTone.number}
+            checkoutLoading={checkoutLoading}
+            checkoutError={checkoutError}
+            offerVariant={offerVariant}
+            onCheckout={handlePaidReportClick}
+          />
+        ) : (
+          <div className="mb-12 min-h-80 animate-pulse rounded-3xl border border-orange-100 bg-white" aria-hidden="true" />
+        )}
 
         {/* Detailed Interpretation */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-12">

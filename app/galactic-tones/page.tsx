@@ -38,6 +38,19 @@ export default function GalacticTonesPage() {
           </p>
         </section>
 
+        <section className="mb-10 rounded-2xl border border-blue-200 bg-blue-50 p-6 text-gray-700 md:p-8">
+          <h2 className="text-xl font-bold text-gray-950">A note on terminology</h2>
+          <p className="mt-3 leading-7">
+            The repeating numbers 1 to 13 are part of the Tzolk’in calendar count. The names Magnetic,
+            Lunar, Electric, Resonant, Galactic, Cosmic, and the related process keywords are modern
+            Dreamspell terminology. We keep the familiar “Galactic Tone” wording on this page while
+            clearly labeling its modern interpretive source.
+          </p>
+          <Link href="/methodology" className="mt-4 inline-block font-bold text-blue-800 underline underline-offset-4">
+            Read our calculation methodology and sources
+          </Link>
+        </section>
+
         <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 mb-10 shadow-sm">
           <h2 className="text-2xl font-bold text-gray-950 mb-3">How to Read Your Tone</h2>
           <p className="text-gray-700 mb-4">
@@ -66,7 +79,7 @@ export default function GalacticTonesPage() {
                   {tone.number}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-orange-700">Galactic Tone</p>
+                  <p className="text-sm font-semibold text-orange-700">Modern Dreamspell name</p>
                   <h2 className="text-2xl font-bold text-gray-950">{tone.name}</h2>
                 </div>
               </div>

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:report": "node --test tests/report-engine.test.mjs",
+    "test:report": "node --test tests/maya-calendar-core.test.mjs tests/report-engine.test.mjs",
     "test:auth": "node --test tests/auth-session.test.mjs",
     "test:checkout": "node --test tests/checkout-consent.test.mjs",
     "report:sample": "node scripts/generate-sample-report.mjs"

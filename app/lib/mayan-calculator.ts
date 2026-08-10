@@ -1,6 +1,8 @@
 // Mayan Astrology Calculator - Tzolk'in Date Conversion
 // This algorithm converts Gregorian dates to Mayan Tzolk'in dates
 
+import { calculateTzolkinPosition } from '../../shared/maya-calendar-core.js';
+
 export interface TzolkinDate {
   number: number;
   daySign: string;
@@ -422,35 +424,17 @@ export const GALACTIC_TONES = [
  * Calculate the number of days since the Mayan correlation date
  * Using the GMT correlation constant: 584283 (most widely accepted)
  */
-function calculateDaysSinceCorrelation(date: Date): number {
-  // GMT correlation: August 11, 3114 BCE (Gregorian) = 0.0.0.0.0 4 Ahau 8 Cumku
-  // Julian Day Number for correlation date: 584283
-  const correlationJDN = 584283;
-
-  // Calculate Julian Day Number for input date
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // JavaScript months are 0-based
-  const day = date.getDate();
-
-  const a = Math.floor((14 - month) / 12);
-  const y = year + 4800 - a;
-  const m = month + 12 * a - 3;
-
-  const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
-
-  return jdn - correlationJDN;
-}
-
 /**
  * Convert a Gregorian date to Tzolk'in date
  */
 export function calculateTzolkinDate(birthDate: Date): MayanReading {
-  const daysSinceCorrelation = calculateDaysSinceCorrelation(birthDate);
-
-  // Calculate Tzolk'in position
-  // The correlation date corresponds to 4 Ahau (day sign 19, number 4)
-  const tzolkinNumber = ((daysSinceCorrelation + 4 - 1) % 13) + 1;
-  const daySignIndex = (daysSinceCorrelation + 19) % 20;
+  const position = calculateTzolkinPosition({
+    day: birthDate.getDate(),
+    month: birthDate.getMonth() + 1,
+    year: birthDate.getFullYear(),
+  });
+  const tzolkinNumber = position.toneNumber;
+  const daySignIndex = position.daySignIndex;
 
   const daySign = DAY_SIGNS[daySignIndex];
   const galacticTone = GALACTIC_TONES[tzolkinNumber - 1];

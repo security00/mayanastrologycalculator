@@ -6,6 +6,11 @@ export const REPORT_PRODUCT = {
   instantDeliveryEnabled: process.env.NEXT_PUBLIC_INSTANT_REPORTS !== 'false',
 } as const;
 
+export const REPORT_EXPERIMENT = {
+  name: 'report_transparency_v1',
+  defaultRolloutPercent: 0,
+} as const;
+
 export const REPORT_ANALYTICS_ITEM = {
   item_id: REPORT_PRODUCT.code,
   item_name: REPORT_PRODUCT.name,

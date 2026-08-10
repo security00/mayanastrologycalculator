@@ -1,4 +1,5 @@
 import { REPORT_PRODUCT, renderReportHtml } from '../shared/report-engine.js';
+import { resolveOrderReportVariant } from '../shared/report-versions.js';
 
 interface Env {
   REPORT_DB: D1Database;
@@ -31,6 +32,12 @@ interface ReportOrder {
   stripe_checkout_session_id: string | null;
   report_object_key: string | null;
   report_expires_at: string | null;
+  report_version?: number | null;
+  calculation_version?: string | null;
+  interpretation_version?: string | null;
+  correlation_constant?: number | null;
+  offer_version?: string | null;
+  experiment_variant?: string | null;
 }
 
 export default {
@@ -100,12 +107,13 @@ async function fulfillOrder(orderId: string, env: Env) {
   if ((claim.meta.changes || 0) === 0) return;
   order = await getOrder(orderId, env);
   if (!order) throw new Error('Order disappeared after claim.');
+  const reportOffer = resolveOrderReportVariant(order);
 
-  const objectKey = order.report_object_key || `reports/${order.id}/${REPORT_PRODUCT.code}.pdf`;
+  const objectKey = order.report_object_key || `reports/${order.id}/${REPORT_PRODUCT.code}-v${reportOffer.reportVersion}.pdf`;
   let reportObject = await env.REPORT_FILES.head(objectKey);
 
   if (!reportObject) {
-    const html = renderReportHtml(order);
+    const html = renderReportHtml(order, { offerVariant: reportOffer.key });
     const pdfResponse = await env.BROWSER.quickAction('pdf', {
       html,
       pdfOptions: { format: 'a4', printBackground: true, preferCSSPageSize: true },
@@ -116,21 +124,21 @@ async function fulfillOrder(orderId: string, env: Env) {
     const expiresAt = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
     await env.REPORT_FILES.put(objectKey, pdfBytes, {
       httpMetadata: { contentType: 'application/pdf', contentDisposition: 'attachment' },
-      customMetadata: { orderId: order.id, expiresAt: expiresAt.toISOString(), productVersion: String(REPORT_PRODUCT.version) },
+      customMetadata: { orderId: order.id, expiresAt: expiresAt.toISOString(), productVersion: String(reportOffer.reportVersion) },
     });
 
     await env.REPORT_DB.prepare(
       `UPDATE report_orders SET delivery_status = 'generated', report_version = ?1,
        report_object_key = ?2, report_pdf_url = ?3, report_generated_at = datetime('now'),
        report_expires_at = ?4, updated_at = datetime('now') WHERE id = ?5`,
-    ).bind(REPORT_PRODUCT.version, objectKey, objectKey, expiresAt.toISOString(), order.id).run();
+    ).bind(reportOffer.reportVersion, objectKey, objectKey, expiresAt.toISOString(), order.id).run();
     reportObject = await env.REPORT_FILES.head(objectKey);
   }
 
   if (!reportObject) throw new Error('Generated report was not found in private storage.');
   const token = await createDownloadToken(order.id, env.REPORT_LINK_SECRET, 7 * 24 * 60 * 60);
   const downloadUrl = `${env.SITE_URL.replace(/\/$/, '')}/api/report-download?token=${encodeURIComponent(token)}`;
-  await sendReportEmail(order, downloadUrl, env);
+  await sendReportEmail(order, downloadUrl, reportOffer.reportVersion, env);
 
   await env.REPORT_DB.prepare(
     `UPDATE report_orders SET delivery_status = 'delivered', delivered_at = datetime('now'),
@@ -140,13 +148,13 @@ async function fulfillOrder(orderId: string, env: Env) {
   console.log(JSON.stringify({ event: 'report_delivered', orderId: order.id, objectKey }));
 }
 
-async function sendReportEmail(order: ReportOrder, downloadUrl: string, env: Env) {
+async function sendReportEmail(order: ReportOrder, downloadUrl: string, reportVersion: number, env: Env) {
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
       'Content-Type': 'application/json',
-      'Idempotency-Key': `report-delivery/${order.id}/v${REPORT_PRODUCT.version}`,
+      'Idempotency-Key': `report-delivery/${order.id}/v${reportVersion}`,
     },
     body: JSON.stringify({
       from: env.REPORT_FROM_EMAIL,

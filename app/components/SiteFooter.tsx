@@ -31,6 +31,7 @@ export default function SiteFooter() {
               <li><Link href="/day-signs" className="hover:text-white">20 Day Signs</Link></li>
               <li><Link href="/galactic-tones" className="hover:text-white">13 Galactic Tones</Link></li>
               <li><Link href="/about" className="hover:text-white">About Mayan Calendar</Link></li>
+              <li><Link href="/methodology" className="hover:text-white">Methodology &amp; Sources</Link></li>
             </ul>
           </div>
           <div>
