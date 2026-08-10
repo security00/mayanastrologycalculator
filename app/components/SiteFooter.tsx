@@ -40,6 +40,25 @@ export default function SiteFooter() {
               <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
             </ul>
+            <div className="mt-6">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">
+                Featured on
+              </p>
+              <a
+                href="https://firstlook.tools"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://firstlook.tools/badge/badge_transparent.svg"
+                  alt="Featured on First Look"
+                  width="200"
+                  height="54"
+                />
+              </a>
+            </div>
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
