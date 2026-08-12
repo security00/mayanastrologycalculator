@@ -43,6 +43,19 @@ export default function SiteFooter() {
             </ul>
             <div className="mt-6">
               <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">
+                Friends
+              </p>
+              <a
+                href="https://animatephoto.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white"
+              >
+                Animate Photo AI
+              </a>
+            </div>
+            <div className="mt-6">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">
                 Featured on
               </p>
               <a
