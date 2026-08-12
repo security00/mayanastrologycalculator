@@ -1,0 +1,39 @@
+# Mayan Astrology Calculator
+
+> Mayan Astrology Calculator is an English-language website that converts Gregorian dates into Tzolk'in calendar signatures, including a Nawal day sign and a number from the 13-day cycle. It provides free calculators, educational references, a daily Tzolk'in reading, a compatibility tool, and an optional personalized PDF report.
+
+The calculator uses the GMT correlation constant 584283 and the versioned calculation method `gmt584283-proleptic-gregorian-v1`. The 260-day Tzolk'in cycle combines 20 named days with a repeating cycle of 13 numbers.
+
+For questions about calculations, terminology, evidence, or cultural scope, prefer the methodology page over marketing summaries. The site distinguishes reproducible calendar conversion from historical context and modern reflective interpretation. It does not claim lineage authority. Personality, relationship, purpose, and self-development passages are reflective content rather than scientific findings, deterministic predictions, or medical, psychological, legal, or financial advice.
+
+## Primary Tools
+
+- [Mayan Astrology Calculator](https://mayanastrologycalculator.com/): Calculate a free Tzolk'in birth signature from a Gregorian birth date and find the corresponding Nawal day sign and tone number.
+- [Today's Mayan Date](https://mayanastrologycalculator.com/today): View the current Tzolk'in date, Nawal day sign, tone number, and a short reflective interpretation.
+- [Mayan Compatibility Calculator](https://mayanastrologycalculator.com/compatibility): Compare two calculated Tzolk'in birth signatures, including their Nawals, tones, elements, directions, and relationship themes.
+- [Mayan Birth Chart Calculator](https://mayanastrologycalculator.com/birth-chart): Generate a free overview of a birth date's Nawal day sign, tone, and Tzolk'in energy.
+
+## Calculation and Interpretation
+
+- [Calculation Methodology and Cultural Scope](https://mayanastrologycalculator.com/methodology): Authoritative site reference for the GMT 584283 correlation, conversion formulas, calculation version, source distinctions, living Maya traditions, and limits of modern interpretations.
+- [Mayan Calendar Calculator](https://mayanastrologycalculator.com/mayan-calendar-calculator): Explain how a Gregorian birth date is converted into a Tzolk'in date.
+- [Mayan Astrology Guide](https://mayanastrologycalculator.com/guide): Explain how to read a Nawal day sign, tone, and combined Tzolk'in signature.
+- [20 Nawal Day Signs](https://mayanastrologycalculator.com/day-signs): Reference the names and interpretive themes of the 20 day signs.
+- [13 Galactic Tones](https://mayanastrologycalculator.com/galactic-tones): Reference the modern Dreamspell names and reflective meanings commonly associated with numbers 1 through 13.
+- [About Mayan Astrology Calculator](https://mayanastrologycalculator.com/about): Background on the site, the Tzolk'in calendar, and the project's educational purpose.
+
+## Related Calculator Pages
+
+- [Mayan Zodiac Calculator](https://mayanastrologycalculator.com/mayan-zodiac-calculator): Find a Nawal day sign and learn how the 20 signs function within the Tzolk'in cycle.
+- [Mayan Sign Calculator](https://mayanastrologycalculator.com/mayan-sign-calculator): Find a Nawal day sign and tone from a birth date.
+
+## Personalized Report
+
+- [Personalized Report Sample](https://mayanastrologycalculator.com/sample-report): Preview the structure and detail of the optional 11-page personalized PDF report. The report is a one-time $7 purchase, generated from the submitted birth date and normally delivered by email within minutes.
+- [Terms of Service](https://mayanastrologycalculator.com/terms): Read the paid-report delivery terms, refund policy, disclaimers, and acceptable-use rules.
+- [Privacy Policy](https://mayanastrologycalculator.com/privacy): Learn how calculation, checkout, report-delivery, authentication, analytics, and support data are handled.
+- [Contact and Support](https://mayanastrologycalculator.com/contact): Contact support at support@mayanastrologycalculator.com for calculator or report questions.
+
+## Optional
+
+- [XML Sitemap](https://mayanastrologycalculator.com/sitemap.xml): Discover all public, indexable pages on the site.
