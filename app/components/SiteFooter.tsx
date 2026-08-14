@@ -58,20 +58,35 @@ export default function SiteFooter() {
               <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">
                 Featured on
               </p>
-              <a
-                href="https://firstlook.tools"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://firstlook.tools/badge/badge_transparent.svg"
-                  alt="Featured on First Look"
-                  width="200"
-                  height="54"
-                />
-              </a>
+              <div className="space-y-3">
+                <a
+                  href="https://firstlook.tools"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://firstlook.tools/badge/badge_transparent.svg"
+                    alt="Featured on First Look"
+                    width="200"
+                    height="54"
+                  />
+                </a>
+                <a
+                  href="https://findly.tools/mayan-astrology-calculator?utm_source=mayan-astrology-calculator"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://findly.tools/badges/findly-tools-badge-light.svg"
+                    alt="Featured on Findly.tools"
+                    width="150"
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
