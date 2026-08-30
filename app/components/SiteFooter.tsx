@@ -86,6 +86,21 @@ export default function SiteFooter() {
                     width="150"
                   />
                 </a>
+                <a
+                  href="https://www.tinyshelf.co/?ref=mayanastrologycalculator.com"
+                  title="Featured on tinyshelf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://www.tinyshelf.co/badge/tinyshelf-badge-light-5ca4026a.svg"
+                    alt="Featured on tinyshelf"
+                    width="216"
+                    height="64"
+                  />
+                </a>
               </div>
             </div>
           </div>
