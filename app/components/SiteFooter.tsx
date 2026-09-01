@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FeaturedBadgeMarquee from './FeaturedBadgeMarquee';
 
 export default function SiteFooter() {
   return (
@@ -60,50 +61,7 @@ export default function SiteFooter() {
           <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wide text-gray-400">
             Featured on
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 md:flex-nowrap md:gap-6">
-            <a
-              href="https://firstlook.tools"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block transition-opacity hover:opacity-80"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://firstlook.tools/badge/badge_transparent.svg"
-                alt="Featured on First Look"
-                width="200"
-                height="54"
-              />
-            </a>
-            <a
-              href="https://findly.tools/mayan-astrology-calculator?utm_source=mayan-astrology-calculator"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block transition-opacity hover:opacity-80"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://findly.tools/badges/findly-tools-badge-light.svg"
-                alt="Featured on Findly.tools"
-                width="150"
-              />
-            </a>
-            <a
-              href="https://www.tinyshelf.co/?ref=mayanastrologycalculator.com"
-              title="Featured on tinyshelf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block transition-opacity hover:opacity-80"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://www.tinyshelf.co/badge/tinyshelf-badge-light-5ca4026a.svg"
-                alt="Featured on tinyshelf"
-                width="216"
-                height="64"
-              />
-            </a>
-          </div>
+          <FeaturedBadgeMarquee />
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>&copy; 2026 Mayan Astrology Calculator. All rights reserved.</p>
