@@ -1,6 +1,4 @@
-﻿'use client';
-
-import BirthDateCalculator from './components/BirthDateCalculator';
+﻿import BirthDateCalculator from './components/BirthDateCalculator';
 import TzolkinWheel from './components/decor/TzolkinWheel';
 import GrecaBand from './components/decor/GrecaBand';
 import GlyphMark from './components/decor/GlyphMark';
@@ -108,7 +106,6 @@ export default function Home() {
                 width={1600}
                 height={900}
                 className="w-full h-auto object-cover opacity-95"
-                priority
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b0908]/55 via-transparent to-transparent" />
             </div>
