@@ -27,11 +27,11 @@ export default function TodayReading() {
     return (
       <section
         id="today-reading"
-        className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm"
+        className="panel rounded-2xl p-6 md:p-8"
       >
-        <p className="text-sm font-semibold text-orange-700 mb-2">Today in your local time</p>
-        <h2 className="text-3xl font-bold text-gray-950 mb-3">Calculating today's Tzolk'in day sign…</h2>
-        <p className="text-gray-600">
+        <p className="text-sm font-semibold text-gold-bright mb-2">Today in your local time</p>
+        <h2 className="text-3xl font-display text-[var(--parchment)] mb-3">Calculating today's Tzolk'in day sign…</h2>
+        <p className="text-[var(--parchment-dim)]">
           Your current Galactic Tone and Nawal will appear when the page loads.
         </p>
       </section>
@@ -41,53 +41,53 @@ export default function TodayReading() {
   const reading = calculateTzolkinDate(today);
 
   return (
-    <section id="today-reading" className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
-      <p className="text-sm font-semibold text-orange-700 mb-2">Today in your local time</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-950 mb-2">
+    <section id="today-reading" className="panel rounded-2xl p-6 md:p-8">
+      <p className="text-sm font-semibold text-gold-bright mb-2">Today in your local time</p>
+      <h2 className="text-3xl md:text-4xl font-display text-[var(--parchment)] mb-2">
         {reading.galacticTone.number} {reading.nawal.name}
       </h2>
-      <p className="text-gray-600 mb-6">{formatToday(today)}</p>
+      <p className="text-[var(--parchment-dim)] mb-6">{formatToday(today)}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-        <article className="bg-blue-50 rounded-lg p-5">
-          <h3 className="text-xl font-bold text-gray-950 mb-2">
+        <article className="rounded-xl border border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)] p-5">
+          <h3 className="text-xl font-display text-[var(--parchment)] mb-2">
             Galactic Tone {reading.galacticTone.number}: {reading.galacticTone.name}
           </h3>
-          <p className="text-gray-700 mb-3">{reading.galacticTone.meaning}</p>
+          <p className="text-[var(--parchment-dim)] mb-3">{reading.galacticTone.meaning}</p>
           <div className="flex flex-wrap gap-2">
             {reading.galacticTone.keywords.map((keyword) => (
-              <span key={keyword} className="rounded-full bg-blue-100 text-blue-800 px-3 py-1 text-sm">
+              <span key={keyword} className="chip chip-jade">
                 {keyword}
               </span>
             ))}
           </div>
         </article>
 
-        <article className="bg-amber-50 rounded-lg p-5">
-          <h3 className="text-xl font-bold text-gray-950 mb-2">
+        <article className="rounded-xl border border-[var(--gold-line)] bg-[rgb(212_162_78/6%)] p-5">
+          <h3 className="text-xl font-display text-[var(--parchment)] mb-2">
             Nawal: {reading.nawal.name}
           </h3>
-          <p className="text-gray-700 mb-3">{reading.nawal.meaning}</p>
+          <p className="text-[var(--parchment-dim)] mb-3">{reading.nawal.meaning}</p>
           <dl className="grid grid-cols-3 gap-3 text-sm">
             <div>
-              <dt className="font-semibold text-gray-950">Element</dt>
-              <dd className="text-gray-700">{reading.nawal.element}</dd>
+              <dt className="font-semibold text-[var(--parchment)]">Element</dt>
+              <dd className="text-[var(--parchment-dim)]">{reading.nawal.element}</dd>
             </div>
             <div>
-              <dt className="font-semibold text-gray-950">Direction</dt>
-              <dd className="text-gray-700">{reading.nawal.direction}</dd>
+              <dt className="font-semibold text-[var(--parchment)]">Direction</dt>
+              <dd className="text-[var(--parchment-dim)]">{reading.nawal.direction}</dd>
             </div>
             <div>
-              <dt className="font-semibold text-gray-950">Color</dt>
-              <dd className="text-gray-700">{reading.nawal.color}</dd>
+              <dt className="font-semibold text-[var(--parchment)]">Color</dt>
+              <dd className="text-[var(--parchment-dim)]">{reading.nawal.color}</dd>
             </div>
           </dl>
         </article>
       </div>
 
-      <div className="bg-orange-50 border-l-4 border-orange-500 p-5 mb-6">
-        <h3 className="text-lg font-bold text-gray-950 mb-2">How to use today's energy</h3>
-        <p className="text-gray-700">
+      <div className="panel rounded-2xl border-l-2 border-l-[var(--gold)] p-5 mb-6">
+        <h3 className="text-lg font-display text-[var(--parchment)] mb-2">How to use today's energy</h3>
+        <p className="text-[var(--parchment-dim)]">
           Treat today's Mayan date as a short reflection prompt. The tone shows the rhythm of the day,
           while the Nawal points to the symbolic theme. You can use both to choose a focus for planning,
           journaling, meditation, or checking how today's pattern interacts with your birth sign.
@@ -97,13 +97,13 @@ export default function TodayReading() {
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/"
-          className="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold text-center hover:bg-orange-700"
+          className="btn-ember px-6 py-3 text-center"
         >
           Calculate Your Birth Sign
         </Link>
         <Link
           href="/day-signs"
-          className="border border-orange-600 text-orange-700 px-6 py-3 rounded-lg font-semibold text-center hover:bg-orange-50"
+          className="btn-ghost-gold px-6 py-3 text-center"
         >
           Read the 20 Day Signs
         </Link>

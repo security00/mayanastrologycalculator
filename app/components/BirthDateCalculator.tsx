@@ -65,47 +65,48 @@ export default function BirthDateCalculator({
     <section
       id="calculator"
       aria-labelledby="calculator-title"
-      className="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-6 md:p-8 border-4 border-amber-200"
+      className="panel panel-glow relative max-w-2xl mx-auto rounded-2xl p-6 md:p-9"
     >
       <div className="text-center mb-8">
-        <h2 id="calculator-title" className="text-2xl font-bold text-gray-950 mb-2">{title}</h2>
-        <p className="text-gray-600">{description}</p>
+        <p className="eyebrow mb-4 justify-center">✦&nbsp;&nbsp;Begin the reading&nbsp;&nbsp;✦</p>
+        <h2 id="calculator-title" className="font-display text-3xl text-[var(--parchment)] mb-2">{title}</h2>
+        <p className="text-[var(--parchment-dim)]">{description}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--gold-dim)]">
           Day
           <select
             aria-label="Birth day"
             value={day}
             onChange={(event) => setDay(event.target.value)}
-            className="mt-2 w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none text-lg bg-white"
+            className="select-gold mt-2"
           >
             <option value="">Day</option>
             {days.map((value) => <option key={value} value={value}>{value}</option>)}
           </select>
         </label>
 
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--gold-dim)]">
           Month
           <select
             aria-label="Birth month"
             value={month}
             onChange={(event) => setMonth(event.target.value)}
-            className="mt-2 w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none text-lg bg-white"
+            className="select-gold mt-2"
           >
             <option value="">Month</option>
             {months.map((name, index) => <option key={name} value={index + 1}>{name}</option>)}
           </select>
         </label>
 
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--gold-dim)]">
           Year
           <select
             aria-label="Birth year"
             value={year}
             onChange={(event) => setYear(event.target.value)}
-            className="mt-2 w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none text-lg bg-white"
+            className="select-gold mt-2"
           >
             <option value="">Year</option>
             {years.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -114,7 +115,7 @@ export default function BirthDateCalculator({
       </div>
 
       {error && (
-        <p role="alert" className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+        <p role="alert" className="mb-4 rounded-lg border border-red-500/40 bg-red-950/50 p-3 text-sm text-red-300">
           {error}
         </p>
       )}
@@ -123,12 +124,12 @@ export default function BirthDateCalculator({
         type="button"
         onClick={handleCalculate}
         disabled={!day || !month || !year || isCalculating}
-        className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold py-4 px-8 rounded-lg text-lg hover:from-orange-700 hover:to-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+        className="btn-ember w-full py-4 px-8 text-lg"
       >
         {isCalculating ? 'Calculating your Mayan sign…' : buttonLabel}
       </button>
 
-      <p className="text-center text-sm text-gray-500 mt-4">
+      <p className="text-center text-xs text-[var(--parchment-faint)] mt-4 tracking-wide">
         Free instant calculation • No registration required
       </p>
     </section>

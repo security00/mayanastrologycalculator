@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import BirthDateCalculator from '../components/BirthDateCalculator';
+import PageHero from '../components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Mayan Calendar Calculator - Convert Birth Date to Tzolk\'in',
@@ -56,22 +57,18 @@ export default function MayanCalendarCalculatorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
+    <div className="page-shell">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <section className="mb-12">
-          <p className="text-sm font-semibold uppercase tracking-wide text-orange-700 mb-3">
-            Mayan calendar calculator
-          </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-950 mb-5">
-            Convert Your Birth Date to the Mayan Calendar
-          </h1>
-          <p className="text-lg text-gray-700 max-w-4xl mb-6">
-            This Mayan calendar calculator helps you convert a modern Gregorian date into the sacred
-            Tzolk'in calendar. Enter your birth date to find the Nawal day sign and Galactic Tone that
-            form your Mayan astrology birth signature.
-          </p>
-        </section>
+        <PageHero
+          eyebrow="Mayan calendar calculator"
+          title="Convert Your Birth Date to the Mayan Calendar"
+          glyphs={['sun', 'moon', 'obsidian']}
+        >
+          This Mayan calendar calculator helps you convert a modern Gregorian date into the sacred
+          Tzolk'in calendar. Enter your birth date to find the Nawal day sign and Galactic Tone that
+          form your Mayan astrology birth signature.
+        </PageHero>
 
         <div className="mb-12">
           <BirthDateCalculator
@@ -82,37 +79,37 @@ export default function MayanCalendarCalculatorPage() {
         </div>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-950 mb-3">1. Enter a date</h2>
-            <p className="text-gray-700">
+          <article className="panel rounded-2xl p-6">
+            <h2 className="text-xl font-display text-[var(--parchment)] mb-3">1. Enter a date</h2>
+            <p className="text-[var(--parchment-dim)]">
               Choose the day, month, and year you want to convert. Most visitors use a birth date, but
               the Tzolk'in cycle can also be used to reflect on current dates.
             </p>
           </article>
-          <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-950 mb-3">2. Calculate Tzolk'in</h2>
-            <p className="text-gray-700">
+          <article className="panel rounded-2xl p-6">
+            <h2 className="text-xl font-display text-[var(--parchment)] mb-3">2. Calculate Tzolk'in</h2>
+            <p className="text-[var(--parchment-dim)]">
               The calculator maps the date into the 260-day sacred count using a Gregorian-to-Mayan
               conversion method commonly used for modern Tzolk'in readings.
             </p>
           </article>
-          <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-950 mb-3">3. Read the result</h2>
-            <p className="text-gray-700">
+          <article className="panel rounded-2xl p-6">
+            <h2 className="text-xl font-display text-[var(--parchment)] mb-3">3. Read the result</h2>
+            <p className="text-[var(--parchment-dim)]">
               Your result shows a tone, a day sign, symbolic meaning, element, direction, color, and
               personality themes connected with that date.
             </p>
           </article>
         </section>
 
-        <section className="bg-white border border-amber-200 rounded-lg p-6 md:p-8 mb-10 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-950 mb-3">What Is the Tzolk'in Calendar?</h2>
-          <p className="text-gray-700 mb-4">
+        <section className="panel rounded-2xl p-6 md:p-8 mb-10">
+          <h2 className="text-2xl font-display text-[var(--parchment)] mb-3">What Is the Tzolk'in Calendar?</h2>
+          <p className="text-[var(--parchment-dim)] mb-4">
             The Tzolk'in is a 260-day sacred Mayan calendar made from 20 day signs and 13 numbers. Each
             date in the cycle has a unique combination, such as 7 Ik or 12 K'an. In Mayan astrology, that
             combination is used as a symbolic profile for timing, personality, and spiritual reflection.
           </p>
-          <p className="text-gray-700">
+          <p className="text-[var(--parchment-dim)]">
             People often search for a Mayan calendar calculator when they want to know their Mayan birth
             date, Mayan zodiac sign, or Tzolk'in energy. Use the calculator above for the conversion, then
             read the sections below to understand what the result means.
@@ -120,48 +117,48 @@ export default function MayanCalendarCalculatorPage() {
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-950 mb-3">Mayan calendar vs Mayan zodiac</h2>
-            <p className="text-gray-700 mb-4">
+          <article className="panel rounded-2xl p-6">
+            <h2 className="text-xl font-display text-[var(--parchment)] mb-3">Mayan calendar vs Mayan zodiac</h2>
+            <p className="text-[var(--parchment-dim)] mb-4">
               The Mayan calendar is the system. The Mayan zodiac sign is the day sign found inside that
               system. A full reading combines the day sign with a Galactic Tone.
             </p>
-            <Link href="/mayan-zodiac-calculator" className="text-orange-700 hover:text-orange-800 font-semibold">
+            <Link href="/mayan-zodiac-calculator" className="link-gold font-semibold">
               Learn about Mayan zodiac signs
             </Link>
           </article>
-          <article className="bg-white border border-amber-100 rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-950 mb-3">Today's Mayan calendar date</h2>
-            <p className="text-gray-700 mb-4">
+          <article className="panel rounded-2xl p-6">
+            <h2 className="text-xl font-display text-[var(--parchment)] mb-3">Today's Mayan calendar date</h2>
+            <p className="text-[var(--parchment-dim)] mb-4">
               Your birth sign stays the same, while the current Tzolk'in date changes daily. Checking
               today's date helps compare personal energy with the wider calendar rhythm.
             </p>
-            <Link href="/today" className="text-orange-700 hover:text-orange-800 font-semibold">
+            <Link href="/today" className="link-gold font-semibold">
               View today's Mayan date
             </Link>
           </article>
         </section>
 
-        <section className="mt-10 bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-950 mb-5">Mayan Calendar Calculator FAQ</h2>
+        <section className="panel rounded-2xl p-6 md:p-8 mt-10">
+          <h2 className="text-2xl font-display text-[var(--parchment)] mb-5">Mayan Calendar Calculator FAQ</h2>
           <div className="space-y-5">
             <div>
-              <h3 className="font-semibold text-gray-950 mb-2">What does a Mayan calendar calculator do?</h3>
-              <p className="text-gray-700">
+              <h3 className="font-display text-[var(--parchment)] mb-2">What does a Mayan calendar calculator do?</h3>
+              <p className="text-[var(--parchment-dim)]">
                 It converts a Gregorian date into the Tzolk'in calendar and shows the day sign, Galactic
                 Tone, and symbolic meaning for that date.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-950 mb-2">Can I use it for today as well as a birth date?</h3>
-              <p className="text-gray-700">
+              <h3 className="font-display text-[var(--parchment)] mb-2">Can I use it for today as well as a birth date?</h3>
+              <p className="text-[var(--parchment-dim)]">
                 Yes. You can calculate a birth date or use the daily Mayan date page to check the current
                 Tzolk'in energy.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-950 mb-2">What is a Tzolk'in date?</h3>
-              <p className="text-gray-700">
+              <h3 className="font-display text-[var(--parchment)] mb-2">What is a Tzolk'in date?</h3>
+              <p className="text-[var(--parchment-dim)]">
                 It is a combination of one number from 1 to 13 and one of 20 Mayan day signs, creating a
                 date inside the 260-day sacred calendar cycle.
               </p>

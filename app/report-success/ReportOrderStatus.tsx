@@ -86,11 +86,11 @@ export default function ReportOrderStatus() {
   };
 
   return (
-    <div className="rounded-lg border border-amber-200 bg-amber-50 p-5 mb-6" aria-live="polite">
-      <h2 className="font-bold text-gray-950 mb-2">
+    <div className="rounded-xl border border-[var(--gold-line)] bg-[rgb(212_162_78/6%)] p-5 mb-6" aria-live="polite">
+      <h2 className="font-display text-lg text-[var(--parchment)] mb-2">
         {reportReady ? 'Your report is ready' : 'We are generating your report'}
       </h2>
-      <ul className="space-y-2 text-gray-700">
+      <ul className="space-y-2 text-[var(--parchment-dim)]">
         <li>✓ Your payment and birth date details are recorded securely.</li>
         <li>✓ Your report is calculated from the submitted date, not from editable browser values.</li>
         <li>
@@ -105,20 +105,20 @@ export default function ReportOrderStatus() {
         <a
           href={order.download_url}
           onClick={trackDownload}
-          className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-orange-600 px-6 py-3.5 font-bold text-white shadow-md transition-colors hover:bg-orange-700 sm:w-auto"
+          className="btn-ember mt-5 inline-flex w-full px-6 py-3.5 sm:w-auto"
         >
           Download my PDF report
         </a>
       )}
       {!reportReady && (
-        <p className="mt-4 text-sm font-medium text-orange-800">
+        <p className="mt-4 text-sm font-medium text-gold-bright">
           This page updates automatically. The download button will appear as soon as the PDF is ready.
         </p>
       )}
       {order?.mayan_signature && (
-        <p className="mt-3 text-sm font-semibold text-orange-800">Order signature: {order.mayan_signature}</p>
+        <p className="mt-3 text-sm font-semibold text-gold-bright">Order signature: {order.mayan_signature}</p>
       )}
-      <p className="mt-3 text-sm text-gray-600">
+      <p className="mt-3 text-sm text-[var(--parchment-faint)]">
         Keep this page open until the button appears. The private download link remains valid for 7 days.
       </p>
     </div>

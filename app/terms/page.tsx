@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import PageHero from '../components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Terms of Service - Mayan Astrology Calculator',
@@ -23,16 +24,17 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose">
+    <div className="page-shell">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 content-prose">
         <div className="mb-6">
-          <Link href="/" className="text-orange-600 hover:text-orange-700 font-medium">
+          <Link href="/" className="link-gold">
             Back to Calculator
           </Link>
         </div>
 
-        <h1>Terms of Service</h1>
-        <p>Last updated: August 3, 2026</p>
+        <PageHero eyebrow="Agreement" title="Terms of Service" glyphs={['maize', 'obsidian', 'sun']}>
+          Last updated: August 3, 2026
+        </PageHero>
 
         <p>
           By using Mayan Astrology Calculator, you agree to these terms. If you do not agree, please do
@@ -132,12 +134,12 @@ export default function TermsPage() {
           {' '}or visit our <Link href="/contact">contact page</Link> for questions.
         </p>
 
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <h3 className="text-lg font-semibold mb-3">Related Pages</h3>
+        <div className="mt-8 pt-6 border-t border-[var(--gold-line)]">
+          <h3 className="text-lg font-display mb-3">Related Pages</h3>
           <ul className="space-y-2">
-            <li><Link href="/privacy" className="text-orange-600 hover:text-orange-700">Privacy Policy</Link></li>
-            <li><Link href="/about" className="text-orange-600 hover:text-orange-700">About Mayan Astrology</Link></li>
-            <li><Link href="/guide" className="text-orange-600 hover:text-orange-700">Mayan Astrology Guide</Link></li>
+            <li><Link href="/privacy" className="link-gold">Privacy Policy</Link></li>
+            <li><Link href="/about" className="link-gold">About Mayan Astrology</Link></li>
+            <li><Link href="/guide" className="link-gold">Mayan Astrology Guide</Link></li>
           </ul>
         </div>
       </main>

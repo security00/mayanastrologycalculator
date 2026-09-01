@@ -172,12 +172,12 @@ export default function GoogleEmailSignIn() {
   if (!sessionLoaded || (!googleClientId && !user)) return null;
 
   return (
-    <div className="mb-4 rounded-xl border border-orange-100 bg-white/95 p-3 text-gray-800 shadow-sm">
+    <div className="mb-4 rounded-xl border border-white/20 bg-black/25 p-3.5 text-orange-50">
       {user ? (
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold text-gray-950">Delivery email: {user.email}</p>
-            <p className="mt-1 text-xs text-gray-600">
+            <p className="text-sm font-semibold text-white">Delivery email: {user.email}</p>
+            <p className="mt-1 text-xs text-orange-100/75">
               Google verified this address. You can confirm it again in Stripe.
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function GoogleEmailSignIn() {
             type="button"
             onClick={handleLogout}
             disabled={authLoading}
-            className="self-start text-sm font-semibold text-orange-700 underline decoration-orange-300 underline-offset-4 disabled:opacity-60"
+            className="self-start text-sm font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white disabled:opacity-60"
           >
             Use another email
           </button>
@@ -193,16 +193,16 @@ export default function GoogleEmailSignIn() {
       ) : (
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0 sm:pr-3">
-            <p className="text-sm font-semibold text-gray-950">Delivery email</p>
-            <p className="mt-1 text-xs text-gray-600">
+            <p className="text-sm font-semibold text-white">Delivery email</p>
+            <p className="mt-1 text-xs text-orange-100/75">
               Enter it in Stripe, or optionally prefill it with Google.
             </p>
           </div>
           <div ref={buttonRef} className="min-h-10 max-w-full shrink-0 overflow-hidden" aria-label="Continue with Google" />
         </div>
       )}
-      {authLoading && <p className="mt-2 text-xs text-gray-600">Confirming your email...</p>}
-      {authError && <p className="mt-2 text-xs font-medium text-red-700">{authError}</p>}
+      {authLoading && <p className="mt-2 text-xs text-orange-100/75">Confirming your email...</p>}
+      {authError && <p className="mt-2 text-xs font-medium text-red-300">{authError}</p>}
     </div>
   );
 }

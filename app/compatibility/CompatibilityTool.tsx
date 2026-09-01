@@ -133,15 +133,15 @@ function DateFields({
   const days = Array.from({ length: 31 }, (_, index) => String(index + 1));
 
   return (
-    <fieldset className="bg-white border border-amber-100 rounded-lg p-5 shadow-sm">
-      <legend className="text-lg font-bold text-gray-950 mb-4">{label}</legend>
+    <fieldset className="panel rounded-2xl p-5">
+      <legend className="text-lg font-bold text-[var(--parchment)] mb-4">{label}</legend>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <label className="block">
-          <span className="block text-sm font-medium text-gray-700 mb-2">Day</span>
+          <span className="block text-sm font-medium text-[var(--parchment-dim)] mb-2">Day</span>
           <select
             value={value.day}
             onChange={(event) => onChange({ ...value, day: event.target.value })}
-            className="w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none"
+            className="select-gold"
           >
             <option value="">Day</option>
             {days.map((day) => (
@@ -150,11 +150,11 @@ function DateFields({
           </select>
         </label>
         <label className="block">
-          <span className="block text-sm font-medium text-gray-700 mb-2">Month</span>
+          <span className="block text-sm font-medium text-[var(--parchment-dim)] mb-2">Month</span>
           <select
             value={value.month}
             onChange={(event) => onChange({ ...value, month: event.target.value })}
-            className="w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none"
+            className="select-gold"
           >
             <option value="">Month</option>
             {months.map((month) => (
@@ -163,11 +163,11 @@ function DateFields({
           </select>
         </label>
         <label className="block">
-          <span className="block text-sm font-medium text-gray-700 mb-2">Year</span>
+          <span className="block text-sm font-medium text-[var(--parchment-dim)] mb-2">Year</span>
           <select
             value={value.year}
             onChange={(event) => onChange({ ...value, year: event.target.value })}
-            className="w-full px-4 py-3 border-2 border-amber-200 rounded-lg focus:border-orange-500 focus:outline-none"
+            className="select-gold"
           >
             <option value="">Year</option>
             {years.map((year) => (
@@ -220,42 +220,42 @@ export default function CompatibilityTool() {
       </section>
 
       {error && (
-        <div className="mb-5 p-4 rounded-lg border border-red-300 bg-red-50 text-red-700">
+        <div className="mb-5 p-4 rounded-xl border border-red-500/40 bg-red-950/50 text-red-300">
           {error}
         </div>
       )}
 
       <button
         onClick={handleSubmit}
-        className="w-full bg-orange-600 text-white px-7 py-4 rounded-lg font-bold text-lg hover:bg-orange-700 shadow-sm"
+        className="btn-ember w-full px-7 py-4 text-lg"
       >
         Check Mayan Compatibility
       </button>
 
       {result && (
-        <section className="mt-10 bg-white border border-amber-200 rounded-lg p-6 md:p-8 shadow-sm">
+        <section className="panel rounded-2xl p-6 md:p-8 mt-10">
           <div className="text-center mb-8">
-            <p className="text-sm font-semibold text-orange-700 mb-2">Compatibility score</p>
-            <h2 className="text-5xl font-bold text-gray-950 mb-3">{result.score}%</h2>
-            <p className="text-xl text-gray-700">{result.relationshipTheme}</p>
+            <p className="text-sm font-semibold text-gold-bright mb-2">Compatibility score</p>
+            <h2 className="text-5xl font-display text-[var(--parchment)] mb-3">{result.score}%</h2>
+            <p className="text-xl text-[var(--parchment-dim)]">{result.relationshipTheme}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-            <article className="bg-amber-50 rounded-lg p-5">
-              <h3 className="text-2xl font-bold text-gray-950 mb-2">
+            <article className="rounded-xl border border-[var(--gold-line)] bg-[rgb(212_162_78/6%)] p-5">
+              <h3 className="text-2xl font-display text-[var(--parchment)] mb-2">
                 {result.personA.galacticTone.number} {result.personA.nawal.name}
               </h3>
-              <p className="text-gray-700 mb-2">{result.personA.nawal.meaning}</p>
-              <p className="text-sm text-gray-600">
+              <p className="text-[var(--parchment-dim)] mb-2">{result.personA.nawal.meaning}</p>
+              <p className="text-sm text-[var(--parchment-dim)]">
                 {result.personA.galacticTone.name} tone • {result.personA.nawal.element} • {result.personA.nawal.direction}
               </p>
             </article>
-            <article className="bg-blue-50 rounded-lg p-5">
-              <h3 className="text-2xl font-bold text-gray-950 mb-2">
+            <article className="rounded-xl border border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)] p-5">
+              <h3 className="text-2xl font-display text-[var(--parchment)] mb-2">
                 {result.personB.galacticTone.number} {result.personB.nawal.name}
               </h3>
-              <p className="text-gray-700 mb-2">{result.personB.nawal.meaning}</p>
-              <p className="text-sm text-gray-600">
+              <p className="text-[var(--parchment-dim)] mb-2">{result.personB.nawal.meaning}</p>
+              <p className="text-sm text-[var(--parchment-dim)]">
                 {result.personB.galacticTone.name} tone • {result.personB.nawal.element} • {result.personB.nawal.direction}
               </p>
             </article>
@@ -263,12 +263,12 @@ export default function CompatibilityTool() {
 
           <div className="space-y-5">
             <article>
-              <h3 className="text-xl font-bold text-gray-950 mb-2">Tone compatibility</h3>
-              <p className="text-gray-700">{result.toneSummary}</p>
+              <h3 className="text-xl font-display text-[var(--parchment)] mb-2">Tone compatibility</h3>
+              <p className="text-[var(--parchment-dim)]">{result.toneSummary}</p>
             </article>
             <article>
-              <h3 className="text-xl font-bold text-gray-950 mb-2">Nawal compatibility</h3>
-              <p className="text-gray-700">{result.signSummary}</p>
+              <h3 className="text-xl font-display text-[var(--parchment)] mb-2">Nawal compatibility</h3>
+              <p className="text-[var(--parchment-dim)]">{result.signSummary}</p>
             </article>
           </div>
         </section>
