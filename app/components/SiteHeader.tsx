@@ -19,7 +19,7 @@ export default function SiteHeader() {
             <span className="relative flex items-center justify-center">
               <span className="absolute inset-0 rounded-full bg-[var(--gold)] opacity-25 blur-md transition-opacity group-hover:opacity-45" />
               <Image
-                src="/ref-page/logo.webp"
+                src="/logo.webp"
                 alt="Mayan Astrology Calculator Logo"
                 width={50}
                 height={50}
