@@ -33,11 +33,10 @@ export default function ResultPage() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
   const [offerVariant, setOfferVariant] = useState<ReportOfferVariant | null>(null);
-  const [storedData] = useState<StoredReading | null>(() => {
-    if (typeof window === 'undefined') {
-      return null;
-    }
+  const [storedData, setStoredData] = useState<StoredReading | null>(null);
+  const [ready, setReady] = useState(false);
 
+  useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const day = Number(searchParams.get('day'));
     const month = Number(searchParams.get('month'));
@@ -47,12 +46,15 @@ export default function ResultPage() {
       const reading = calculateTzolkinDate(new Date(year, month - 1, day));
       const nextData = { reading, birthDate: { day, month, year } };
       sessionStorage.setItem('mayanReading', JSON.stringify(nextData));
-      return nextData;
+      setStoredData(nextData);
+      setReady(true);
+      return;
     }
 
     const data = sessionStorage.getItem('mayanReading');
-    return data ? JSON.parse(data) : null;
-  });
+    setStoredData(data ? JSON.parse(data) : null);
+    setReady(true);
+  }, []);
 
   // Add noindex meta tag dynamically
   useEffect(() => {
@@ -160,6 +162,16 @@ export default function ResultPage() {
       setCheckoutLoading(false);
     }
   };
+
+  if (!ready) {
+    return (
+      <div className="page-shell flex items-center justify-center">
+        <div className="panel text-center max-w-md mx-auto p-10 rounded-2xl" aria-busy="true">
+          <p className="text-[var(--parchment-dim)]">Opening your reading…</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!storedData) {
     return (

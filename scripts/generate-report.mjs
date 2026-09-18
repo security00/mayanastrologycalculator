@@ -1,5 +1,7 @@
 import { join } from 'node:path';
 import { d1, ensureDir, exportPdf, getOrderOutputDir, renderReportHtml, slugify, writeText } from './report-common.mjs';
+import { COMPATIBILITY_PRODUCT } from '../shared/mayan-compatibility.js';
+import { renderCompatibilityReportHtml } from '../shared/compatibility-report-engine.js';
 
 const orderId = process.argv[2];
 const allowTest = process.argv.includes('--allow-test');
@@ -38,11 +40,12 @@ await d1(
 const outputDir = getOrderOutputDir(order);
 ensureDir(outputDir);
 
-const baseName = `${slugify(order.mayan_signature)}-birth-chart-report`;
+const isPair = order.report_type === COMPATIBILITY_PRODUCT.code;
+const baseName = `${slugify(order.mayan_signature)}-${isPair ? 'compatibility-report' : 'birth-chart-report'}`;
 const htmlPath = join(outputDir, `${baseName}.html`);
 const pdfPath = join(outputDir, `${baseName}.pdf`);
 
-writeText(htmlPath, renderReportHtml(order));
+writeText(htmlPath, isPair ? renderCompatibilityReportHtml(order) : renderReportHtml(order));
 exportPdf(htmlPath, pdfPath);
 
 await d1(

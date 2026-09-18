@@ -1,8 +1,15 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { calculateTzolkinDate, validateDate, type MayanReading } from '../lib/mayan-calculator';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { calculateTzolkinDate, validateDate } from '../lib/mayan-calculator';
+import {
+  buildCompatibilityReading,
+  parseCompatibilityContext,
+  type CompatibilityContext,
+} from '../lib/mayan-compatibility';
+import CompatibilityUpgradeCard from '../components/CompatibilityUpgradeCard';
+import GrecaBand from '../components/decor/GrecaBand';
 
 type BirthDate = {
   day: string;
@@ -10,16 +17,14 @@ type BirthDate = {
   year: string;
 };
 
-type CompatibilityResult = {
-  personA: MayanReading;
-  personB: MayanReading;
-  score: number;
-  toneSummary: string;
-  signSummary: string;
-  relationshipTheme: string;
+type ParsedBirthDate = {
+  day: number;
+  month: number;
+  year: number;
 };
 
-const emptyDate: BirthDate = { day: '', month: '', year: '' };
+const YEAR_OPTIONS = Array.from({ length: 100 }, (_, index) => String(2026 - index));
+const DAY_OPTIONS = Array.from({ length: 31 }, (_, index) => String(index + 1));
 
 const months = [
   { value: '1', name: 'January' },
@@ -36,17 +41,39 @@ const months = [
   { value: '12', name: 'December' },
 ];
 
-function readInitialDate(prefix: string): BirthDate {
-  if (typeof window === 'undefined') {
-    return emptyDate;
-  }
+const CONTEXT_OPTIONS: { value: CompatibilityContext; label: string; hint: string }[] = [
+  { value: 'romantic', label: 'Romantic', hint: 'Partners' },
+  { value: 'friendship', label: 'Friendship', hint: 'Friends or family' },
+  { value: 'work', label: 'Work', hint: 'Collaborators' },
+  { value: 'general', label: 'General', hint: 'No specific role' },
+];
 
-  const params = new URLSearchParams(window.location.search);
+const NAWAL_COLOR_DOTS: Record<string, string> = {
+  red: 'bg-red-400',
+  white: 'bg-stone-100',
+  blue: 'bg-sky-400',
+  yellow: 'bg-yellow-400',
+};
+
+type AnalyticsWindow = Window & {
+  gtag?: (command: string, eventName: string, params: Record<string, string | number>) => void;
+};
+
+function readSearchDate(prefix: string, search: string): BirthDate {
+  const params = new URLSearchParams(search);
   return {
     day: params.get(`${prefix}day`) || '',
     month: params.get(`${prefix}month`) || '',
     year: params.get(`${prefix}year`) || '',
   };
+}
+
+function readSearchContext(search: string): CompatibilityContext | null {
+  return parseCompatibilityContext(new URLSearchParams(search).get('context'));
+}
+
+function sameBirthDate(a: BirthDate, b: BirthDate) {
+  return a.day === b.day && a.month === b.month && a.year === b.year;
 }
 
 function parseBirthDate(date: BirthDate) {
@@ -70,53 +97,17 @@ function calculateReading(date: BirthDate) {
   };
 }
 
-function circularDistance(a: number, b: number, cycle: number) {
-  const diff = Math.abs(a - b);
-  return Math.min(diff, cycle - diff);
-}
-
-function buildCompatibility(personA: MayanReading, personB: MayanReading): CompatibilityResult {
-  const toneDistance = circularDistance(personA.galacticTone.number, personB.galacticTone.number, 13);
-  const toneScore = Math.max(0, 38 - toneDistance * 5);
-
-  const signDistance = circularDistance(
-    personA.tzolkin.number + personA.nawal.name.length,
-    personB.tzolkin.number + personB.nawal.name.length,
-    20
-  );
-  const signScore = Math.max(0, 32 - signDistance * 2);
-
-  const elementScore = personA.nawal.element === personB.nawal.element ? 18 : 10;
-  const directionScore = personA.nawal.direction === personB.nawal.direction ? 12 : 7;
-  const score = Math.min(100, Math.round(toneScore + signScore + elementScore + directionScore));
-
-  const toneSummary =
-    toneDistance <= 2
-      ? 'Your Galactic Tones move at a similar rhythm, which can make timing, decisions, and emotional pacing feel natural.'
-      : toneDistance <= 5
-        ? 'Your Galactic Tones bring different rhythms. This can create useful balance when both people respect each other’s pace.'
-        : 'Your Galactic Tones are quite different, so the relationship may need more patience around timing, priorities, and expectations.';
-
-  const signSummary =
-    personA.nawal.element === personB.nawal.element
-      ? `Both signs carry ${personA.nawal.element} energy, giving the connection a shared instinct and familiar emotional language.`
-      : `${personA.nawal.name} carries ${personA.nawal.element} energy while ${personB.nawal.name} carries ${personB.nawal.element} energy, creating a relationship based on contrast and learning.`;
-
-  const relationshipTheme =
-    score >= 80
-      ? 'A naturally resonant connection with strong shared rhythm.'
-      : score >= 60
-        ? 'A balanced connection with both harmony and productive differences.'
-        : 'A growth-oriented connection that benefits from clear communication and patience.';
-
-  return {
-    personA,
-    personB,
-    score,
-    toneSummary,
-    signSummary,
-    relationshipTheme,
-  };
+function compatibilityPath(personA: ParsedBirthDate, personB: ParsedBirthDate, context: CompatibilityContext) {
+  const params = new URLSearchParams({
+    aday: String(personA.day),
+    amonth: String(personA.month),
+    ayear: String(personA.year),
+    bday: String(personB.day),
+    bmonth: String(personB.month),
+    byear: String(personB.year),
+    context,
+  });
+  return `/compatibility?${params.toString()}`;
 }
 
 function DateFields({
@@ -128,9 +119,8 @@ function DateFields({
   value: BirthDate;
   onChange: (next: BirthDate) => void;
 }) {
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, index) => String(currentYear - index));
-  const days = Array.from({ length: 31 }, (_, index) => String(index + 1));
+  const years = YEAR_OPTIONS;
+  const days = DAY_OPTIONS;
 
   return (
     <fieldset className="panel rounded-2xl p-5">
@@ -139,6 +129,7 @@ function DateFields({
         <label className="block">
           <span className="block text-sm font-medium text-[var(--parchment-dim)] mb-2">Day</span>
           <select
+            aria-label={`${label} day`}
             value={value.day}
             onChange={(event) => onChange({ ...value, day: event.target.value })}
             className="select-gold"
@@ -152,6 +143,7 @@ function DateFields({
         <label className="block">
           <span className="block text-sm font-medium text-[var(--parchment-dim)] mb-2">Month</span>
           <select
+            aria-label={`${label} month`}
             value={value.month}
             onChange={(event) => onChange({ ...value, month: event.target.value })}
             className="select-gold"
@@ -165,6 +157,7 @@ function DateFields({
         <label className="block">
           <span className="block text-sm font-medium text-[var(--parchment-dim)] mb-2">Year</span>
           <select
+            aria-label={`${label} year`}
             value={value.year}
             onChange={(event) => onChange({ ...value, year: event.target.value })}
             className="select-gold"
@@ -180,36 +173,130 @@ function DateFields({
   );
 }
 
+function SignatureCard({
+  person,
+  accent,
+}: {
+  person: ReturnType<typeof buildCompatibilityReading>['personA'];
+  accent: 'gold' | 'jade';
+}) {
+  const frame = accent === 'jade'
+    ? 'border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)]'
+    : 'border-[var(--gold-line)] bg-[rgb(212_162_78/6%)]';
+  const heading = accent === 'jade' ? 'text-jade' : 'text-gold-bright';
+
+  return (
+    <article className={`rounded-xl border p-5 ${frame}`}>
+      <h3 className={`font-display text-2xl mb-2 ${heading}`}>{person.signature}</h3>
+      <p className="text-[var(--parchment-dim)] mb-4">{person.nawalMeaning}</p>
+      <div className="flex flex-wrap gap-2 mb-4 text-sm">
+        <span className="chip">
+          <span className={`w-2.5 h-2.5 rounded-full mr-2 ${NAWAL_COLOR_DOTS[person.color.toLowerCase()] ?? 'bg-stone-100'}`} />
+          {person.color}
+        </span>
+        <span className="chip">{person.element}</span>
+        <span className="chip chip-jade">{person.direction}</span>
+      </div>
+      <p className="text-sm text-[var(--parchment-dim)]">
+        <span className="font-semibold text-[var(--parchment)]">Tone {person.toneNumber} {person.toneName}.</span>{' '}
+        A {person.tone.pace} rhythm that is helped when they {person.tone.move}.
+      </p>
+      <p className="text-sm text-[var(--parchment-dim)] mt-3">
+        <span className="font-semibold text-[var(--parchment)]">Often offers</span> {person.offer}.
+      </p>
+    </article>
+  );
+}
+
+type SubmittedQuery = {
+  personA: BirthDate;
+  personB: BirthDate;
+  context: CompatibilityContext;
+};
+
+function readQueryState(search: string) {
+  const personA = readSearchDate('a', search);
+  const personB = readSearchDate('b', search);
+  const context = readSearchContext(search);
+  const ready = Boolean(calculateReading(personA) && calculateReading(personB) && context);
+  return {
+    personA,
+    personB,
+    context,
+    submitted: ready && context ? { personA, personB, context } : null,
+  };
+}
+
 export default function CompatibilityTool() {
   const router = useRouter();
-  const [personA, setPersonA] = useState<BirthDate>(() => readInitialDate('a'));
-  const [personB, setPersonB] = useState<BirthDate>(() => readInitialDate('b'));
+  const searchParams = useSearchParams();
+  const queryState = useMemo(() => readQueryState(searchParams.toString()), [searchParams]);
+  const trackedResult = useRef('');
+  const [personA, setPersonA] = useState<BirthDate>(queryState.personA);
+  const [personB, setPersonB] = useState<BirthDate>(queryState.personB);
+  const [context, setContext] = useState<CompatibilityContext | null>(queryState.context);
+  const [draftSubmitted, setDraftSubmitted] = useState<SubmittedQuery | null>(queryState.submitted);
   const [error, setError] = useState('');
+  const submitted = draftSubmitted ?? queryState.submitted;
+
+  const calculatedA = useMemo(() => calculateReading(personA), [personA]);
+  const calculatedB = useMemo(() => calculateReading(personB), [personB]);
+  const submittedA = useMemo(() => submitted ? calculateReading(submitted.personA) : null, [submitted]);
+  const submittedB = useMemo(() => submitted ? calculateReading(submitted.personB) : null, [submitted]);
+  const formMatchesSubmitted = Boolean(
+    submitted
+    && context === submitted.context
+    && sameBirthDate(personA, submitted.personA)
+    && sameBirthDate(personB, submitted.personB),
+  );
+  const canSubmit = Boolean(calculatedA && calculatedB && context);
 
   const result = useMemo(() => {
-    const a = calculateReading(personA);
-    const b = calculateReading(personB);
-
-    if (!a || !b) {
+    if (!submitted || !submittedA || !submittedB || !formMatchesSubmitted) {
       return null;
     }
 
-    return buildCompatibility(a.reading, b.reading);
-  }, [personA, personB]);
+    return {
+      reading: buildCompatibilityReading(submittedA.reading, submittedB.reading, submitted.context),
+      dateA: submittedA.date,
+      dateB: submittedB.date,
+    };
+  }, [formMatchesSubmitted, submitted, submittedA, submittedB]);
+
+  useEffect(() => {
+    if (!result) return;
+
+    const key = `${result.reading.personA.signature}|${result.reading.personB.signature}|${result.reading.context}`;
+    if (trackedResult.current === key) return;
+    trackedResult.current = key;
+
+    (window as AnalyticsWindow).gtag?.('event', 'compatibility_result_view', {
+      nawal_a: result.reading.personA.nawalName,
+      nawal_b: result.reading.personB.nawalName,
+      tone_a: result.reading.personA.toneNumber,
+      tone_b: result.reading.personB.toneNumber,
+      score: result.reading.score,
+      relationship_context: result.reading.context,
+    });
+  }, [result]);
 
   const handleSubmit = () => {
-    const a = calculateReading(personA);
-    const b = calculateReading(personB);
-
-    if (!a || !b) {
+    if (!calculatedA || !calculatedB) {
       setError('Please enter two valid birth dates.');
       return;
     }
 
+    if (!context) {
+      setError('Choose how these two people are connected.');
+      return;
+    }
+
     setError('');
-    router.push(
-      `/compatibility?aday=${a.date.day}&amonth=${a.date.month}&ayear=${a.date.year}&bday=${b.date.day}&bmonth=${b.date.month}&byear=${b.date.year}`
-    );
+    setDraftSubmitted({ personA, personB, context });
+    router.push(compatibilityPath(calculatedA.date, calculatedB.date, context));
+    window.requestAnimationFrame(() => {
+      document.getElementById('compatibility-reading')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   };
 
   return (
@@ -219,59 +306,164 @@ export default function CompatibilityTool() {
         <DateFields label="Person B" value={personB} onChange={setPersonB} />
       </section>
 
+      <fieldset className="mb-6">
+        <legend className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--gold-dim)]">
+          Relationship context
+        </legend>
+        <p className="mb-3 text-sm text-[var(--parchment-dim)]">
+          Choose how these two people are connected. This is required — it changes the language of the reading.
+        </p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {CONTEXT_OPTIONS.map((option) => {
+            const selected = context === option.value;
+            return (
+              <label
+                key={option.value}
+                className={`cursor-pointer rounded-xl border p-4 transition-all ${
+                  selected
+                    ? 'border-[var(--gold-line-strong)] bg-[rgb(212_162_78/10%)]'
+                    : 'border-[var(--gold-line)] bg-[var(--surface)] hover:border-[var(--gold-line-strong)]'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="relationship-context"
+                  value={option.value}
+                  checked={selected}
+                  onChange={() => setContext(option.value)}
+                  className="sr-only"
+                />
+                <span className="block font-semibold text-[var(--parchment)]">{option.label}</span>
+                <span className="block text-sm text-[var(--parchment-dim)] mt-1">{option.hint}</span>
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
+
       {error && (
-        <div className="mb-5 p-4 rounded-xl border border-red-500/40 bg-red-950/50 text-red-300">
+        <div role="alert" className="mb-5 p-4 rounded-xl border border-red-500/40 bg-red-950/50 text-red-300">
           {error}
         </div>
       )}
 
       <button
+        type="button"
         onClick={handleSubmit}
+        disabled={!canSubmit || formMatchesSubmitted}
         className="btn-ember w-full px-7 py-4 text-lg"
       >
-        Check Mayan Compatibility
+        {submitted && !formMatchesSubmitted ? 'Update the pair reading' : 'Check Mayan Compatibility'}
       </button>
+      <p className="text-center text-xs text-[var(--parchment-faint)] mt-4 tracking-wide">
+        {!canSubmit
+          ? 'Enter both birth dates and choose a relationship, then generate the reading.'
+          : formMatchesSubmitted
+            ? 'This reading matches the dates and relationship you selected.'
+            : 'The reading appears below after you generate it.'}
+      </p>
 
       {result && (
-        <section className="panel rounded-2xl p-6 md:p-8 mt-10">
-          <div className="text-center mb-8">
-            <p className="text-sm font-semibold text-gold-bright mb-2">Compatibility score</p>
-            <h2 className="text-5xl font-display text-[var(--parchment)] mb-3">{result.score}%</h2>
-            <p className="text-xl text-[var(--parchment-dim)]">{result.relationshipTheme}</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-            <article className="rounded-xl border border-[var(--gold-line)] bg-[rgb(212_162_78/6%)] p-5">
-              <h3 className="text-2xl font-display text-[var(--parchment)] mb-2">
-                {result.personA.galacticTone.number} {result.personA.nawal.name}
-              </h3>
-              <p className="text-[var(--parchment-dim)] mb-2">{result.personA.nawal.meaning}</p>
-              <p className="text-sm text-[var(--parchment-dim)]">
-                {result.personA.galacticTone.name} tone • {result.personA.nawal.element} • {result.personA.nawal.direction}
+        <div id="compatibility-reading" className="mt-12 space-y-8">
+          <section className="panel panel-glow panel-ornate rounded-3xl p-6 md:p-10">
+            <div className="text-center mb-8">
+              <p className="eyebrow mb-4 justify-center">✦&nbsp;&nbsp;{result.reading.contextLabel}&nbsp;&nbsp;✦</p>
+              <p className="text-sm font-semibold text-gold-bright mb-2">Compatibility score</p>
+              <h2 className="text-5xl md:text-6xl font-display text-[var(--parchment)] mb-3">{result.reading.score}%</h2>
+              <p className="text-xl text-[var(--parchment-dim)] max-w-2xl mx-auto">{result.reading.relationshipTheme}</p>
+              <p className="mt-4 text-sm text-[var(--parchment-faint)]">
+                {result.reading.personA.signature} · {result.reading.personB.signature}
               </p>
-            </article>
-            <article className="rounded-xl border border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)] p-5">
-              <h3 className="text-2xl font-display text-[var(--parchment)] mb-2">
-                {result.personB.galacticTone.number} {result.personB.nawal.name}
-              </h3>
-              <p className="text-[var(--parchment-dim)] mb-2">{result.personB.nawal.meaning}</p>
-              <p className="text-sm text-[var(--parchment-dim)]">
-                {result.personB.galacticTone.name} tone • {result.personB.nawal.element} • {result.personB.nawal.direction}
-              </p>
-            </article>
-          </div>
+            </div>
 
-          <div className="space-y-5">
-            <article>
-              <h3 className="text-xl font-display text-[var(--parchment)] mb-2">Tone compatibility</h3>
-              <p className="text-[var(--parchment-dim)]">{result.toneSummary}</p>
+            <p className="max-w-3xl mx-auto text-center text-[var(--parchment)] leading-relaxed mb-4">
+              {result.reading.contextLens}
+            </p>
+            <p className="max-w-3xl mx-auto text-center text-[var(--parchment-dim)] leading-relaxed mb-8">
+              {result.reading.howToUse}
+            </p>
+
+            <GrecaBand className="max-w-xl mx-auto mb-8" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <SignatureCard person={result.reading.personA} accent="gold" />
+              <SignatureCard person={result.reading.personB} accent="jade" />
+            </div>
+          </section>
+
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <article className="panel rounded-2xl p-6 md:p-8">
+              <p className="eyebrow mb-3">Tone rhythm</p>
+              <h3 className="font-display text-2xl text-[var(--parchment)] mb-3">{result.reading.tone.title}</h3>
+              <p className="text-[var(--parchment-dim)] leading-relaxed mb-4">{result.reading.tone.summary}</p>
+              <p className="text-[var(--parchment-dim)] leading-relaxed">{result.reading.tone.detail}</p>
             </article>
-            <article>
-              <h3 className="text-xl font-display text-[var(--parchment)] mb-2">Nawal compatibility</h3>
-              <p className="text-[var(--parchment-dim)]">{result.signSummary}</p>
+            <article className="panel rounded-2xl p-6 md:p-8">
+              <p className="eyebrow mb-3">Nawal chemistry</p>
+              <h3 className="font-display text-2xl text-[var(--parchment)] mb-3">{result.reading.nawal.title}</h3>
+              <p className="text-[var(--parchment-dim)] leading-relaxed mb-4">{result.reading.nawal.summary}</p>
+              <p className="text-[var(--parchment-dim)] leading-relaxed">{result.reading.nawal.detail}</p>
             </article>
-          </div>
-        </section>
+          </section>
+
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <article className="rounded-2xl border border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)] p-6 md:p-8">
+              <h3 className="font-display text-2xl text-jade mb-4">What this pair is good at</h3>
+              <ul className="space-y-3 text-[var(--parchment-dim)]">
+                {result.reading.strengths.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span aria-hidden="true" className="text-jade">✦</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article className="rounded-2xl border border-[rgb(234_88_12/25%)] bg-[rgb(234_88_12/7%)] p-6 md:p-8">
+              <h3 className="font-display text-2xl text-[var(--parchment)] mb-4">Where friction usually shows up</h3>
+              <ul className="space-y-3 text-[var(--parchment-dim)]">
+                {result.reading.friction.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span aria-hidden="true" className="text-[var(--ember)]">✦</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </section>
+
+          <section className="panel rounded-2xl p-6 md:p-8">
+            <p className="eyebrow mb-3">Use this reading</p>
+            <h3 className="font-display text-2xl md:text-3xl text-[var(--parchment)] mb-4">
+              {result.reading.communication.title}
+            </h3>
+            <p className="text-[var(--parchment-dim)] leading-relaxed mb-6">{result.reading.communication.summary}</p>
+            <ol className="space-y-3 mb-8">
+              {result.reading.communication.steps.map((step, index) => (
+                <li key={step} className="flex gap-4 rounded-xl border border-[var(--gold-line)] bg-[var(--surface)] p-4">
+                  <span className="font-display text-xl text-gold-bright">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="text-[var(--parchment-dim)]">{step}</span>
+                </li>
+              ))}
+            </ol>
+            <h4 className="font-display text-xl text-[var(--parchment)] mb-3">Three questions worth asking</h4>
+            <ul className="space-y-3 text-[var(--parchment-dim)]">
+              {result.reading.prompts.map((prompt) => (
+                <li key={prompt} className="flex gap-3">
+                  <span aria-hidden="true" className="text-gold-bright">✦</span>
+                  <span>{prompt}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <CompatibilityUpgradeCard
+            signatureA={result.reading.personA.signature}
+            signatureB={result.reading.personB.signature}
+            context={result.reading.context}
+            personA={result.dateA}
+            personB={result.dateB}
+          />
+        </div>
       )}
     </div>
   );

@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { REPORT_ANALYTICS_ITEM, REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
+import { COMPATIBILITY_ANALYTICS_ITEM, COMPATIBILITY_PRODUCT } from '../lib/mayan-compatibility';
 
 type OrderStatus = {
   status?: string;
   delivery_status?: string;
   mayan_signature?: string;
   download_url?: string;
+  report_type?: string;
+  amount_usd?: number;
 };
 
 type AnalyticsWindow = Window & {
@@ -41,19 +44,21 @@ export default function ReportOrderStatus() {
         if (nextOrder.status === 'paid' && !purchaseTracked.current) {
           purchaseTracked.current = true;
           const analyticsWindow = window as AnalyticsWindow;
+          const isPair = nextOrder.report_type === COMPATIBILITY_PRODUCT.code;
+          const purchaseValue = nextOrder.amount_usd || (isPair ? COMPATIBILITY_PRODUCT.priceUsd : REPORT_PRODUCT.priceUsd);
           const purchaseParams = {
             transaction_id: orderId,
-            value: REPORT_PRODUCT.priceUsd,
+            value: purchaseValue,
             currency: 'USD',
-            items: [REPORT_ANALYTICS_ITEM],
-            report_type: REPORT_PRODUCT.code,
+            items: [isPair ? COMPATIBILITY_ANALYTICS_ITEM : REPORT_ANALYTICS_ITEM],
+            report_type: nextOrder.report_type || REPORT_PRODUCT.code,
             offer_version: REPORT_PRODUCT.offerVersion,
           };
           analyticsWindow.gtag?.('event', 'purchase', purchaseParams);
           analyticsWindow.gtag?.('event', 'paid_report_purchase_confirmed', purchaseParams);
           analyticsWindow.gtag_report_purchase_conversion?.(
             orderId,
-            REPORT_PRODUCT.priceUsd,
+            purchaseValue,
             'USD',
           );
         }

@@ -6,7 +6,7 @@ export async function onRequestGet({ request, env }) {
   if (!orderId || !sessionId) return json({ error: 'Missing order details.' }, 400);
 
   const order = await env.REPORT_DB.prepare(
-    `SELECT id, status, delivery_status, mayan_signature, delivered_at
+    `SELECT id, status, delivery_status, mayan_signature, delivered_at, report_type, amount_usd
      FROM report_orders WHERE id = ? AND stripe_checkout_session_id = ? LIMIT 1`,
   ).bind(orderId, sessionId).first();
 

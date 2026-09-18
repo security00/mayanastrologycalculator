@@ -1,4 +1,6 @@
 import { REPORT_PRODUCT, renderReportHtml } from '../shared/report-engine.js';
+import { COMPATIBILITY_PRODUCT } from '../shared/mayan-compatibility.js';
+import { isCompatibilityReport, renderCompatibilityReportHtml } from '../shared/compatibility-report-engine.js';
 import { resolveOrderReportVariant } from '../shared/report-versions.js';
 
 interface Env {
@@ -22,9 +24,17 @@ interface ReportOrder {
   id: string;
   status: string;
   delivery_status: string;
+  report_type?: string | null;
   birth_day: number;
   birth_month: number;
   birth_year: number;
+  partner_birth_day?: number | null;
+  partner_birth_month?: number | null;
+  partner_birth_year?: number | null;
+  relationship_context?: string | null;
+  report_payload?: string | null;
+  delivery_notes?: string | null;
+  amount_usd?: number | null;
   mayan_signature: string;
   nawal: string;
   galactic_tone: number;
@@ -109,11 +119,15 @@ async function fulfillOrder(orderId: string, env: Env) {
   if (!order) throw new Error('Order disappeared after claim.');
   const reportOffer = resolveOrderReportVariant(order);
 
-  const objectKey = order.report_object_key || `reports/${order.id}/${REPORT_PRODUCT.code}-v${reportOffer.reportVersion}.pdf`;
+  const productCode = isCompatibilityReport(order) ? COMPATIBILITY_PRODUCT.code : REPORT_PRODUCT.code;
+  const reportVersion = isCompatibilityReport(order) ? COMPATIBILITY_PRODUCT.version : reportOffer.reportVersion;
+  const objectKey = order.report_object_key || `reports/${order.id}/${productCode}-v${reportVersion}.pdf`;
   let reportObject = await env.REPORT_FILES.head(objectKey);
 
   if (!reportObject) {
-    const html = renderReportHtml(order, { offerVariant: reportOffer.key });
+    const html = isCompatibilityReport(order)
+      ? renderCompatibilityReportHtml(order)
+      : renderReportHtml(order, { offerVariant: reportOffer.key });
     const pdfResponse = await env.BROWSER.quickAction('pdf', {
       html,
       pdfOptions: { format: 'a4', printBackground: true, preferCSSPageSize: true },
@@ -124,21 +138,21 @@ async function fulfillOrder(orderId: string, env: Env) {
     const expiresAt = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
     await env.REPORT_FILES.put(objectKey, pdfBytes, {
       httpMetadata: { contentType: 'application/pdf', contentDisposition: 'attachment' },
-      customMetadata: { orderId: order.id, expiresAt: expiresAt.toISOString(), productVersion: String(reportOffer.reportVersion) },
+      customMetadata: { orderId: order.id, expiresAt: expiresAt.toISOString(), productVersion: String(reportVersion) },
     });
 
     await env.REPORT_DB.prepare(
       `UPDATE report_orders SET delivery_status = 'generated', report_version = ?1,
        report_object_key = ?2, report_pdf_url = ?3, report_generated_at = datetime('now'),
        report_expires_at = ?4, updated_at = datetime('now') WHERE id = ?5`,
-    ).bind(reportOffer.reportVersion, objectKey, objectKey, expiresAt.toISOString(), order.id).run();
+    ).bind(reportVersion, objectKey, objectKey, expiresAt.toISOString(), order.id).run();
     reportObject = await env.REPORT_FILES.head(objectKey);
   }
 
   if (!reportObject) throw new Error('Generated report was not found in private storage.');
   const token = await createDownloadToken(order.id, env.REPORT_LINK_SECRET, 7 * 24 * 60 * 60);
   const downloadUrl = `${env.SITE_URL.replace(/\/$/, '')}/api/report-download?token=${encodeURIComponent(token)}`;
-  await sendReportEmail(order, downloadUrl, reportOffer.reportVersion, env);
+  await sendReportEmail(order, downloadUrl, reportVersion, env);
 
   await env.REPORT_DB.prepare(
     `UPDATE report_orders SET delivery_status = 'delivered', delivered_at = datetime('now'),
@@ -160,10 +174,12 @@ async function sendReportEmail(order: ReportOrder, downloadUrl: string, reportVe
       from: env.REPORT_FROM_EMAIL,
       reply_to: env.REPORT_REPLY_TO_EMAIL,
       to: [order.customer_email],
-      subject: `Your ${order.mayan_signature} Mayan Signature Report is ready`,
+      subject: isCompatibilityReport(order)
+        ? `Your ${order.mayan_signature} compatibility report is ready`
+        : `Your ${order.mayan_signature} Mayan Signature Report is ready`,
       html: `<div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;color:#292524"><h1>Your report is ready</h1><p>Your private <strong>${escapeHtml(order.mayan_signature)}</strong> report has been generated.</p><p><a href="${escapeHtml(downloadUrl)}" style="display:inline-block;background:#c2410c;color:white;text-decoration:none;padding:14px 22px;border-radius:9px;font-weight:bold">Download your PDF report</a></p><p>This secure link expires in 7 days. The private report file is retained for 90 days so support can issue a fresh link if needed.</p><p>If the report is missing or unusable, reply within 7 days for a replacement or refund.</p><p>— Mayan Astrology Calculator</p></div>`,
       text: `Your ${order.mayan_signature} report is ready. Download it within 7 days: ${downloadUrl}`,
-      tags: [{ name: 'product', value: REPORT_PRODUCT.code }],
+      tags: [{ name: 'product', value: isCompatibilityReport(order) ? COMPATIBILITY_PRODUCT.code : REPORT_PRODUCT.code }],
     }),
   });
 
@@ -181,9 +197,9 @@ async function reportStatus(request: Request, env: Env) {
   if (!orderId || !sessionId) return Response.json({ error: 'Missing order details.' }, { status: 400 });
 
   const order = await env.REPORT_DB.prepare(
-    `SELECT id, status, delivery_status, mayan_signature, delivered_at, report_object_key
+    `SELECT id, status, delivery_status, mayan_signature, delivered_at, report_object_key, report_type, amount_usd
      FROM report_orders WHERE id = ?1 AND stripe_checkout_session_id = ?2 LIMIT 1`,
-  ).bind(orderId, sessionId).first<Pick<ReportOrder, 'id' | 'status' | 'delivery_status' | 'mayan_signature' | 'report_object_key'> & { delivered_at: string | null }>();
+  ).bind(orderId, sessionId).first<Pick<ReportOrder, 'id' | 'status' | 'delivery_status' | 'mayan_signature' | 'report_object_key' | 'report_type' | 'amount_usd'> & { delivered_at: string | null }>();
   if (!order) return Response.json({ error: 'Order not found.' }, { status: 404 });
 
   const responseBody: Record<string, unknown> = {
@@ -192,6 +208,8 @@ async function reportStatus(request: Request, env: Env) {
     delivery_status: order.delivery_status,
     mayan_signature: order.mayan_signature,
     delivered_at: order.delivered_at,
+    report_type: order.report_type,
+    amount_usd: order.amount_usd,
   };
   if (order.status === 'paid' && order.report_object_key) {
     const token = await createDownloadToken(order.id, env.REPORT_LINK_SECRET, 7 * 24 * 60 * 60);
@@ -213,10 +231,13 @@ async function reportDownload(request: Request, env: Env) {
   if (!object) return new Response('Report file has expired.', { status: 410 });
 
   const safeSignature = order.mayan_signature.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const filename = isCompatibilityReport(order)
+    ? `${safeSignature}-compatibility-report.pdf`
+    : `${safeSignature}-mayan-signature-report.pdf`;
   return new Response(object.body, {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="${safeSignature}-mayan-signature-report.pdf"`,
+      'Content-Disposition': `attachment; filename="${filename}"`,
       'Cache-Control': 'private, no-store, max-age=0',
       'X-Content-Type-Options': 'nosniff',
       ETag: object.httpEtag,

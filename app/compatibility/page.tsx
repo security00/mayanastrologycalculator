@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import CompatibilityTool from './CompatibilityTool';
 import PageHero from '../components/PageHero';
 
 export const metadata: Metadata = {
   title: 'Mayan Compatibility Calculator - Compare Two Birth Signs',
-  description: "Use this free Mayan compatibility calculator to compare two Tzolk'in birth signs, Galactic Tones, Nawals, elements, and relationship themes.",
+  description: "Use this free Mayan compatibility calculator to compare two Tzolk'in birth signs. Get a usable pair reading for partners, friends, or collaborators, then go deeper if you want the full report.",
   keywords: 'mayan compatibility calculator, mayan astrology compatibility, mayan sign compatibility, mayan zodiac compatibility, tzolkin compatibility',
   alternates: { canonical: 'https://mayanastrologycalculator.com/compatibility' },
   openGraph: {
     title: 'Mayan Compatibility Calculator - Compare Two Birth Signs',
-    description: "Compare two Mayan astrology birth signs and discover their shared rhythm, contrast, and relationship themes.",
+    description: "Compare two Mayan astrology birth signs and get a usable pair reading for partners, friends, or collaborators.",
     url: 'https://mayanastrologycalculator.com/compatibility',
     siteName: 'Mayan Astrology Calculator',
     images: [{
@@ -52,12 +53,31 @@ export default function CompatibilityPage() {
           title="Mayan Compatibility Calculator"
           glyphs={['water', 'star', 'obsidian']}
         >
-          Compare two Mayan astrology birth signs and see how their Galactic Tones, Nawals,
-          elements, and directions interact. This tool is designed for partners, friends, family
-          members, or anyone curious about relationship patterns in the Tzolk'in calendar.
+          Compare two Mayan astrology birth signs and get a usable pair reading: tone rhythm,
+          Nawal chemistry, strengths, friction, and a communication pattern. Choose a romantic,
+          friendship, or work context to make the language more specific.
         </PageHero>
 
-        <CompatibilityTool />
+        <p className="mb-8 text-sm text-[var(--parchment-dim)]">
+          Preview the paid 11-page pair report before you decide.{' '}
+          <Link href="/sample-compatibility-report" className="link-gold font-semibold">
+            Open the sample report
+          </Link>
+          {' '}or{' '}
+          <a
+            href="/samples/mayan-compatibility-report-sample.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-gold font-semibold"
+          >
+            view the complete PDF
+          </a>
+          . The free reading stays useful on its own.
+        </p>
+
+        <Suspense fallback={<p className="mb-8 text-sm text-[var(--parchment-dim)]">Loading the pair calculator…</p>}>
+          <CompatibilityTool />
+        </Suspense>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
           <article className="panel rounded-2xl p-6">
@@ -89,8 +109,8 @@ export default function CompatibilityPage() {
           </h2>
           <p className="text-[var(--parchment-dim)] mb-5">
             Enter two birth dates to calculate each person's Nawal day sign and Galactic Tone. The
-            comparison then looks at tone rhythm, day-sign distance, element, and direction to create
-            a modern reflective compatibility score and a short relationship reading.
+            comparison looks at tone rhythm, day-sign distance, element, and direction, then writes a
+            modern reflective pair reading you can use even if you never buy a longer report.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <article className="rounded-xl border border-[var(--gold-line)] bg-[rgb(212_162_78/6%)] p-5">

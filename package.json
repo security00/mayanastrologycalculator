@@ -9,9 +9,11 @@
     "start": "next start",
     "lint": "eslint",
     "test:report": "node --test tests/maya-calendar-core.test.mjs tests/report-engine.test.mjs",
+    "test:compatibility": "node --test tests/mayan-compatibility.test.mjs tests/compatibility-report-engine.test.mjs",
     "test:auth": "node --test tests/auth-session.test.mjs",
-    "test:checkout": "node --test tests/checkout-consent.test.mjs",
-    "report:sample": "node scripts/generate-sample-report.mjs"
+    "test:checkout": "node --test tests/checkout-consent.test.mjs tests/compatibility-checkout.test.mjs",
+    "report:sample": "node scripts/generate-sample-report.mjs",
+    "report:sample:compatibility": "node scripts/generate-compatibility-sample-report.mjs"
   },
   "dependencies": {
     "jose": "^6.2.8",

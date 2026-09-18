@@ -27,6 +27,14 @@ node scripts/create-stripe-report-product.mjs
 
 Copy the printed price ID.
 
+For the pair report:
+
+```bash
+node scripts/create-stripe-compatibility-product.mjs
+```
+
+Then apply `migrations/006_compatibility_report_orders.sql` to D1.
+
 ## 3. Configure Cloudflare Pages environment variables
 
 Set:
@@ -35,6 +43,7 @@ Set:
 SITE_URL=https://mayanastrologycalculator.com
 STRIPE_SECRET_KEY=sk_live_or_test_...
 STRIPE_REPORT_PRICE_ID=price_...
+STRIPE_COMPATIBILITY_REPORT_PRICE_ID=price_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 ```
 
