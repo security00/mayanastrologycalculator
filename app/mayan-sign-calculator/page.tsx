@@ -78,6 +78,12 @@ export default function MayanSignCalculatorPage() {
             title="Find Your Mayan Sign by Birth Date"
             description="Calculate your Nawal day sign and Galactic Tone instantly."
             buttonLabel="Calculate My Mayan Sign"
+            sampleCta={{
+              href: '/sample-report',
+              label: 'See a full sample report first →',
+              helper: 'The free result comes first. The 11-page report is optional ($7).',
+              placement: 'sign_calculator',
+            }}
           />
         </div>
 

@@ -9,6 +9,7 @@ import {
   type CompatibilityContext,
 } from '../lib/mayan-compatibility';
 import CompatibilityUpgradeCard from '../components/CompatibilityUpgradeCard';
+import { TrackedSampleLink } from '../components/content/SampleAction';
 import GrecaBand from '../components/decor/GrecaBand';
 
 type BirthDate = {
@@ -192,13 +193,13 @@ function SignatureCard({
       <div className="flex flex-wrap gap-2 mb-4 text-sm">
         <span className="chip">
           <span className={`w-2.5 h-2.5 rounded-full mr-2 ${NAWAL_COLOR_DOTS[person.color.toLowerCase()] ?? 'bg-stone-100'}`} />
-          {person.color}
+          {person.color} · Dreamspell color
         </span>
-        <span className="chip">{person.element}</span>
+        <span className="chip">{person.element} · modern convention</span>
         <span className="chip chip-jade">{person.direction}</span>
       </div>
       <p className="text-sm text-[var(--parchment-dim)]">
-        <span className="font-semibold text-[var(--parchment)]">Tone {person.toneNumber} {person.toneName}.</span>{' '}
+        <span className="font-semibold text-[var(--parchment)]">Number {person.toneNumber} · Dreamspell name: {person.toneName}.</span>{' '}
         A {person.tone.pace} rhythm that is helped when they {person.tone.move}.
       </p>
       <p className="text-sm text-[var(--parchment-dim)] mt-3">
@@ -355,6 +356,12 @@ export default function CompatibilityTool() {
       >
         {submitted && !formMatchesSubmitted ? 'Update the pair reading' : 'Check Mayan Compatibility'}
       </button>
+      <div className="sample-cta !justify-center">
+        <TrackedSampleLink href="/sample-compatibility-report" placement="compatibility_compare">
+          See a sample pair report first →
+        </TrackedSampleLink>
+        <span className="basis-full text-center text-xs text-[var(--parchment-faint)]">Optional 11-page pair PDF · $12 · one-time</span>
+      </div>
       <p className="text-center text-xs text-[var(--parchment-faint)] mt-4 tracking-wide">
         {!canSubmit
           ? 'Enter both birth dates and choose a relationship, then generate the reading.'

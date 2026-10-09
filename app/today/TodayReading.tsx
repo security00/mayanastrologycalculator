@@ -51,7 +51,7 @@ export default function TodayReading() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
         <article className="rounded-xl border border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)] p-5">
           <h3 className="text-xl font-display text-[var(--parchment)] mb-2">
-            Galactic Tone {reading.galacticTone.number}: {reading.galacticTone.name}
+            Number {reading.galacticTone.number} · Dreamspell name: {reading.galacticTone.name}
           </h3>
           <p className="text-[var(--parchment-dim)] mb-3">{reading.galacticTone.meaning}</p>
           <div className="flex flex-wrap gap-2">
@@ -71,7 +71,7 @@ export default function TodayReading() {
           <dl className="grid grid-cols-3 gap-3 text-sm">
             <div>
               <dt className="font-semibold text-[var(--parchment)]">Element</dt>
-              <dd className="text-[var(--parchment-dim)]">{reading.nawal.element}</dd>
+              <dd className="text-[var(--parchment-dim)]">{reading.nawal.element} · modern convention</dd>
             </div>
             <div>
               <dt className="font-semibold text-[var(--parchment)]">Direction</dt>
@@ -79,7 +79,7 @@ export default function TodayReading() {
             </div>
             <div>
               <dt className="font-semibold text-[var(--parchment)]">Color</dt>
-              <dd className="text-[var(--parchment-dim)]">{reading.nawal.color}</dd>
+              <dd className="text-[var(--parchment-dim)]">{reading.nawal.color} · Dreamspell color</dd>
             </div>
           </dl>
         </article>

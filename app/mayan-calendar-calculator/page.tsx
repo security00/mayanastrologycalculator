@@ -75,6 +75,12 @@ export default function MayanCalendarCalculatorPage() {
             title="Mayan Calendar Date Calculator"
             description="Convert your Gregorian birth date to its Tzolk'in day sign and tone."
             buttonLabel="Convert My Birth Date"
+            sampleCta={{
+              href: '/sample-report',
+              label: 'See a full sample report first →',
+              helper: 'The free result comes first. The 11-page report is optional ($7).',
+              placement: 'calendar_calculator',
+            }}
           />
         </div>
 

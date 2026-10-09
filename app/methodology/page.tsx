@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHero from '../components/PageHero';
+import { TrackedSampleLink } from '../components/content/SampleAction';
 
 export const metadata: Metadata = {
   title: 'Calculation Methodology and Cultural Scope',
@@ -104,10 +105,13 @@ export default function MethodologyPage() {
           </section>
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="sample-cta mt-10 justify-center">
           <Link href="/" className="btn-ember inline-block px-7 py-3.5">
             Return to the calculator
           </Link>
+          <TrackedSampleLink href="/sample-report" placement="methodology_footer">
+            See exactly what a report contains →
+          </TrackedSampleLink>
         </div>
       </main>
     </div>

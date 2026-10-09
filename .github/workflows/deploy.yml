@@ -34,6 +34,9 @@ jobs:
       - name: Test checkout versioning
         run: npm run test:checkout
 
+      - name: Test content calendar
+        run: npm run test:content
+
       - name: Validate report Worker bundle
         run: npx wrangler deploy --config wrangler.report-worker.jsonc --dry-run
       

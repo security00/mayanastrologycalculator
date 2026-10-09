@@ -188,16 +188,28 @@ export default function CompatibilityUpgradeCard({
                 Check the delivery consent box to continue.
               </span>
             )}
-            <a
-              href="/samples/mayan-compatibility-report-sample.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => track('sample_report_click')}
-              className="ml-0 mt-4 inline-block font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white sm:ml-5 sm:mt-0"
-            >
-              View the complete sample PDF ↗
-            </a>
+            <span className="ml-0 mt-4 inline-flex flex-col gap-2 sm:ml-5 sm:mt-0 sm:inline-flex sm:flex-row sm:items-center sm:gap-4">
+              <a
+                href="/sample-compatibility-report"
+                onClick={() => track('sample_report_click', { placement: 'compatibility_paid_panel', target: 'html' })}
+                className="font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white"
+              >
+                See a sample pair report first →
+              </a>
+              <a
+                href="/samples/mayan-compatibility-report-sample.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track('sample_report_click', { placement: 'compatibility_paid_panel', target: 'pdf' })}
+                className="font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white"
+              >
+                Open the 11-page sample PDF ↗
+              </a>
+            </span>
             <p className="mt-4 text-sm text-orange-100/80">
+              A real pair report for 11 Ik&apos; + 4 Ajaw.
+            </p>
+            <p className="mt-2 text-sm text-orange-100/80">
               One-time payment · {compatibilityDeliveryCopy} · 7-day delivery guarantee
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">

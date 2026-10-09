@@ -85,7 +85,7 @@ export const DAY_SIGNS = [
     name: "Kan",
     spanish: "Semilla",
     mayan: "K'an",
-    meaning: "Seed - The potential for growth and abundance",
+    meaning: "Ripe maize (Dreamspell alias: Seed)",
     element: "Fire",
     direction: "South",
     color: "Yellow",
@@ -100,7 +100,7 @@ export const DAY_SIGNS = [
     name: "Chicchan",
     spanish: "Serpiente",
     mayan: "Chikchan",
-    meaning: "Serpent - Life force and kundalini energy",
+    meaning: "Serpent",
     element: "Fire",
     direction: "East",
     color: "Red",
@@ -145,7 +145,7 @@ export const DAY_SIGNS = [
     name: "Lamat",
     spanish: "Conejo",
     mayan: "Lamat",
-    meaning: "Rabbit - Fertility, abundance, and multiplication",
+    meaning: "Star (Venus)",
     element: "Water",
     direction: "South",
     color: "Yellow",
@@ -160,7 +160,7 @@ export const DAY_SIGNS = [
     name: "Muluc",
     spanish: "Agua",
     mayan: "Muluk",
-    meaning: "Water - Purification and emotional flow",
+    meaning: "Jar (K'iche' Toj)",
     element: "Water",
     direction: "East",
     color: "Red",
@@ -205,7 +205,7 @@ export const DAY_SIGNS = [
     name: "Eb",
     spanish: "Escalera",
     mayan: "Eb'",
-    meaning: "Road - The path of destiny and spiritual journey",
+    meaning: "Tooth (K'iche' E)",
     element: "Fire",
     direction: "South",
     color: "Yellow",
@@ -220,7 +220,7 @@ export const DAY_SIGNS = [
     name: "Ben",
     spanish: "Caña",
     mayan: "B'en",
-    meaning: "Reed - Authority, home, and family pillar",
+    meaning: "Young maize (alias: Reed)",
     element: "Fire",
     direction: "East",
     color: "Red",
@@ -250,7 +250,7 @@ export const DAY_SIGNS = [
     name: "Men",
     spanish: "Águila",
     mayan: "Men",
-    meaning: "Eagle - Vision, wisdom, and higher perspective",
+    meaning: "Bird (K'iche' Tz'ikin)",
     element: "Air",
     direction: "West",
     color: "Blue",
@@ -265,7 +265,7 @@ export const DAY_SIGNS = [
     name: "Cib",
     spanish: "Búho",
     mayan: "Kib'",
-    meaning: "Owl - Ancient wisdom and forgiveness",
+    meaning: "Wax (K'iche' Ajmaq)",
     element: "Water",
     direction: "South",
     color: "Yellow",
@@ -295,7 +295,7 @@ export const DAY_SIGNS = [
     name: "Etznab",
     spanish: "Espejo",
     mayan: "Etz'nab'",
-    meaning: "Mirror - Reflection and truth revelation",
+    meaning: "Flint (Dreamspell alias: Mirror)",
     element: "Air",
     direction: "North",
     color: "White",
@@ -472,9 +472,9 @@ export function getDetailedInterpretation(reading: MayanReading): string {
 
   return `Your Mayan astrology reveals that you were born on ${galacticTone.number} ${nawal.name}, a powerful combination that shapes your spiritual essence and life path.
 
-The Galactic Tone ${galacticTone.number} (${galacticTone.name}) represents ${galacticTone.meaning.toLowerCase()}. This energy influences how you approach life's challenges and opportunities. People with this tone are naturally drawn to ${galacticTone.keywords.join(', ').toLowerCase()}.
+Number ${galacticTone.number} (Dreamspell name: ${galacticTone.name}) represents ${galacticTone.meaning.toLowerCase()}. This energy influences how you approach life's challenges and opportunities. People with this tone are naturally drawn to ${galacticTone.keywords.join(', ').toLowerCase()}.
 
-Your Nawal, ${nawal.name} (${nawal.spanish} in Spanish, ${nawal.mayan} in Mayan), carries the energy of ${nawal.meaning.toLowerCase()}. This day sign is associated with the ${nawal.element} element and the ${nawal.direction} direction, giving you a natural affinity for ${nawal.color.toLowerCase()} energy.
+Your Nawal, ${nawal.name} (${nawal.spanish} in Spanish, ${nawal.mayan} in Mayan), carries the energy of ${nawal.meaning.toLowerCase()}. The element "${nawal.element}" is marked here as a modern convention. The color "${nawal.color}" is a Dreamspell color label. The direction shown with this sign is ${nawal.direction}.
 
 Key characteristics of ${nawal.name} people include: ${nawal.characteristics.join(', ').toLowerCase()}. These traits, combined with your ${galacticTone.name} tone, create a unique spiritual blueprint that guides your journey through life.
 

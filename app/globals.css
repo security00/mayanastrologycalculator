@@ -477,6 +477,63 @@ body {
   margin: 2rem 0;
 }
 
+.content-prose {
+  overflow-x: auto;
+}
+
+.content-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0 1.5rem;
+  font-size: 0.92rem;
+}
+
+.content-prose th,
+.content-prose td {
+  border: 1px solid var(--gold-line);
+  padding: 0.45rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.content-prose th {
+  color: var(--parchment);
+  font-weight: 600;
+}
+
+.content-prose blockquote {
+  margin: 1.25rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold);
+}
+
+.content-prose code {
+  color: var(--gold-bright);
+}
+
+.sample-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.sample-cta-pair {
+  margin: 0.15rem 0 1.25rem;
+}
+
+.sample-link {
+  color: var(--gold-bright);
+  text-decoration: underline;
+  text-decoration-color: var(--gold-dim);
+  text-underline-offset: 3px;
+}
+
+.sample-link:hover {
+  color: #f6dc9f;
+}
+
 /* ---------- featured badges marquee ---------- */
 
 .featured-badges-marquee {
