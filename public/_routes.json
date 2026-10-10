@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "include": ["/api/*"],
+  "exclude": [
+    "/pricing",
+    "/pricing/",
+    "/day-signs/chicchan",
+    "/day-signs/chicchan/",
+    "/day-signs/cimi",
+    "/day-signs/cimi/",
+    "/day-signs/muluc",
+    "/day-signs/muluc/",
+    "/day-signs/oc",
+    "/day-signs/oc/",
+    "/day-signs/chuen",
+    "/day-signs/chuen/",
+    "/day-signs/cib",
+    "/day-signs/cib/",
+    "/day-signs/caban",
+    "/day-signs/caban/",
+    "/day-signs/cauac",
+    "/day-signs/cauac/",
+    "/day-signs/ahau",
+    "/day-signs/ahau/",
+    "/day-signs/ahaw",
+    "/day-signs/ahaw/",
+    "/mayan-astrology-birth-chart-free",
+    "/mayan-astrology-birth-chart-free/"
+  ]
+}

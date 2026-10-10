@@ -42,6 +42,9 @@ jobs:
       
       - name: Build
         run: npm run build
+
+      - name: Check static export redirects
+        run: npm run test:export
       
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
