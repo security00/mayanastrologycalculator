@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
+import { displayForColonial } from '../../shared/dual-calendar.js';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
 import MayanNumeral from '../components/decor/MayanNumeral';
 import GrecaBand from '../components/decor/GrecaBand';
@@ -216,15 +217,25 @@ export default function ResultPage() {
             <h2 className="font-display text-5xl md:text-6xl gold-gradient-text mb-3 mt-4">
               {reading.galacticTone.number} {reading.nawal.name}
             </h2>
+            {displayForColonial(reading.nawal.name) && (
+              <p className="mb-3">
+                <Link
+                  href={`/day-signs/${displayForColonial(reading.nawal.name)?.slug}#${reading.galacticTone.number}-${displayForColonial(reading.nawal.name)?.slug}`}
+                  className="link-gold"
+                >
+                  Read {reading.galacticTone.number} {displayForColonial(reading.nawal.name)?.name}
+                </Link>
+              </p>
+            )}
             <p className="text-lg text-[var(--parchment-dim)] mb-5">
               {reading.nawal.spanish} • {reading.nawal.mayan}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-3 text-sm">
               <span className="chip">
                 <span className={`w-2.5 h-2.5 rounded-full mr-2 ${NAWAL_COLOR_DOTS[reading.nawal.color.toLowerCase()] ?? 'bg-stone-100'}`}></span>
-                {reading.nawal.color}
+                {reading.nawal.color} · Dreamspell color
               </span>
-              <span className="chip">{reading.nawal.element}</span>
+              <span className="chip">{reading.nawal.element} · modern convention</span>
               <span className="chip chip-jade">{reading.nawal.direction}</span>
             </div>
           </div>
@@ -233,15 +244,11 @@ export default function ResultPage() {
             {/* Galactic Tone */}
             <div className="rounded-2xl border border-[rgb(79_209_165/22%)] bg-[linear-gradient(160deg,rgb(79_209_165/8%),rgb(79_209_165/2%))] p-7">
               <h3 className="font-display text-2xl text-jade mb-4">
-                {offerVariant === 'transparent_v3'
-                  ? `Tzolk’in Number ${reading.galacticTone.number}`
-                  : `Galactic Tone ${reading.galacticTone.number}: ${reading.galacticTone.name}`}
+                Number {reading.galacticTone.number}
               </h3>
-              {offerVariant === 'transparent_v3' && (
-                <p className="mb-3 text-sm font-semibold text-jade">
-                  Modern Dreamspell name: {reading.galacticTone.name}
-                </p>
-              )}
+              <p className="mb-3 text-sm font-semibold text-jade">
+                Dreamspell name: {reading.galacticTone.name}
+              </p>
               <p className="text-[var(--parchment-dim)] leading-relaxed mb-5">{reading.galacticTone.meaning}</p>
               <div className="flex flex-wrap gap-2">
                 {reading.galacticTone.keywords.map((keyword, index) => (

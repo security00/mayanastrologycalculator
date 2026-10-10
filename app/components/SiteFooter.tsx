@@ -35,6 +35,8 @@ export default function SiteFooter() {
               <li><Link href="/mayan-sign-calculator" className="transition-colors hover:text-[var(--gold-bright)]">Mayan Sign Calculator</Link></li>
               <li><Link href="/day-signs" className="transition-colors hover:text-[var(--gold-bright)]">20 Day Signs</Link></li>
               <li><Link href="/galactic-tones" className="transition-colors hover:text-[var(--gold-bright)]">13 Galactic Tones</Link></li>
+              <li><Link href="/dreamspell-vs-traditional-maya-calendar" className="transition-colors hover:text-[var(--gold-bright)]">Dreamspell vs Traditional</Link></li>
+              <li><Link href="/reports" className="transition-colors hover:text-[var(--gold-bright)]">Reports</Link></li>
               <li><Link href="/about" className="transition-colors hover:text-[var(--gold-bright)]">About Mayan Calendar</Link></li>
               <li><Link href="/methodology" className="transition-colors hover:text-[var(--gold-bright)]">Methodology &amp; Sources</Link></li>
             </ul>

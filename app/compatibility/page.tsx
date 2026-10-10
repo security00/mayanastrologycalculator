@@ -59,20 +59,7 @@ export default function CompatibilityPage() {
         </PageHero>
 
         <p className="mb-8 text-sm text-[var(--parchment-dim)]">
-          Preview the paid 11-page pair report before you decide.{' '}
-          <Link href="/sample-compatibility-report" className="link-gold font-semibold">
-            Open the sample report
-          </Link>
-          {' '}or{' '}
-          <a
-            href="/samples/mayan-compatibility-report-sample.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-gold font-semibold"
-          >
-            view the complete PDF
-          </a>
-          . The free reading stays useful on its own.
+          The free reading stays useful on its own.
         </p>
 
         <Suspense fallback={<p className="mb-8 text-sm text-[var(--parchment-dim)]">Loading the pair calculator…</p>}>

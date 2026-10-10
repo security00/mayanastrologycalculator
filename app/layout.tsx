@@ -33,9 +33,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL('https://mayanastrologycalculator.com'),
-  alternates: {
-    canonical: 'https://mayanastrologycalculator.com',
-  },
   openGraph: {
     title: "Mayan Astrology Calculator - Free Tzolk'in Date Calculator",
     description: "Calculate your Mayan astrology with a free Tzolk'in date calculator. Reveal your Nawal day sign and Galactic Tone with accurate Mayan calendar conversion.",

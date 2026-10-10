@@ -3,11 +3,18 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { calculateTzolkinDate, validateDate } from '../lib/mayan-calculator';
+import { TrackedSampleLink } from './content/SampleAction';
 
 type BirthDateCalculatorProps = {
   title?: string;
   description?: string;
   buttonLabel?: string;
+  sampleCta?: {
+    href: string;
+    label: string;
+    helper?: string;
+    placement: string;
+  };
 };
 
 type AnalyticsWindow = Window & {
@@ -18,6 +25,7 @@ export default function BirthDateCalculator({
   title = 'Mayan Astrology Calculator',
   description = "Enter your birth date to calculate your Tzolk'in signature",
   buttonLabel = 'Calculate My Mayan Astrology',
+  sampleCta,
 }: BirthDateCalculatorProps) {
   const router = useRouter();
   const [day, setDay] = useState('');
@@ -128,6 +136,15 @@ export default function BirthDateCalculator({
       >
         {isCalculating ? 'Calculating your Mayan sign…' : buttonLabel}
       </button>
+
+      {sampleCta && (
+        <div className="sample-cta !justify-center">
+          <TrackedSampleLink href={sampleCta.href} placement={sampleCta.placement}>
+            {sampleCta.label}
+          </TrackedSampleLink>
+          {sampleCta.helper && <span className="basis-full text-center text-xs text-[var(--parchment-faint)]">{sampleCta.helper}</span>}
+        </div>
+      )}
 
       <p className="text-center text-xs text-[var(--parchment-faint)] mt-4 tracking-wide">
         Free instant calculation • No registration required

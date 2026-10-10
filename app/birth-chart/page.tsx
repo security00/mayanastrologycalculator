@@ -43,6 +43,12 @@ export default function BirthChartPage() {
             title="Generate Your Mayan Birth Chart"
             description="Enter your birth date to reveal your Nawal sign, Galactic Tone, and Tzolk'in profile."
             buttonLabel="Generate My Birth Chart"
+            sampleCta={{
+              href: '/sample-report',
+              label: 'See a full sample report first →',
+              helper: 'The free result comes first. The 11-page report is optional ($7).',
+              placement: 'birth_chart_calculator',
+            }}
           />
         </div>
 

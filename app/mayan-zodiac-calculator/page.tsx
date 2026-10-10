@@ -99,6 +99,12 @@ export default function MayanZodiacCalculatorPage() {
             title="Mayan Zodiac Sign Calculator"
             description="Enter your birth date to find your Nawal day sign and Galactic Tone."
             buttonLabel="Find My Mayan Zodiac Sign"
+            sampleCta={{
+              href: '/sample-report',
+              label: 'See a full sample report first →',
+              helper: 'The free result comes first. The 11-page report is optional ($7).',
+              placement: 'zodiac_calculator',
+            }}
           />
         </div>
 
@@ -124,7 +130,7 @@ export default function MayanZodiacCalculatorPage() {
                 <h3 className="text-2xl font-display text-[var(--parchment)] mb-2">{sign.name}</h3>
                 <p className="text-[var(--parchment-dim)] mb-4">{sign.meaning}</p>
                 <p className="text-sm text-[var(--parchment-dim)]">
-                  {sign.element} element, {sign.direction} direction, {sign.color} color
+                  {sign.element} element (modern convention), {sign.direction} direction, {sign.color} · Dreamspell color
                 </p>
               </article>
             ))}

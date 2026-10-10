@@ -31,8 +31,8 @@ export default function ReportSuccessPage() {
             <h2 className="font-display text-[var(--parchment)] mb-2">Need help?</h2>
             <p className="text-[var(--parchment-dim)] mb-3">
               If you made a typo, used the wrong email, or have a question about your order, contact us
-              and include your Stripe checkout email. Unusable or undelivered reports are covered by our
-              7-day replacement-or-refund promise.
+              and include your Stripe checkout email. Reports are delivered within a few minutes. If birth
+              details were entered wrong, one free correction within 7 days.
             </p>
             <a
               href="mailto:support@mayanastrologycalculator.com?subject=Full%20Mayan%20birth%20chart%20report%20order"

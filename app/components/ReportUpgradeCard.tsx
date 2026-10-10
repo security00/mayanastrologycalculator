@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
+import { REPORT_PRODUCT, reportTermsNote } from '../lib/report-product';
 import { getReportOfferMetadata, type ReportOfferVariant } from '../lib/report-experiment';
 import GoogleEmailSignIn from './GoogleEmailSignIn';
 
@@ -82,7 +82,7 @@ export default function ReportUpgradeCard({
     return () => observer.disconnect();
   }, [galacticTone, nawal, offerMetadata.offerVersion, offerMetadata.reportVersion, offerVariant]);
 
-  const trackSampleClick = () => {
+  const trackSampleClick = (href: string) => {
     const analyticsWindow = window as AnalyticsWindow;
     analyticsWindow.gtag?.('event', 'sample_report_click', {
       report_type: REPORT_PRODUCT.code,
@@ -93,6 +93,8 @@ export default function ReportUpgradeCard({
       experiment_name: 'report_transparency_v1',
       experiment_variant: offerVariant,
       report_version: offerMetadata.reportVersion,
+      placement: 'result_paid_panel',
+      target: href.includes('.pdf') ? 'pdf' : 'html',
     });
   };
 
@@ -149,19 +151,29 @@ export default function ReportUpgradeCard({
                 Check the delivery consent box to continue.
               </span>
             )}
-            <a
-              href={isTransparentOffer
-                ? '/samples/personal-mayan-signature-report-sample-transparent-v3.pdf'
-                : '/samples/personal-mayan-signature-report-sample.pdf'}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={trackSampleClick}
-              className="ml-0 mt-4 inline-block font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white sm:ml-5 sm:mt-0"
-            >
-              View the complete sample PDF ↗
-            </a>
+            <span className="ml-0 mt-4 inline-flex flex-col gap-2 sm:ml-5 sm:mt-0 sm:inline-flex sm:flex-row sm:items-center sm:gap-4">
+              <a
+                href="/sample-report"
+                onClick={() => trackSampleClick('/sample-report')}
+                className="font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white"
+              >
+                See a full sample report first →
+              </a>
+              <a
+                href="/samples/personal-mayan-signature-report-sample-transparent-v3.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackSampleClick('/samples/personal-mayan-signature-report-sample-transparent-v3.pdf')}
+                className="font-semibold text-[#f6dc9f] underline decoration-[#d4a24e]/60 underline-offset-4 hover:text-white"
+              >
+                Open the 11-page sample PDF ↗
+              </a>
+            </span>
             <p className="mt-4 text-sm text-orange-100/80">
-              One-time payment · {reportDeliveryCopy} · 7-day delivery guarantee
+              Every page of a real report, generated for 1 January 2000.
+            </p>
+            <p className="mt-2 text-sm text-orange-100/80">
+              One-time payment. {reportTermsNote}
             </p>
           </div>
         </div>
@@ -206,7 +218,7 @@ export default function ReportUpgradeCard({
         <div className="grid grid-cols-1 gap-3 text-sm text-[var(--parchment-dim)] sm:grid-cols-3">
           <p><strong className="text-[var(--parchment)]">Secure:</strong> Stripe processes the payment.</p>
           <p><strong className="text-[var(--parchment)]">Private:</strong> Your PDF is delivered to your checkout email.</p>
-          <p><strong className="text-[var(--parchment)]">Protected:</strong> Unusable or undelivered reports are covered for 7 days.</p>
+          <p><strong className="text-[var(--parchment)]">Correction:</strong> If birth details were entered wrong, one free correction within 7 days.</p>
         </div>
         <p className="mt-4 text-xs text-[var(--parchment-faint)]">
           The report is a reflective interpretation, not scientific, medical, legal, financial, or psychological advice.{' '}

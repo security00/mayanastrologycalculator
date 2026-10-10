@@ -1,9 +1,15 @@
-﻿import BirthDateCalculator from './components/BirthDateCalculator';
+﻿import type { Metadata } from 'next';
+import BirthDateCalculator from './components/BirthDateCalculator';
+import { TrackedSampleLink } from './components/content/SampleAction';
 import TzolkinWheel from './components/decor/TzolkinWheel';
 import GrecaBand from './components/decor/GrecaBand';
 import GlyphMark from './components/decor/GlyphMark';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://mayanastrologycalculator.com' },
+};
 
 const toolCards = [
   {
@@ -89,7 +95,13 @@ export default function Home() {
 
             <div className="relative">
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-[24rem] w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--ember)] opacity-[0.08] blur-3xl" />
-              <BirthDateCalculator />
+              <BirthDateCalculator
+                sampleCta={{
+                  href: '/sample-report',
+                  label: 'Free result first. Want more? See what the $7 report looks like →',
+                  placement: 'home_calculator',
+                }}
+              />
             </div>
           </div>
         </section>
@@ -199,6 +211,14 @@ export default function Home() {
                 <Link href={card.href} className="link-gold text-sm">
                   {card.cta} →
                 </Link>
+                {card.href === '/compatibility' && (
+                  <span className="mt-3 block">
+                    <TrackedSampleLink href="/sample-compatibility-report" placement="home_explore_pair">
+                      See a sample pair report →
+                    </TrackedSampleLink>
+                    <span className="mt-1 block text-xs text-[var(--parchment-faint)]">11 pages for two birth dates · $12</span>
+                  </span>
+                )}
               </div>
             ))}
           </div>
