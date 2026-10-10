@@ -2,9 +2,9 @@
 slug: men
 url: /day-signs/men
 canonical: https://mayanastrologycalculator.com/day-signs/men
-title: "Men (Tz'ikin) Maya Day Sign: The Bird Day, Glyph & Upcoming Dates"
+title: "Men (Tz'ikin) Maya Day Sign: Bird Glyph & Dates"
 h1: "Men (Tz'ikin): The Bird Day, Fifteenth Sign of the Maya Calendar"
-meta_description: "Men (K'iche' Tz'ikin) is the 15th Maya day sign: a glyph that began as the Principal Bird Deity, why it is called \"Eagle\", Tz'ikin as the \"most excellent of days\", Dreamspell's \"Blue Eagle\", and dates."
+meta_description: "Men (K'iche' Tz'ikin) is the 15th Maya day sign: a glyph that began as the Principal Bird Deity, later bird readings, and upcoming dates."
 breadcrumb: "Home › Day Signs › Men"
 position: 15
 prev: /day-signs/ix
@@ -108,7 +108,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 24 Oct 2026 | 2 Men | 8 Sak | Kin 59, Blue Resonant Storm |
+| 24 Oct 2026 | 2 Men | 8 Sak' | Kin 59, Blue Resonant Storm |
 | 13 Nov 2026 | 9 Men | 8 Keh | Kin 79, Blue Magnetic Storm |
 | 3 Dec 2026 | 3 Men | 8 Mak | Kin 99, Blue Galactic Storm |
 | 23 Dec 2026 | 10 Men | 8 K'ank'in | Kin 119, Blue Lunar Storm |

@@ -21,7 +21,7 @@ export const DAY_SIGN_DISPLAY = Object.freeze([
   { slug: 'ben', name: 'Ben', colonial: 'Ben' },
   { slug: 'ix', name: 'Ix', colonial: 'Ix' },
   { slug: 'men', name: 'Men', colonial: 'Men' },
-  { slug: 'kib', name: "K'ib", colonial: 'Cib' },
+  { slug: 'kib', name: 'Kib', colonial: 'Cib' },
   { slug: 'kaban', name: 'Kaban', colonial: 'Caban' },
   { slug: 'etznab', name: "Etz'nab", colonial: 'Etznab' },
   { slug: 'kawak', name: 'Kawak', colonial: 'Cauac' },
@@ -30,7 +30,7 @@ export const DAY_SIGN_DISPLAY = Object.freeze([
 
 export const HAAB_MONTHS = Object.freeze([
   'Pop', 'Wo', 'Sip', "Sotz'", 'Sek', 'Xul', "Yaxk'in", 'Mol', "Ch'en",
-  'Yax', 'Sak', 'Keh', 'Mak', "K'ank'in", 'Muwan', 'Pax', "K'ayab", "Kumk'u",
+  'Yax', "Sak'", 'Keh', 'Mak', "K'ank'in", 'Muwan', 'Pax', "K'ayab", "Kumk'u",
 ]);
 
 export const DREAMSPELL_TONE_NAMES = Object.freeze([

@@ -2,9 +2,9 @@
 slug: muluk
 url: /day-signs/muluk
 canonical: https://mayanastrologycalculator.com/day-signs/muluk
-title: "Muluk (Muluc, Toj) Maya Day Sign: The Jar, Payment & Dates"
+title: "Muluk (Toj) Maya Day Sign: The Jar, Payment & Dates"
 h1: "Muluk (Toj): The Jar Day, Ninth Sign of the Maya Calendar"
-meta_description: "Muluk (K'iche' Toj) is the 9th Maya day sign: a glyph that began as an inverted jar, why \"Water\" is a Mexican name for it, Toj as payment, Dreamspell's \"Red Moon\", and upcoming dates."
+meta_description: "Muluk (K'iche' Toj) is the 9th Maya day sign: inverted-jar glyph, payment and offering associations, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Muluk"
 position: 9
 prev: /day-signs/lamat
@@ -104,7 +104,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 18 Oct 2026 | 9 Muluk | 2 Sak | Kin 53, Red Magnetic Skywalker |
+| 18 Oct 2026 | 9 Muluk | 2 Sak' | Kin 53, Red Magnetic Skywalker |
 | 7 Nov 2026 | 3 Muluk | 2 Keh | Kin 73, Red Galactic Skywalker |
 | 27 Nov 2026 | 10 Muluk | 2 Mak | Kin 93, Red Lunar Skywalker |
 | 17 Dec 2026 | 4 Muluk | 2 K'ank'in | Kin 113, Red Solar Skywalker |

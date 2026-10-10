@@ -2,9 +2,9 @@
 slug: ben
 url: /day-signs/ben
 canonical: https://mayanastrologycalculator.com/day-signs/ben
-title: "Ben (Aj) Maya Day Sign: Young Maize, Not Just \"Reed\" | Dates"
+title: "Ben (Aj) Maya Day Sign: Young Maize, Dates"
 h1: "Ben (Aj): The Young Maize Day, Thirteenth Sign of the Maya Calendar"
-meta_description: "Ben (K'iche' Aj) is the 13th Maya day sign: a glyph that began as a maize cob on the Maize God's head, why \"Reed\" is a later reading, Dreamspell's \"Red Skywalker\", and upcoming Ben days."
+meta_description: "Ben (K'iche' Aj) is the 13th Maya day sign: a glyph that began as maize on a stalk—not simply \"reed\"—and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Ben"
 position: 13
 prev: /day-signs/eb
@@ -107,7 +107,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 22 Oct 2026 | 13 Ben | 6 Sak | Kin 57, Red Overtone Earth |
+| 22 Oct 2026 | 13 Ben | 6 Sak' | Kin 57, Red Overtone Earth |
 | 11 Nov 2026 | 7 Ben | 6 Keh | Kin 77, Red Crystal Earth |
 | 1 Dec 2026 | 1 Ben | 6 Mak | Kin 97, Red Rhythmic Earth |
 | 21 Dec 2026 | 8 Ben | 6 K'ank'in | Kin 117, Red Cosmic Earth |

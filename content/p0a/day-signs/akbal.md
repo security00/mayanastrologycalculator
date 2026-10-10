@@ -2,9 +2,9 @@
 slug: akbal
 url: /day-signs/akbal
 canonical: https://mayanastrologycalculator.com/day-signs/akbal
-title: "Ak'bal (Akbal, Aq'ab'al) Maya Day Sign: Night & Dawn"
+title: "Ak'bal (Aq'ab'al) Maya Day Sign: Night & Dawn"
 h1: "Ak'bal (Aq'ab'al): The Night Day, Third Sign of the Maya Calendar"
-meta_description: "Ak'bal (K'iche' Aq'ab'al) is the 3rd Maya day sign: \"night, darkness\" in Classic script, \"dawn\" for K'iche' daykeepers. Dreamspell's \"Blue Night\" and upcoming Ak'bal days."
+meta_description: "Ak'bal (K'iche' Aq'ab'al) is the 3rd Maya day sign: night and darkness in Classical Yucatec, dawn associations, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Ak'bal"
 position: 3
 prev: /day-signs/ik
@@ -105,7 +105,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
 | 12 Oct 2026 | 3 Ak'bal | 16 Yax | Kin 47, Blue Galactic Hand |
-| 1 Nov 2026 | 10 Ak'bal | 16 Sak | Kin 67, Blue Lunar Hand |
+| 1 Nov 2026 | 10 Ak'bal | 16 Sak' | Kin 67, Blue Lunar Hand |
 | 21 Nov 2026 | 4 Ak'bal | 16 Keh | Kin 87, Blue Solar Hand |
 | 11 Dec 2026 | 11 Ak'bal | 16 Mak | Kin 107, Blue Electric Hand |
 | 31 Dec 2026 | 5 Ak'bal | 16 K'ank'in | Kin 127, Blue Planetary Hand |

@@ -7,7 +7,6 @@ import {
   COMPATIBILITY_ANALYTICS_ITEM,
   COMPATIBILITY_PAID_SECTIONS,
   COMPATIBILITY_PRODUCT,
-  compatibilityDeliveryCopy,
 } from '../lib/mayan-compatibility';
 import GoogleEmailSignIn from './GoogleEmailSignIn';
 
@@ -210,7 +209,7 @@ export default function CompatibilityUpgradeCard({
               A real pair report for 11 Ik&apos; + 4 Ajaw.
             </p>
             <p className="mt-2 text-sm text-orange-100/80">
-              One-time payment · {compatibilityDeliveryCopy} · 7-day delivery guarantee
+              One-time payment. Reports are delivered within a few minutes. If birth details were entered wrong, one free correction within 7 days.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <Link
@@ -270,7 +269,7 @@ export default function CompatibilityUpgradeCard({
         <div className="grid grid-cols-1 gap-3 text-sm text-[var(--parchment-dim)] sm:grid-cols-3">
           <p><strong className="text-[var(--parchment)]">Secure:</strong> Stripe processes the payment.</p>
           <p><strong className="text-[var(--parchment)]">Private:</strong> Your PDF is delivered to your checkout email.</p>
-          <p><strong className="text-[var(--parchment)]">Protected:</strong> Unusable or undelivered reports are covered for 7 days.</p>
+          <p><strong className="text-[var(--parchment)]">Correction:</strong> If birth details were entered wrong, one free correction within 7 days.</p>
         </div>
         <p className="mt-4 text-xs text-[var(--parchment-faint)]">
           The report is a reflective interpretation, not scientific, medical, legal, financial, or psychological advice.{' '}

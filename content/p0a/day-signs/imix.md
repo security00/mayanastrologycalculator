@@ -4,7 +4,7 @@ url: /day-signs/imix
 canonical: https://mayanastrologycalculator.com/day-signs/imix
 title: "Imix (Imox) Maya Day Sign: Meaning, Glyph & Dates"
 h1: "Imix (Imox): The First Day Sign of the Maya Calendar"
-meta_description: "Imix (K'iche' Imox) is the first of the 20 Maya day signs. What the waterlily glyph shows, the crocodile debate, Dreamspell's \"Red Dragon\", and upcoming Imix days."
+meta_description: "Imix (K'iche' Imox) is the first of the 20 Maya day signs: waterlily glyph, traditional associations, Dreamspell alias notes, and upcoming dates."
 breadcrumb: "Home › Day Signs › Imix"
 position: 1
 prev: /day-signs/ajaw
@@ -111,7 +111,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
 | 10 Oct 2026 | 1 Imix | 14 Yax | Kin 45, Red Rhythmic Serpent |
-| 30 Oct 2026 | 8 Imix | 14 Sak | Kin 65, Red Cosmic Serpent |
+| 30 Oct 2026 | 8 Imix | 14 Sak' | Kin 65, Red Cosmic Serpent |
 | 19 Nov 2026 | 2 Imix | 14 Keh | Kin 85, Red Resonant Serpent |
 | 9 Dec 2026 | 9 Imix | 14 Mak | Kin 105, Red Magnetic Serpent |
 | 29 Dec 2026 | 3 Imix | 14 K'ank'in | Kin 125, Red Galactic Serpent |

@@ -2,9 +2,9 @@
 slug: chikchan
 url: /day-signs/chikchan
 canonical: https://mayanastrologycalculator.com/day-signs/chikchan
-title: "Chikchan (Chicchan, Kan) Maya Day Sign: The Serpent Day"
+title: "Chikchan (Kan) Maya Day Sign: The Serpent Day"
 h1: "Chikchan (Kan): The Serpent Day, Fifth Sign of the Maya Calendar"
-meta_description: "Chikchan (K'iche' Kan) is the 5th Maya day sign: Ch'orti' rain serpents, snake markings in the glyph, the K'iche' day Kan, Dreamspell's \"Red Serpent\", and upcoming Chikchan days."
+meta_description: "Chikchan (K'iche' Kan) is the 5th Maya day sign: serpent associations in highland tradition, glyph notes, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Chikchan"
 position: 5
 prev: /day-signs/kan
@@ -106,7 +106,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
 | 14 Oct 2026 | 5 Chikchan | 18 Yax | Kin 49, Red Planetary Moon |
-| 3 Nov 2026 | 12 Chikchan | 18 Sak | Kin 69, Red Self-Existing Moon |
+| 3 Nov 2026 | 12 Chikchan | 18 Sak' | Kin 69, Red Self-Existing Moon |
 | 23 Nov 2026 | 6 Chikchan | 18 Keh | Kin 89, Red Spectral Moon |
 | 13 Dec 2026 | 13 Chikchan | 18 Mak | Kin 109, Red Overtone Moon |
 | 2 Jan 2027 | 7 Chikchan | 18 K'ank'in | Kin 129, Red Crystal Moon |

@@ -264,7 +264,7 @@ export const DAY_SIGNS = [
   {
     name: "Cib",
     spanish: "Búho",
-    mayan: "Kib'",
+    mayan: "Kib",
     meaning: "Wax (K'iche' Ajmaq)",
     element: "Water",
     direction: "South",

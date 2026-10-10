@@ -2,9 +2,9 @@
 slug: lamat
 url: /day-signs/lamat
 canonical: https://mayanastrologycalculator.com/day-signs/lamat
-title: "Lamat (Q'anil) Maya Day Sign: Venus Star, Ripe Maize & Dates"
+title: "Lamat (Q'anil) Maya Day Sign: Venus, Maize & Dates"
 h1: "Lamat (Q'anil): The Star Day, Eighth Sign of the Maya Calendar"
-meta_description: "Lamat (K'iche' Q'anil) is the 8th Maya day sign: a glyph that is the sign for Venus, the K'iche' day of ripe maize, why \"Rabbit\" comes from the Aztec calendar, Dreamspell's \"Yellow Star\", and dates."
+meta_description: "Lamat (K'iche' Q'anil) is the 8th Maya day sign: Venus-star glyph, ripe-maize readings, traditional notes, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Lamat"
 position: 8
 prev: /day-signs/manik
@@ -108,7 +108,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 17 Oct 2026 | 8 Lamat | 1 Sak | Kin 52, Yellow Cosmic Human |
+| 17 Oct 2026 | 8 Lamat | 1 Sak' | Kin 52, Yellow Cosmic Human |
 | 6 Nov 2026 | 2 Lamat | 1 Keh | Kin 72, Yellow Resonant Human |
 | 26 Nov 2026 | 9 Lamat | 1 Mak | Kin 92, Yellow Magnetic Human |
 | 16 Dec 2026 | 3 Lamat | 1 K'ank'in | Kin 112, Yellow Galactic Human |

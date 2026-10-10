@@ -2,9 +2,9 @@
 slug: day-signs
 url: /day-signs
 canonical: https://mayanastrologycalculator.com/day-signs
-title: "The 20 Maya Day Signs: Names, Meanings & Glyphs (Traditional Count)"
+title: "The 20 Maya Day Signs: Names, Meanings & Glyphs"
 h1: "The 20 Maya Day Signs"
-meta_description: "All 20 day signs of the 260-day Maya calendar, with Yucatec and K'iche' names, what each name and glyph points to, which English labels are borrowed, and how they differ from Dreamspell's 20 seals."
+meta_description: "All 20 day signs of the 260-day Maya calendar, with Yucatec and K'iche' names, glyph notes, and upcoming dates. Traditional count (GMT 584283)."
 breadcrumb: "Home › Day Signs"
 byline: "Prepared by the Mayan Astrology Calculator editors · Sources below"
 reviewed: "2026-10-10"

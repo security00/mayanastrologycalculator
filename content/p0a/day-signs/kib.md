@@ -2,9 +2,9 @@
 slug: kib
 url: /day-signs/kib
 canonical: https://mayanastrologycalculator.com/day-signs/kib
-title: "Kib (Ajmaq) Maya Day Sign: Wax, Ancestors & Upcoming Dates"
+title: "Kib (Ajmaq) Maya Day Sign: Wax, Ancestors & Dates"
 h1: "Kib (Ajmaq): The Sixteenth Sign of the Maya Calendar"
-meta_description: "Kib (K'iche' Ajmaq) is the 16th Maya day sign: \"wax\" in Yucatec, a K'iche' day of ancestors and penitence, why \"Owl\" has no clear source, Dreamspell's \"Yellow Warrior\", and upcoming Kib days."
+meta_description: "Kib (K'iche' Ajmaq) is the 16th Maya day sign: Yucatec \"wax,\" highland ancestor readings; \"Owl\" has no source; upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Kib"
 position: 16
 prev: /day-signs/men
@@ -107,7 +107,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 25 Oct 2026 | 3 Kib | 9 Sak | Kin 60, Yellow Galactic Sun |
+| 25 Oct 2026 | 3 Kib | 9 Sak' | Kin 60, Yellow Galactic Sun |
 | 14 Nov 2026 | 10 Kib | 9 Keh | Kin 80, Yellow Lunar Sun |
 | 4 Dec 2026 | 4 Kib | 9 Mak | Kin 100, Yellow Solar Sun |
 | 24 Dec 2026 | 11 Kib | 9 K'ank'in | Kin 120, Yellow Electric Sun |

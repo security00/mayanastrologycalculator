@@ -2,9 +2,9 @@
 slug: ok
 url: /day-signs/ok
 canonical: https://mayanastrologycalculator.com/day-signs/ok
-title: "Ok (Oc, Tz'i') Maya Day Sign: The Dog Day, Meaning & Dates"
+title: "Ok (Tz'i') Maya Day Sign: The Dog Day, Meaning & Dates"
 h1: "Ok (Tz'i'): The Dog Day, Tenth Sign of the Maya Calendar"
-meta_description: "Ok (K'iche' Tz'i') is the 10th Maya day sign: the dog that guides the dead and the setting sun, the K'iche' word for dog, Dreamspell's \"White Wizard\", and upcoming Ok days."
+meta_description: "Ok (K'iche' Tz'i') is the 10th Maya day sign: the dog that guides the dead, traditional associations, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Ok"
 position: 10
 prev: /day-signs/muluk
@@ -105,7 +105,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 19 Oct 2026 | 10 Ok | 3 Sak | Kin 54, White Lunar Wizard |
+| 19 Oct 2026 | 10 Ok | 3 Sak' | Kin 54, White Lunar Wizard |
 | 8 Nov 2026 | 4 Ok | 3 Keh | Kin 74, White Solar Wizard |
 | 28 Nov 2026 | 11 Ok | 3 Mak | Kin 94, White Electric Wizard |
 | 18 Dec 2026 | 5 Ok | 3 K'ank'in | Kin 114, White Planetary Wizard |

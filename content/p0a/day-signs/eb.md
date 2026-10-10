@@ -2,9 +2,9 @@
 slug: eb
 url: /day-signs/eb
 canonical: https://mayanastrologycalculator.com/day-signs/eb
-title: "Eb (E) Maya Day Sign: Meaning, Glyph, Year Bearer & Dates"
+title: "Eb (E) Maya Day Sign: Meaning, Glyph, Year Bearer"
 h1: "Eb (E): The Twelfth Sign of the Maya Calendar"
-meta_description: "Eb (K'iche' E) is the 12th Maya day sign: a jawbone glyph with rain symbols, the K'iche' word for \"tooth\", E as a year bearer, why \"Road\" has no clear source, Dreamspell's \"Yellow Human\", and dates."
+meta_description: "Eb (K'iche' E) is the 12th Maya day sign: jawbone glyph with rain marks, year-bearer role, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Eb"
 position: 12
 prev: /day-signs/chuwen
@@ -109,7 +109,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 21 Oct 2026 | 12 Eb | 5 Sak | Kin 56, Yellow Self-Existing Warrior |
+| 21 Oct 2026 | 12 Eb | 5 Sak' | Kin 56, Yellow Self-Existing Warrior |
 | 10 Nov 2026 | 6 Eb | 5 Keh | Kin 76, Yellow Spectral Warrior |
 | 30 Nov 2026 | 13 Eb | 5 Mak | Kin 96, Yellow Overtone Warrior |
 | 20 Dec 2026 | 7 Eb | 5 K'ank'in | Kin 116, Yellow Crystal Warrior |

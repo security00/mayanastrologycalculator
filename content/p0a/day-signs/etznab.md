@@ -2,9 +2,9 @@
 slug: etznab
 url: /day-signs/etznab
 canonical: https://mayanastrologycalculator.com/day-signs/etznab
-title: "Etz'nab (Tijax) Maya Day Sign: The Flint Blade, Meaning & Dates"
+title: "Etz'nab (Tijax) Maya Day Sign: Flint Blade & Dates"
 h1: "Etz'nab (Tijax): The Flint Day, Eighteenth Sign of the Maya Calendar"
-meta_description: "Etz'nab (K'iche' Tijax) is the 18th Maya day sign: a pressure-flaked flint blade, a healer's tool in colonial Yucatán, a K'iche' day for settling quarrels, why \"Mirror\" is Dreamspell, and upcoming dates."
+meta_description: "Etz'nab (K'iche' Tijax) is the 18th Maya day sign: the flint-blade glyph, ritual associations in tradition, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Etz'nab"
 position: 18
 prev: /day-signs/kaban
@@ -105,7 +105,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 27 Oct 2026 | 5 Etz'nab | 11 Sak | Kin 62, White Planetary Wind |
+| 27 Oct 2026 | 5 Etz'nab | 11 Sak' | Kin 62, White Planetary Wind |
 | 16 Nov 2026 | 12 Etz'nab | 11 Keh | Kin 82, White Self-Existing Wind |
 | 6 Dec 2026 | 6 Etz'nab | 11 Mak | Kin 102, White Spectral Wind |
 | 26 Dec 2026 | 13 Etz'nab | 11 K'ank'in | Kin 122, White Overtone Wind |

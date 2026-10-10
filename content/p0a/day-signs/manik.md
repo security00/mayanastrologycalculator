@@ -2,9 +2,9 @@
 slug: manik
 url: /day-signs/manik
 canonical: https://mayanastrologycalculator.com/day-signs/manik
-title: "Manik' (Manik, Kej) Maya Day Sign: The Deer Day & Its Hand Glyph"
+title: "Manik' (Kej) Maya Day Sign: Deer Day & Hand Glyph"
 h1: "Manik' (Kej): The Deer Day, Seventh Sign of the Maya Calendar"
-meta_description: "Manik' (K'iche' Kej) is the 7th Maya day sign: why a deer day is written with a hand, the earliest known Maya date (7 Manik'), Kej as a year bearer, Dreamspell's \"Blue Hand\", and dates."
+meta_description: "Manik' (K'iche' Kej) is the 7th Maya day sign: why a deer day is written with a hand glyph, traditional associations, and upcoming dates."
 breadcrumb: "Home › Day Signs › Manik'"
 position: 7
 prev: /day-signs/kimi
@@ -111,7 +111,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 16 Oct 2026 | 7 Manik' | 0 Sak | Kin 51, Blue Crystal Monkey |
+| 16 Oct 2026 | 7 Manik' | 0 Sak' | Kin 51, Blue Crystal Monkey |
 | 5 Nov 2026 | 1 Manik' | 0 Keh | Kin 71, Blue Rhythmic Monkey |
 | 25 Nov 2026 | 8 Manik' | 0 Mak | Kin 91, Blue Cosmic Monkey |
 | 15 Dec 2026 | 2 Manik' | 0 K'ank'in | Kin 111, Blue Resonant Monkey |

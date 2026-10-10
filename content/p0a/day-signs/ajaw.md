@@ -2,9 +2,9 @@
 slug: ajaw
 url: /day-signs/ajaw
 canonical: https://mayanastrologycalculator.com/day-signs/ajaw
-title: "Ajaw (Ahau) Maya Day Sign: Lord, Period Endings & Dates"
+title: "Ajaw (Ahau) Maya Day Sign: Lord, Period Endings"
 h1: "Ajaw (Junajpu): The Lord Day, Twentieth Sign of the Maya Calendar"
-meta_description: "Ajaw (Ahau; K'iche' Junajpu or Ajpu') is the 20th Maya day sign: the word for \"lord\", the day every Long Count period ends on, the Hero Twin's name, Dreamspell's \"Yellow Sun\", and upcoming Ajaw days."
+meta_description: "Ajaw (Ahau; K'iche' Ajpu') is the 20th Maya day sign: the word for lord, k'atun endings, traditional associations, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Ajaw"
 position: 20
 prev: /day-signs/kawak
@@ -114,7 +114,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 29 Oct 2026 | 7 Ajaw | 13 Sak | Kin 64, Yellow Crystal Seed |
+| 29 Oct 2026 | 7 Ajaw | 13 Sak' | Kin 64, Yellow Crystal Seed |
 | 18 Nov 2026 | 1 Ajaw | 13 Keh | Kin 84, Yellow Rhythmic Seed |
 | 8 Dec 2026 | 8 Ajaw | 13 Mak | Kin 104, Yellow Cosmic Seed |
 | 28 Dec 2026 | 2 Ajaw | 13 K'ank'in | Kin 124, Yellow Resonant Seed |

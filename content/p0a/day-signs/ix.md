@@ -2,9 +2,9 @@
 slug: ix
 url: /day-signs/ix
 canonical: https://mayanastrologycalculator.com/day-signs/ix
-title: "Ix (I'x) Maya Day Sign: The Jaguar Day, Glyph & Upcoming Dates"
+title: "Ix (I'x) Maya Day Sign: Jaguar Glyph & Dates"
 h1: "Ix (I'x): The Jaguar Day, Fourteenth Sign of the Maya Calendar"
-meta_description: "Ix (K'iche' I'x) is the 14th Maya day sign: a glyph that began as the eye of a spotted feline, the jaguar across Mesoamerica, the K'iche' day of mountains and the earth, Dreamspell's \"White Wizard\", and dates."
+meta_description: "Ix (K'iche' I'x) is the 14th Maya day sign: a glyph that began as a spotted animal eye, later read as jaguar; upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Ix"
 position: 14
 prev: /day-signs/ben
@@ -105,7 +105,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 23 Oct 2026 | 1 Ix | 7 Sak | Kin 58, White Rhythmic Mirror |
+| 23 Oct 2026 | 1 Ix | 7 Sak' | Kin 58, White Rhythmic Mirror |
 | 12 Nov 2026 | 8 Ix | 7 Keh | Kin 78, White Cosmic Mirror |
 | 2 Dec 2026 | 2 Ix | 7 Mak | Kin 98, White Resonant Mirror |
 | 22 Dec 2026 | 9 Ix | 7 K'ank'in | Kin 118, White Magnetic Mirror |

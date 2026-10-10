@@ -79,10 +79,6 @@ export const COMPATIBILITY_ANALYTICS_ITEM = {
   quantity: 1,
 } as const;
 
-export const compatibilityDeliveryCopy = process.env.NEXT_PUBLIC_INSTANT_REPORTS !== 'false'
-  ? 'Generated privately and emailed within minutes'
-  : 'Prepared privately and emailed within 24–48 hours';
-
 export function normalizeCompatibilityContext(value: string | null | undefined): CompatibilityContext {
   return normalizeCompatibilityContextJs(value) as CompatibilityContext;
 }

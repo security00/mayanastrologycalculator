@@ -2,9 +2,9 @@
 slug: ik
 url: /day-signs/ik
 canonical: https://mayanastrologycalculator.com/day-signs/ik
-title: "Ik' (Iq') Maya Day Sign: Wind, Breath & Upcoming Dates"
+title: "Ik' (Iq') Maya Day Sign: Wind, Breath & Dates"
 h1: "Ik' (Iq'): The Wind Day, Second Sign of the Maya Calendar"
-meta_description: "Ik' (K'iche' Iq') is the 2nd Maya day sign: the glyph that writes \"wind, breath\", its role as a highland year bearer, Dreamspell's \"White Wind\", and upcoming Ik' days."
+meta_description: "Ik' (K'iche' Iq') is the 2nd Maya day sign: the glyph for wind and breath, year-bearer role, traditional notes, and upcoming dates (GMT 584283)."
 breadcrumb: "Home › Day Signs › Ik'"
 position: 2
 prev: /day-signs/imix
@@ -111,7 +111,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
 | 11 Oct 2026 | 2 Ik' | 15 Yax | Kin 46, White Resonant World-Bridger |
-| 31 Oct 2026 | 9 Ik' | 15 Sak | Kin 66, White Magnetic World-Bridger |
+| 31 Oct 2026 | 9 Ik' | 15 Sak' | Kin 66, White Magnetic World-Bridger |
 | 20 Nov 2026 | 3 Ik' | 15 Keh | Kin 86, White Galactic World-Bridger |
 | 10 Dec 2026 | 10 Ik' | 15 Mak | Kin 106, White Lunar World-Bridger |
 | 30 Dec 2026 | 4 Ik' | 15 K'ank'in | Kin 126, White Solar World-Bridger |

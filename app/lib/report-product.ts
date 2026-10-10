@@ -18,6 +18,6 @@ export const REPORT_ANALYTICS_ITEM = {
   quantity: 1,
 } as const;
 
-export const reportDeliveryCopy = REPORT_PRODUCT.instantDeliveryEnabled
-  ? 'Generated privately and emailed within minutes'
-  : 'Prepared privately and emailed within 24–48 hours';
+export const reportDeliveryCopy = 'Emailed within a few minutes';
+
+export const reportTermsNote = 'Reports are delivered within a few minutes. If birth details were entered wrong, one free correction within 7 days.';

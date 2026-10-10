@@ -2,9 +2,9 @@
 slug: chuwen
 url: /day-signs/chuwen
 canonical: https://mayanastrologycalculator.com/day-signs/chuwen
-title: "Chuwen (Chuen, B'atz') Maya Day Sign: The Monkey Artisan Day"
+title: "Chuwen (B'atz') Maya Day Sign: Monkey Artisan Day"
 h1: "Chuwen (B'atz'): The Monkey Day, Eleventh Sign of the Maya Calendar"
-meta_description: "Chuwen (K'iche' B'atz') is the 11th Maya day sign: the howler monkey, patron of artisans and scribes, the Popol Vuh's One Batz and One Chouen, 8 B'atz', Dreamspell's \"Blue Monkey\", and dates."
+meta_description: "Chuwen (K'iche' B'atz') is the 11th Maya day sign: howler-monkey artisan, trecena and New Year roles, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Chuwen"
 position: 11
 prev: /day-signs/ok
@@ -108,7 +108,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 20 Oct 2026 | 11 Chuwen | 4 Sak | Kin 55, Blue Electric Eagle |
+| 20 Oct 2026 | 11 Chuwen | 4 Sak' | Kin 55, Blue Electric Eagle |
 | 9 Nov 2026 | 5 Chuwen | 4 Keh | Kin 75, Blue Planetary Eagle |
 | 29 Nov 2026 | 12 Chuwen | 4 Mak | Kin 95, Blue Self-Existing Eagle |
 | 19 Dec 2026 | 6 Chuwen | 4 K'ank'in | Kin 115, Blue Spectral Eagle |

@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { gregorianToJdn } from '../shared/maya-calendar-core.js';
 import {
+  DAY_SIGN_DISPLAY,
+  HAAB_MONTHS,
   addDays,
   describeDate,
   describeDreamspell,
@@ -65,6 +67,16 @@ test('29 February is skipped: 2000-03-01 continues the kin after 2000-02-28', ()
   assert.equal(traditional28.tzolkinLabel, '4 Ajaw');
   assert.equal(describeTraditional({ day: 29, month: 2, year: 2000 }).tzolkinLabel, '5 Imix');
   assert.equal(traditionalMar.tzolkinLabel, "6 Ik'");
+});
+
+test('traditional display uses Kib and Sak apostrophe', () => {
+  assert.equal(DAY_SIGN_DISPLAY.find((sign) => sign.slug === 'kib').name, 'Kib');
+  assert.equal(HAAB_MONTHS[10], "Sak'");
+  const kib = describeTraditional({ day: 25, month: 10, year: 2026 });
+  assert.equal(kib.tzolkinLabel, '3 Kib');
+  assert.equal(kib.haab.label, "9 Sak'");
+  const sak = describeTraditional({ day: 23, month: 10, year: 2026 });
+  assert.equal(sak.haab.label, "7 Sak'");
 });
 
 test('a tone-page row uses day 0 of a Haab month', () => {

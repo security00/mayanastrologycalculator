@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { REPORT_PRODUCT, reportDeliveryCopy } from '../lib/report-product';
+import { REPORT_PRODUCT, reportTermsNote } from '../lib/report-product';
 import { getReportOfferMetadata, type ReportOfferVariant } from '../lib/report-experiment';
 import GoogleEmailSignIn from './GoogleEmailSignIn';
 
@@ -173,7 +173,7 @@ export default function ReportUpgradeCard({
               Every page of a real report, generated for 1 January 2000.
             </p>
             <p className="mt-2 text-sm text-orange-100/80">
-              One-time payment · {reportDeliveryCopy} · 7-day delivery guarantee
+              One-time payment. {reportTermsNote}
             </p>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function ReportUpgradeCard({
         <div className="grid grid-cols-1 gap-3 text-sm text-[var(--parchment-dim)] sm:grid-cols-3">
           <p><strong className="text-[var(--parchment)]">Secure:</strong> Stripe processes the payment.</p>
           <p><strong className="text-[var(--parchment)]">Private:</strong> Your PDF is delivered to your checkout email.</p>
-          <p><strong className="text-[var(--parchment)]">Protected:</strong> Unusable or undelivered reports are covered for 7 days.</p>
+          <p><strong className="text-[var(--parchment)]">Correction:</strong> If birth details were entered wrong, one free correction within 7 days.</p>
         </div>
         <p className="mt-4 text-xs text-[var(--parchment-faint)]">
           The report is a reflective interpretation, not scientific, medical, legal, financial, or psychological advice.{' '}

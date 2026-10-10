@@ -2,9 +2,9 @@
 slug: kawak
 url: /day-signs/kawak
 canonical: https://mayanastrologycalculator.com/day-signs/kawak
-title: "Kawak (Kawoq) Maya Day Sign: Storm, Rain & Upcoming Dates"
+title: "Kawak (Kawoq) Maya Day Sign: Storm, Rain & Dates"
 h1: "Kawak (Kawoq): The Storm Day, Nineteenth Sign of the Maya Calendar"
-meta_description: "Kawak (K'iche' Kawoq) is the 19th Maya day sign: names for storm, thunder and rain, a glyph that also writes \"year\", the K'iche' day of the dead's displeasure, Dreamspell's \"Blue Storm\", and dates."
+meta_description: "Kawak (K'iche' Kawoq) is the 19th Maya day sign: storm and rain names, glyph notes, traditional associations, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Kawak"
 position: 19
 prev: /day-signs/etznab
@@ -103,7 +103,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 28 Oct 2026 | 6 Kawak | 12 Sak | Kin 63, Blue Spectral Night |
+| 28 Oct 2026 | 6 Kawak | 12 Sak' | Kin 63, Blue Spectral Night |
 | 17 Nov 2026 | 13 Kawak | 12 Keh | Kin 83, Blue Overtone Night |
 | 7 Dec 2026 | 7 Kawak | 12 Mak | Kin 103, Blue Crystal Night |
 | 27 Dec 2026 | 1 Kawak | 12 K'ank'in | Kin 123, Blue Rhythmic Night |

@@ -2,9 +2,9 @@
 slug: kan
 url: /day-signs/kan
 canonical: https://mayanastrologycalculator.com/day-signs/kan
-title: "K'an (Kan, K'at) Maya Day Sign: Ripe Maize, Meaning & Dates"
+title: "K'an (K'at) Maya Day Sign: Ripe Maize, Meaning & Dates"
 h1: "K'an (K'at): The Ripe Maize Day, Fourth Sign of the Maya Calendar"
-meta_description: "K'an (K'iche' K'at) is the 4th Maya day sign: \"yellow, ripe\", a glyph that began as a maize tamale, and the K'iche' \"net\". Why \"Seed\" is Dreamspell's label, plus upcoming K'an days."
+meta_description: "K'an (K'iche' K'at) is the 4th Maya day sign: yellow, ripe maize; glyph history, traditional associations, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › K'an"
 position: 4
 prev: /day-signs/akbal
@@ -108,7 +108,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
 | 13 Oct 2026 | 4 K'an | 17 Yax | Kin 48, Yellow Solar Star |
-| 2 Nov 2026 | 11 K'an | 17 Sak | Kin 68, Yellow Electric Star |
+| 2 Nov 2026 | 11 K'an | 17 Sak' | Kin 68, Yellow Electric Star |
 | 22 Nov 2026 | 5 K'an | 17 Keh | Kin 88, Yellow Planetary Star |
 | 12 Dec 2026 | 12 K'an | 17 Mak | Kin 108, Yellow Self-Existing Star |
 | 1 Jan 2027 | 6 K'an | 17 K'ank'in | Kin 128, Yellow Spectral Star |

@@ -2,9 +2,9 @@
 slug: kaban
 url: /day-signs/kaban
 canonical: https://mayanastrologycalculator.com/day-signs/kaban
-title: "Kaban (No'j) Maya Day Sign: Earth, Thought & Upcoming Dates"
+title: "Kaban (No'j) Maya Day Sign: Earth, Thought & Dates"
 h1: "Kaban (No'j): The Earth Day, Seventeenth Sign of the Maya Calendar"
-meta_description: "Kaban (K'iche' No'j) is the 17th Maya day sign: the glyph for \"earth\", its origin as a god's painted eye, No'j as a year bearer and day of good thoughts, Dreamspell's \"Red Earth\", and upcoming dates."
+meta_description: "Kaban (K'iche' No'j) is the 17th Maya day sign: the glyph for earth, thought associations in tradition, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Kaban"
 position: 17
 prev: /day-signs/kib
@@ -111,7 +111,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
-| 26 Oct 2026 | 4 Kaban | 10 Sak | Kin 61, Red Solar Dragon |
+| 26 Oct 2026 | 4 Kaban | 10 Sak' | Kin 61, Red Solar Dragon |
 | 15 Nov 2026 | 11 Kaban | 10 Keh | Kin 81, Red Electric Dragon |
 | 5 Dec 2026 | 5 Kaban | 10 Mak | Kin 101, Red Planetary Dragon |
 | 25 Dec 2026 | 12 Kaban | 10 K'ank'in | Kin 121, Red Self-Existing Dragon |

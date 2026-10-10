@@ -2,9 +2,9 @@
 slug: kimi
 url: /day-signs/kimi
 canonical: https://mayanastrologycalculator.com/day-signs/kimi
-title: "Kimi (Cimi, Kame) Maya Day Sign: Death, Ancestors & Dates"
+title: "Kimi (Kame) Maya Day Sign: Death, Ancestors & Dates"
 h1: "Kimi (Kame): The Death Day, Sixth Sign of the Maya Calendar"
-meta_description: "Kimi (K'iche' Kame) is the 6th Maya day sign: the death-god glyph, the Popol Vuh lords One Death and Seven Death, forgiveness in K'iche' practice, Dreamspell's \"World-Bridger\", and dates."
+meta_description: "Kimi (K'iche' Kame) is the 6th Maya day sign: the death-god glyph, ancestor associations in tradition, and upcoming dates under GMT 584283."
 breadcrumb: "Home › Day Signs › Kimi"
 position: 6
 prev: /day-signs/chikchan
@@ -109,7 +109,7 @@ Calculated with the GMT 584283 correlation, the same method as our calculator, a
 | Gregorian date | Tzolk'in (traditional) | Haab' | Dreamspell, for comparison only |
 |---|---|---|---|
 | 15 Oct 2026 | 6 Kimi | 19 Yax | Kin 50, White Spectral Dog |
-| 4 Nov 2026 | 13 Kimi | 19 Sak | Kin 70, White Overtone Dog |
+| 4 Nov 2026 | 13 Kimi | 19 Sak' | Kin 70, White Overtone Dog |
 | 24 Nov 2026 | 7 Kimi | 19 Keh | Kin 90, White Crystal Dog |
 | 14 Dec 2026 | 1 Kimi | 19 Mak | Kin 110, White Rhythmic Dog |
 | 3 Jan 2027 | 8 Kimi | 19 K'ank'in | Kin 130, White Cosmic Dog |
