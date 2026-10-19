@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from 'next';
 import BirthDateCalculator from './components/BirthDateCalculator';
+import { PillarChartAside } from './components/PillarChartLink';
 import { TrackedSampleLink } from './components/content/SampleAction';
 import TzolkinWheel from './components/decor/TzolkinWheel';
 import GrecaBand from './components/decor/GrecaBand';
@@ -221,6 +222,9 @@ export default function Home() {
                 )}
               </div>
             ))}
+          </div>
+          <div className="mt-10">
+            <PillarChartAside placement="home" />
           </div>
         </div>
       </main>

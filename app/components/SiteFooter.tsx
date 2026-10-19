@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import FeaturedBadgeMarquee from './FeaturedBadgeMarquee';
+import { PillarChartLink } from './PillarChartLink';
 import PyramidSilhouette from './decor/PyramidSilhouette';
 
 export default function SiteFooter() {
@@ -52,14 +53,26 @@ export default function SiteFooter() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--gold-dim)]">
                 Friends
               </p>
-              <a
-                href="https://animatephoto.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm transition-colors hover:text-[var(--gold-bright)]"
-              >
-                Animate Photo AI
-              </a>
+              <ul className="space-y-2.5 text-sm">
+                <li>
+                  <a
+                    href="https://animatephoto.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-[var(--gold-bright)]"
+                  >
+                    Animate Photo AI
+                  </a>
+                </li>
+                <li>
+                  <PillarChartLink
+                    placement="footer"
+                    className="transition-colors hover:text-[var(--gold-bright)]"
+                  >
+                    Pillar Chart — Four Pillars (BaZi)
+                  </PillarChartLink>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
