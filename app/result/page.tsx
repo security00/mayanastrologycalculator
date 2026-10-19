@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
 import { displayForColonial } from '../../shared/dual-calendar.js';
+import { PillarChartAside } from '../components/PillarChartLink';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
 import MayanNumeral from '../components/decor/MayanNumeral';
 import GrecaBand from '../components/decor/GrecaBand';
@@ -363,6 +364,10 @@ export default function ResultPage() {
               Today's Energy →
             </Link>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <PillarChartAside placement="result" />
         </div>
       </main>
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-19
+
+- A link to Pillar Chart, a Chinese Four Pillars (BaZi) calculator, in the footer and on the home, birth-chart, and result pages. The Mayan reading stays first. The link opens pillarchart.com in a new tab.
+
 ## 2026-10-10
 
 - Guides for all 20 Maya day signs and all 13 numbers, with upcoming dates.

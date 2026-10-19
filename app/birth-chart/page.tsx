@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import BirthDateCalculator from '../components/BirthDateCalculator';
+import { PillarChartAside } from '../components/PillarChartLink';
 import PageHero from '../components/PageHero';
 
 export const metadata: Metadata = {
@@ -173,6 +174,10 @@ export default function BirthChartPage() {
             </ul>
           </article>
         </section>
+
+        <div className="mt-6">
+          <PillarChartAside placement="birth_chart" />
+        </div>
       </main>
     </div>
   );
