@@ -1,3 +1,6 @@
+/*
+  Strict-Transport-Security: max-age=2592000
+
 /samples/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=3600

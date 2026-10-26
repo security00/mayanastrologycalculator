@@ -22,3 +22,13 @@
 /day-signs/ahau/ /day-signs/ajaw 301
 /day-signs/ahaw /day-signs/ajaw 301
 /day-signs/ahaw/ /day-signs/ajaw 301
+/utm_source=dev.to /?utm_source=dev.to 301
+/utm_source=dev.to/ /?utm_source=dev.to 301
+/utm_source=reddit.com /?utm_source=reddit.com 301
+/utm_source=reddit.com/ /?utm_source=reddit.com 301
+/utm_source%3Ddev.to /?utm_source=dev.to 301
+/utm_source%3Ddev.to/ /?utm_source=dev.to 301
+/utm_source%3Dreddit.com /?utm_source=reddit.com 301
+/utm_source%3Dreddit.com/ /?utm_source=reddit.com 301
+/utm_source=* /?utm_source=:splat 301
+/utm_source%3D* /?utm_source=:splat 301
