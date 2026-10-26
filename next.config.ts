@@ -17,6 +17,21 @@ const legacySignRedirects = [
   permanent: true,
 }));
 
+const mistypedUtmRedirects = [
+  ['/utm_source=dev.to', '/?utm_source=dev.to'],
+  ['/utm_source=dev.to/', '/?utm_source=dev.to'],
+  ['/utm_source=reddit.com', '/?utm_source=reddit.com'],
+  ['/utm_source=reddit.com/', '/?utm_source=reddit.com'],
+  ['/utm_source%3Ddev.to', '/?utm_source=dev.to'],
+  ['/utm_source%3Ddev.to/', '/?utm_source=dev.to'],
+  ['/utm_source%3Dreddit.com', '/?utm_source=reddit.com'],
+  ['/utm_source%3Dreddit.com/', '/?utm_source=reddit.com'],
+].map(([source, destination]) => ({
+  source,
+  destination,
+  statusCode: 301,
+}));
+
 const nextConfig: NextConfig = {
   output: 'export',
   images: {
@@ -26,6 +41,7 @@ const nextConfig: NextConfig = {
     return [
       { source: '/pricing', destination: '/reports', permanent: true },
       ...legacySignRedirects,
+      ...mistypedUtmRedirects,
     ];
   },
 };

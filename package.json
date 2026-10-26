@@ -12,7 +12,7 @@
     "test:compatibility": "node --test tests/mayan-compatibility.test.mjs tests/compatibility-report-engine.test.mjs",
     "test:auth": "node --test tests/auth-session.test.mjs",
     "test:checkout": "node --test tests/checkout-consent.test.mjs tests/compatibility-checkout.test.mjs",
-    "test:content": "node --test tests/dreamspell-converter.test.mjs tests/p0a-content.test.mjs",
+    "test:content": "node --test tests/dreamspell-converter.test.mjs tests/p0a-content.test.mjs tests/gsc-404-redirects.test.mjs",
     "test:export": "node scripts/check-export-redirects.mjs",
     "report:sample": "node scripts/generate-sample-report.mjs",
     "report:sample:compatibility": "node scripts/generate-compatibility-sample-report.mjs"

@@ -10,6 +10,46 @@
       "source": "/mayan-astrology-birth-chart-free/",
       "destination": "/birth-chart",
       "statusCode": 301
+    },
+    {
+      "source": "/utm_source=dev.to",
+      "destination": "/?utm_source=dev.to",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source=dev.to/",
+      "destination": "/?utm_source=dev.to",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source=reddit.com",
+      "destination": "/?utm_source=reddit.com",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source=reddit.com/",
+      "destination": "/?utm_source=reddit.com",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source%3Ddev.to",
+      "destination": "/?utm_source=dev.to",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source%3Ddev.to/",
+      "destination": "/?utm_source=dev.to",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source%3Dreddit.com",
+      "destination": "/?utm_source=reddit.com",
+      "statusCode": 301
+    },
+    {
+      "source": "/utm_source%3Dreddit.com/",
+      "destination": "/?utm_source=reddit.com",
+      "statusCode": 301
     }
   ]
 }
