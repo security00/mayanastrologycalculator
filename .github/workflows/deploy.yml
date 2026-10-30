@@ -37,6 +37,9 @@ jobs:
       - name: Test content calendar
         run: npm run test:content
 
+      - name: Test IndexNow key
+        run: npm run test:indexnow
+
       - name: Validate report Worker bundle
         run: npx wrangler deploy --config wrangler.report-worker.jsonc --dry-run
       
@@ -52,3 +55,11 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy out --project-name=mayanastrologycalculator --commit-dirty=true
+
+      # Best-effort ping after a successful deploy. A failed IndexNow submit
+      # does not fail the deploy. Search Console ownership is still manual.
+      - name: Submit sitemap URLs to IndexNow (non-blocking)
+        continue-on-error: true
+        run: npm run indexnow
+        env:
+          SITE_ORIGIN: https://mayanastrologycalculator.com
