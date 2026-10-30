@@ -464,6 +464,16 @@ body {
   text-underline-offset: 3px;
 }
 
+.content-prose a.btn-ember {
+  color: #fff7ed;
+  text-decoration: none;
+}
+
+.content-prose a.btn-ghost-gold {
+  color: var(--gold-bright);
+  text-decoration: none;
+}
+
 .content-prose a:hover {
   color: #f6dc9f;
 }

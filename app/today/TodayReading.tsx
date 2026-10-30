@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { calculateTzolkinDate } from '../lib/mayan-calculator';
+import { displayForColonial } from '../../shared/dual-calendar.js';
 
 const subscribeToClient = () => () => {};
 
@@ -31,14 +32,21 @@ export default function TodayReading() {
       >
         <p className="text-sm font-semibold text-gold-bright mb-2">Today in your local time</p>
         <h2 className="text-3xl font-display text-[var(--parchment)] mb-3">Calculating today's Tzolk'in day sign…</h2>
-        <p className="text-[var(--parchment-dim)]">
+        <p className="text-[var(--parchment-dim)] mb-4">
           Your current Galactic Tone and Nawal will appear when the page loads.
         </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link href="/day-signs" className="link-gold font-semibold">Day sign hub</Link>
+          <Link href="/galactic-tones" className="link-gold font-semibold">Tone hub</Link>
+        </div>
       </section>
     );
   }
 
   const reading = calculateTzolkinDate(today);
+  const sign = displayForColonial(reading.nawal.name);
+  const signHref = sign ? `/day-signs/${sign.slug}` : '/day-signs';
+  const toneHref = `/galactic-tones/${reading.galacticTone.number}`;
 
   return (
     <section id="today-reading" className="panel rounded-2xl p-6 md:p-8">
@@ -54,13 +62,16 @@ export default function TodayReading() {
             Number {reading.galacticTone.number} · Dreamspell name: {reading.galacticTone.name}
           </h3>
           <p className="text-[var(--parchment-dim)] mb-3">{reading.galacticTone.meaning}</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-4">
             {reading.galacticTone.keywords.map((keyword) => (
               <span key={keyword} className="chip chip-jade">
                 {keyword}
               </span>
             ))}
           </div>
+          <Link href={toneHref} className="link-gold font-semibold">
+            Read tone {reading.galacticTone.number} →
+          </Link>
         </article>
 
         <article className="rounded-xl border border-[var(--gold-line)] bg-[rgb(212_162_78/6%)] p-5">
@@ -82,6 +93,9 @@ export default function TodayReading() {
               <dd className="text-[var(--parchment-dim)]">{reading.nawal.color} · Dreamspell color</dd>
             </div>
           </dl>
+          <Link href={signHref} className="link-gold mt-4 inline-block font-semibold">
+            Read today’s Nawal →
+          </Link>
         </article>
       </div>
 
@@ -96,16 +110,22 @@ export default function TodayReading() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
-          href="/"
+          href="/birth-chart"
           className="btn-ember px-6 py-3 text-center"
         >
-          Calculate Your Birth Sign
+          Calculate my Maya signature
         </Link>
         <Link
-          href="/day-signs"
+          href={signHref}
           className="btn-ghost-gold px-6 py-3 text-center"
         >
-          Read the 20 Day Signs
+          Today’s day sign
+        </Link>
+        <Link
+          href={toneHref}
+          className="btn-ghost-gold px-6 py-3 text-center"
+        >
+          Today’s tone
         </Link>
       </div>
     </section>

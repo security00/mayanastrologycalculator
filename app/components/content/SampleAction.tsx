@@ -21,16 +21,18 @@ export function SampleAction({
   secondaryLabel,
   secondaryHref,
   placement,
+  className = '',
 }: {
   primaryLabel: string;
   primaryHref: string;
   secondaryLabel: string;
   secondaryHref: string;
   placement: string;
+  className?: string;
 }) {
   const sampleLink = secondaryHref.includes('/sample');
   return (
-    <div className="sample-cta">
+    <div className={`sample-cta ${className}`.trim()}>
       <a className="btn-ember inline-block px-6 py-3 text-center" href={primaryHref}>
         {primaryLabel}
       </a>
