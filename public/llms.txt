@@ -10,8 +10,8 @@ For questions about calculations, terminology, evidence, or cultural scope, pref
 
 - [Mayan Astrology Calculator](https://mayanastrologycalculator.com/): Calculate a free Tzolk'in birth signature from a Gregorian birth date and find the corresponding Nawal day sign and tone number.
 - [Today's Mayan Date](https://mayanastrologycalculator.com/today): View the current Tzolk'in date, Nawal day sign, tone number, and a short reflective interpretation.
-- [Mayan Compatibility Calculator](https://mayanastrologycalculator.com/compatibility): Compare two calculated Tzolk'in birth signatures, including their Nawals, tones, elements, directions, and relationship themes. An optional 11-page pair PDF is available after the free reading.
-- [Mayan Birth Chart Calculator](https://mayanastrologycalculator.com/birth-chart): Generate a free overview of a birth date's Nawal day sign, tone, and Tzolk'in energy.
+- [Mayan Compatibility Calculator](https://mayanastrologycalculator.com/compatibility): Compare two calculated Tzolk'in birth signatures, including their Nawals, tones, elements, directions, and relationship themes. The score is a modern interpretive feature, not a historical matching formula. An optional 11-page pair PDF is $12 after the free reading.
+- [Mayan Birth Chart Calculator](https://mayanastrologycalculator.com/birth-chart): Generate a free overview of a birth date's Nawal day sign, tone, and Tzolk'in energy. An optional 11-page personal PDF is $7.
 
 ## Calculation and Interpretation
 
@@ -20,6 +20,8 @@ For questions about calculations, terminology, evidence, or cultural scope, pref
 - [Mayan Astrology Guide](https://mayanastrologycalculator.com/guide): Explain how to read a Nawal day sign, tone, and combined Tzolk'in signature.
 - [20 Nawal Day Signs](https://mayanastrologycalculator.com/day-signs): Reference the names and interpretive themes of the 20 day signs.
 - [13 Galactic Tones](https://mayanastrologycalculator.com/galactic-tones): Reference the modern Dreamspell names and reflective meanings commonly associated with numbers 1 through 13.
+- [Haab' Calendar](https://mayanastrologycalculator.com/haab): Educational explanation of the 365-day Haab' (18 × 20 + five Wayeb' days) and how it differs from the Tzolk'in. This site does not yet calculate Haab' dates.
+- [Maya Year Bearer](https://mayanastrologycalculator.com/year-bearer): Educational explanation of the Tzolk'in day name that carries a Haab' year, with the K'iche' highland four and the later Yucatec four kept in separate sections. No live year-bearer widget yet.
 - [About Mayan Astrology Calculator](https://mayanastrologycalculator.com/about): Background on the site, the Tzolk'in calendar, and the project's educational purpose.
 
 ## Related Calculator Pages

@@ -8,15 +8,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const previousUpdate = new Date("2026-07-13");
   const latestUpdate = new Date("2026-08-10");
   const contentUpdate = new Date("2026-10-10");
+  const waveUpdate = new Date("2026-10-30");
 
   return [
     { url: baseUrl, lastModified: previousUpdate, changeFrequency: "daily", priority: 1 },
-    { url: `${baseUrl}/today`, lastModified: latestUpdate, changeFrequency: "daily", priority: 0.9 },
-    { url: `${baseUrl}/birth-chart`, lastModified: latestUpdate, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${baseUrl}/today`, lastModified: waveUpdate, changeFrequency: "daily", priority: 0.9 },
+    { url: `${baseUrl}/birth-chart`, lastModified: waveUpdate, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-zodiac-calculator`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-calendar-calculator`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-sign-calculator`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${baseUrl}/compatibility`, lastModified: latestUpdate, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${baseUrl}/compatibility`, lastModified: waveUpdate, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${baseUrl}/haab`, lastModified: waveUpdate, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${baseUrl}/year-bearer`, lastModified: waveUpdate, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/guide`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/day-signs`, lastModified: contentUpdate, changeFrequency: "monthly", priority: 0.75 },
     { url: `${baseUrl}/about`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.7 },

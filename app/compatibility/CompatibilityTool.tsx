@@ -9,7 +9,7 @@ import {
   type CompatibilityContext,
 } from '../lib/mayan-compatibility';
 import CompatibilityUpgradeCard from '../components/CompatibilityUpgradeCard';
-import { TrackedSampleLink } from '../components/content/SampleAction';
+import { PairReportPin } from '../components/content/ReportCtaPin';
 import GrecaBand from '../components/decor/GrecaBand';
 
 type BirthDate = {
@@ -312,7 +312,7 @@ export default function CompatibilityTool() {
           Relationship context
         </legend>
         <p className="mb-3 text-sm text-[var(--parchment-dim)]">
-          Choose how these two people are connected. This is required — it changes the language of the reading.
+          Choose how these two people are connected. This is required. The lens changes the wording of the reading, not the underlying modern score.
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {CONTEXT_OPTIONS.map((option) => {
@@ -356,12 +356,12 @@ export default function CompatibilityTool() {
       >
         {submitted && !formMatchesSubmitted ? 'Update the pair reading' : 'Check Mayan Compatibility'}
       </button>
-      <div className="sample-cta !justify-center">
-        <TrackedSampleLink href="/sample-compatibility-report" placement="compatibility_compare">
-          See a sample pair report first →
-        </TrackedSampleLink>
-        <span className="basis-full text-center text-xs text-[var(--parchment-faint)]">Optional 11-page pair PDF · $12 · one-time</span>
-      </div>
+      <PairReportPin
+        placement="compatibility_compare"
+        className="!justify-center"
+        noteClassName="text-center text-sm leading-relaxed text-[var(--parchment-dim)]"
+        trustNote="The free pair reading is complete on its own. The $12 PDF adds longer chapters (pair map, friction & repair, decision filter, seven-day practice)—same modern score layer, more pages."
+      />
       <p className="text-center text-xs text-[var(--parchment-faint)] mt-4 tracking-wide">
         {!canSubmit
           ? 'Enter both birth dates and choose a relationship, then generate the reading.'
