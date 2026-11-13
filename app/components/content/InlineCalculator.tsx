@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { trackEvent } from '../../lib/analytics';
 import { calculateTzolkinDate, GALACTIC_TONES, validateDate } from '../../lib/mayan-calculator';
 import { DAY_SIGN_DISPLAY } from '../../../shared/dual-calendar.js';
 
@@ -53,6 +54,12 @@ export default function InlineCalculator({
       name: sign.name,
       dreamspellName: GALACTIC_TONES[reading.galacticTone.number - 1].name,
       matched: !highlightSlug || sign.slug === highlightSlug,
+    });
+    trackEvent('mayan_calculator_submit', {
+      nawal: reading.nawal.name,
+      galactic_tone: reading.galacticTone.number,
+      placement: window.location.pathname,
+      tool: 'inline',
     });
   };
 

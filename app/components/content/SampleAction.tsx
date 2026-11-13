@@ -1,17 +1,22 @@
 'use client';
 
 import type { ReactNode } from 'react';
-
-type AnalyticsWindow = Window & {
-  gtag?: (command: string, eventName: string, params: Record<string, string>) => void;
-};
+import { reportOfferFromCta, trackEvent } from '../../lib/analytics';
 
 export function trackSampleClick(placement: string, href: string) {
   const target = href.includes('.pdf') ? 'pdf' : 'html';
-  (window as AnalyticsWindow).gtag?.('event', 'sample_report_click', {
+  trackEvent('sample_report_click', {
     placement,
     target,
     report_type: href.includes('compatibility') ? 'compatibility' : 'personal',
+  });
+}
+
+function trackReportCta(placement: string, label: string, href: string) {
+  trackEvent('report_cta_click', {
+    placement,
+    destination: href,
+    ...reportOfferFromCta(label, href),
   });
 }
 
@@ -33,7 +38,11 @@ export function SampleAction({
   const sampleLink = secondaryHref.includes('/sample');
   return (
     <div className={`sample-cta ${className}`.trim()}>
-      <a className="btn-ember inline-block px-6 py-3 text-center" href={primaryHref}>
+      <a
+        className="btn-ember inline-block px-6 py-3 text-center"
+        href={primaryHref}
+        onClick={() => trackReportCta(placement, primaryLabel, primaryHref)}
+      >
         {primaryLabel}
       </a>
       <a

@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { reportOfferFromCta, trackEvent } from '../../lib/analytics';
 import { SampleAction, TrackedSampleLink } from './SampleAction';
 
 const noteClass = 'text-sm leading-relaxed text-[var(--parchment-dim)]';
@@ -33,7 +36,17 @@ export function PersonalReportPin({
       </p>
       <p className={noteClass}>
         Comparing two people?{' '}
-        <Link href="/reports" className="link-gold font-semibold">Get the pair report — $12</Link>
+        <Link
+          href="/reports"
+          className="link-gold font-semibold"
+          onClick={() => trackEvent('report_cta_click', {
+            placement: `${placement}_pair`,
+            destination: '/reports',
+            ...reportOfferFromCta('pair report $12', '/reports'),
+          })}
+        >
+          Get the pair report — $12
+        </Link>
         {' · '}
         <TrackedSampleLink href="/sample-compatibility-report" placement={`${placement}_pair`}>
           See a sample pair report first →

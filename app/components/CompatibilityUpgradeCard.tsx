@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { trackEvent } from '../lib/analytics';
 import { calculateTzolkinDate } from '../lib/mayan-calculator';
 import {
   COMPATIBILITY_ANALYTICS_ITEM,
@@ -61,6 +62,13 @@ export default function CompatibilityUpgradeCard({
           signature_b: signatureB,
           relationship_context: context,
           price_usd: COMPATIBILITY_PRODUCT.priceUsd,
+        });
+        trackEvent('view_item', {
+          currency: 'USD',
+          value: COMPATIBILITY_PRODUCT.priceUsd,
+          items: [COMPATIBILITY_ANALYTICS_ITEM],
+          report_type: COMPATIBILITY_PRODUCT.code,
+          relationship_context: context,
         });
         observer.disconnect();
       },
@@ -124,6 +132,13 @@ export default function CompatibilityUpgradeCard({
         value: COMPATIBILITY_PRODUCT.priceUsd,
         items: [COMPATIBILITY_ANALYTICS_ITEM],
         report_type: COMPATIBILITY_PRODUCT.code,
+        relationship_context: context,
+      });
+      trackEvent('checkout_session_created', {
+        order_id: data.orderId || 'unknown',
+        report_type: COMPATIBILITY_PRODUCT.code,
+        value: COMPATIBILITY_PRODUCT.priceUsd,
+        currency: 'USD',
         relationship_context: context,
       });
 

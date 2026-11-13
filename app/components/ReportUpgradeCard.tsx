@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { REPORT_PRODUCT, reportTermsNote } from '../lib/report-product';
+import { trackEvent } from '../lib/analytics';
+import { REPORT_ANALYTICS_ITEM, REPORT_PRODUCT, reportTermsNote } from '../lib/report-product';
 import { getReportOfferMetadata, type ReportOfferVariant } from '../lib/report-experiment';
 import GoogleEmailSignIn from './GoogleEmailSignIn';
 
@@ -72,6 +73,12 @@ export default function ReportUpgradeCard({
           experiment_name: 'report_transparency_v1',
           experiment_variant: offerVariant,
           report_version: offerMetadata.reportVersion,
+        });
+        trackEvent('view_item', {
+          currency: 'USD',
+          value: REPORT_PRODUCT.priceUsd,
+          items: [REPORT_ANALYTICS_ITEM],
+          report_type: REPORT_PRODUCT.code,
         });
         observer.disconnect();
       },

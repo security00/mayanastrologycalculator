@@ -84,7 +84,9 @@ export default function ReportOrderStatus() {
 
   const trackDownload = () => {
     (window as AnalyticsWindow).gtag?.('event', 'paid_report_download_click', {
-      report_type: REPORT_PRODUCT.code,
+      report_type: order?.report_type || REPORT_PRODUCT.code,
+      value: order?.amount_usd,
+      currency: 'USD',
       source: 'payment_success_page',
       offer_version: REPORT_PRODUCT.offerVersion,
     });
