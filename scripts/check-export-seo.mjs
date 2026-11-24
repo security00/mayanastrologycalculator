@@ -50,6 +50,6 @@ const noindexRules = readExport('_headers')
   .split(/\n(?=\S)/)
   .filter((section) => /^\s+X-Robots-Tag:\s*.*\bnoindex\b/im.test(section))
   .map((section) => section.split('\n', 1)[0]);
-assert.deepEqual(noindexRules, ['https://mayanastrologycalculator.pages.dev/*', '/samples/*']);
+assert.deepEqual(noindexRules, ['/samples/*']);
 
 console.log(`export SEO ok: ${urls.length} canonical pages and ${nonIndexablePages.length} utility pages`);
