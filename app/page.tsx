@@ -9,6 +9,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
+  title: 'Mayan Astrology Calculator | Free Day Sign & Tone',
+  description: "Use only your birth date to find your Mayan day sign (Nawal), Galactic Tone, and Tzolk'in reading. Get your free result without signing up.",
   alternates: { canonical: 'https://mayanastrologycalculator.com' },
 };
 
