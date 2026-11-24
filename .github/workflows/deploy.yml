@@ -48,6 +48,9 @@ jobs:
 
       - name: Check static export redirects
         run: npm run test:export
+
+      - name: Check static export indexing rules
+        run: npm run test:seo
       
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

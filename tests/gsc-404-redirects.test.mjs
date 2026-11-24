@@ -103,7 +103,7 @@ test('sitemap and site copy do not point at the GSC 404 urls', () => {
 
 test('apex responses send HSTS without preload or includeSubDomains', () => {
   const headers = fs.readFileSync('public/_headers', 'utf8');
-  assert.match(headers, /^\/\*\n {2}Strict-Transport-Security: max-age=2592000\n/m);
+  assert.match(headers, /^\/\*\r?\n {2}Strict-Transport-Security: max-age=2592000\r?\n/m);
   assert.equal(headers.includes('preload'), false);
   assert.equal(headers.includes('includeSubDomains'), false);
   assert.match(headers, /\/samples\/\*[\s\S]*X-Robots-Tag: noindex, nofollow/);

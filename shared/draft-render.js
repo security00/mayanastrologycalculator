@@ -17,7 +17,7 @@ function unescapeQuoted(value) {
 }
 
 export function parseFrontmatter(raw) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  const match = raw.replaceAll('\r\n', '\n').match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error('Draft is missing frontmatter');
   const data = {};
   for (const line of match[1].split('\n')) {

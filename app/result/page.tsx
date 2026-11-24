@@ -58,18 +58,6 @@ export default function ResultPage() {
     setReady(true);
   }, []);
 
-  // Add noindex meta tag dynamically
-  useEffect(() => {
-    const metaRobots = document.createElement('meta');
-    metaRobots.name = 'robots';
-    metaRobots.content = 'noindex, nofollow';
-    document.head.appendChild(metaRobots);
-
-    return () => {
-      document.head.removeChild(metaRobots);
-    };
-  }, []);
-
   useEffect(() => {
     setOfferVariant(getOrAssignReportOfferVariant());
   }, []);

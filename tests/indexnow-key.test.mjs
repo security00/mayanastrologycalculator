@@ -24,7 +24,7 @@ test('IndexNow key file matches the exported key', () => {
   assert.equal(path.basename(keyPath), `${key}.txt`);
   assert.equal(fs.existsSync(path.join(root, 'public', `${EXPORT_ALPHA_KEY}.txt`)), false);
   const hosted = fs.readFileSync(keyPath, 'utf8');
-  assert.match(hosted, /^[a-f0-9]+\n?$/);
+  assert.match(hosted, /^[a-f0-9]+(?:\r?\n)?$/);
   assert.equal(hosted.trim(), key);
 });
 
