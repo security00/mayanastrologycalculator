@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { trackEvent } from '../lib/analytics';
+import { CHECKOUT_BLOCKED_EVENT, CHECKOUT_CONSENT_MESSAGE, CHECKOUT_PRODUCT, blockedCheckoutParams, revealConsentField } from '../lib/checkout-consent';
 import { calculateTzolkinDate } from '../lib/mayan-calculator';
 import {
   COMPATIBILITY_ANALYTICS_ITEM,
@@ -44,8 +45,10 @@ export default function CompatibilityUpgradeCard({
   personB,
 }: CompatibilityUpgradeCardProps) {
   const offerRef = useRef<HTMLElement>(null);
+  const consentInputRef = useRef<HTMLInputElement>(null);
   const hasTrackedView = useRef(false);
   const [emailDeliveryConsent, setEmailDeliveryConsent] = useState(false);
+  const [consentHighlight, setConsentHighlight] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
 
@@ -103,7 +106,12 @@ export default function CompatibilityUpgradeCard({
 
   const handleCheckout = async () => {
     if (!emailDeliveryConsent) {
-      setCheckoutError('Please agree to email delivery before continuing.');
+      setConsentHighlight(true);
+      revealConsentField(consentInputRef.current);
+      (window as AnalyticsWindow).gtag?.('event', CHECKOUT_BLOCKED_EVENT, blockedCheckoutParams(
+        CHECKOUT_PRODUCT.compatibility,
+        COMPATIBILITY_PRODUCT.priceUsd,
+      ));
       return;
     }
 
@@ -171,12 +179,19 @@ export default function CompatibilityUpgradeCard({
               decision filter, and a seven-day practice.
             </p>
             <GoogleEmailSignIn />
-            <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-white/25 bg-black/20 p-3.5 text-sm text-orange-50">
+            <label className={`mb-4 flex cursor-pointer items-start gap-3 rounded-xl border bg-black/20 p-3.5 text-sm text-orange-50 ${consentHighlight ? 'border-red-200 ring-2 ring-red-300 ring-offset-2 ring-offset-[#7f1d1d]' : 'border-white/25'}`}>
               <input
+                ref={consentInputRef}
                 type="checkbox"
                 checked={emailDeliveryConsent}
-                onChange={(event) => setEmailDeliveryConsent(event.target.checked)}
-                className="mt-0.5 h-5 w-5 shrink-0 accent-amber-500"
+                onChange={(event) => {
+                  const checked = event.target.checked;
+                  setEmailDeliveryConsent(checked);
+                  if (checked) setConsentHighlight(false);
+                }}
+                className="mt-0.5 h-5 w-5 shrink-0 scroll-mt-32 accent-amber-500"
+                aria-invalid={consentHighlight || undefined}
+                aria-describedby={consentHighlight ? 'compatibility-checkout-consent-help' : undefined}
                 required
               />
               <span>
@@ -188,16 +203,29 @@ export default function CompatibilityUpgradeCard({
                 <span className="mt-1 block text-xs text-orange-100/80">Required to continue. No marketing emails.</span>
               </span>
             </label>
+            {consentHighlight && (
+              <p id="compatibility-checkout-consent-help" role="alert" aria-live="assertive" className="mb-4 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800">
+                {CHECKOUT_CONSENT_MESSAGE}
+              </p>
+            )}
             <button
               type="button"
               onClick={() => void handleCheckout()}
-              disabled={checkoutLoading || !emailDeliveryConsent}
+              disabled={checkoutLoading}
+              aria-busy={checkoutLoading}
               aria-describedby={!emailDeliveryConsent ? 'compatibility-checkout-consent-help' : undefined}
               className="w-full sm:w-auto rounded-xl bg-[linear-gradient(120deg,#f6dc9f,#d4a24e)] px-7 py-3.5 font-bold text-[#2a1a05] shadow-[0_14px_36px_-10px_rgb(212_162_78/60%)] transition-all hover:brightness-110 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {checkoutLoading ? 'Opening secure checkout…' : `Get the 11-page pair report — $${COMPATIBILITY_PRODUCT.priceUsd}`}
+              {checkoutLoading ? (
+                <span className="inline-flex items-center justify-center gap-2">
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#2a1a05]/30 border-t-[#2a1a05]" aria-hidden="true" />
+                  Opening secure checkout…
+                </span>
+              ) : (
+                `Get the 11-page pair report — $${COMPATIBILITY_PRODUCT.priceUsd}`
+              )}
             </button>
-            {!emailDeliveryConsent && (
+            {!emailDeliveryConsent && !consentHighlight && (
               <span id="compatibility-checkout-consent-help" className="mt-2 block text-xs text-orange-100/80 sm:inline sm:ml-3">
                 Check the delivery consent box to continue.
               </span>

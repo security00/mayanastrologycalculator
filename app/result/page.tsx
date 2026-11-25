@@ -8,6 +8,7 @@ import { PillarChartAside } from '../components/PillarChartLink';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
 import MayanNumeral from '../components/decor/MayanNumeral';
 import GrecaBand from '../components/decor/GrecaBand';
+import { CHECKOUT_BLOCKED_EVENT, CHECKOUT_PRODUCT, blockedCheckoutParams } from '../lib/checkout-consent';
 import { REPORT_ANALYTICS_ITEM, REPORT_PRODUCT } from '../lib/report-product';
 import {
   getOrAssignReportOfferVariant,
@@ -93,11 +94,19 @@ export default function ResultPage() {
     if (!storedData || !offerVariant) return;
 
     const offerMetadata = getReportOfferMetadata(offerVariant);
+    const analyticsWindow = window as AnalyticsWindow;
+
+    if (emailDeliveryConsent !== true) {
+      analyticsWindow.gtag?.('event', CHECKOUT_BLOCKED_EVENT, blockedCheckoutParams(
+        CHECKOUT_PRODUCT.personal,
+        REPORT_PRODUCT.priceUsd,
+      ));
+      return;
+    }
 
     setCheckoutLoading(true);
     setCheckoutError('');
 
-    const analyticsWindow = window as AnalyticsWindow;
     analyticsWindow.gtag?.('event', 'paid_report_checkout_click', {
       report_type: REPORT_PRODUCT.code,
       nawal: storedData.reading.nawal.name,
