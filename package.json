@@ -12,7 +12,7 @@
     "test:compatibility": "node --test tests/mayan-compatibility.test.mjs tests/compatibility-report-engine.test.mjs",
     "test:auth": "node --test tests/auth-session.test.mjs",
     "test:checkout": "node --test tests/checkout-consent.test.mjs tests/compatibility-checkout.test.mjs",
-    "test:content": "node --test tests/dreamspell-converter.test.mjs tests/p0a-content.test.mjs tests/gsc-404-redirects.test.mjs tests/today-signature.test.mjs tests/last-birth-input.test.mjs tests/legacy-calculator-redirects.test.mjs tests/mayan-sign-calculator-page.test.mjs",
+    "test:content": "node --test tests/dreamspell-converter.test.mjs tests/p0a-content.test.mjs tests/gsc-404-redirects.test.mjs tests/today-signature.test.mjs tests/last-birth-input.test.mjs tests/legacy-calculator-redirects.test.mjs tests/mayan-sign-calculator-page.test.mjs tests/homepage-day-sign-facts.test.mjs",
     "test:export": "node scripts/check-export-redirects.mjs",
     "test:seo": "node scripts/check-export-seo.mjs",
     "test:indexnow": "node --test tests/indexnow-key.test.mjs",
