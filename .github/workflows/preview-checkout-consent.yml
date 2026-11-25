@@ -1,0 +1,67 @@
+name: Independent checkout preview
+
+on:
+  push:
+    branches:
+      - cursor/checkout-consent-clickable-2a99
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check static export redirects
+        run: npm run test:export
+
+      - name: Check static export indexing rules
+        run: npm run test:seo
+
+      - name: Mark the preview artifact noindex
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          headers = Path('out/_headers')
+          text = headers.read_text()
+          needle = "/*\n  Strict-Transport-Security: max-age=2592000\n"
+          replacement = needle + "  X-Robots-Tag: noindex, nofollow\n"
+          if needle not in text:
+              raise SystemExit('expected HSTS header block was not found')
+          headers.write_text(text.replace(needle, replacement, 1))
+          Path('out/robots.txt').write_text('User-agent: *\nDisallow: /\n')
+          PY
+
+      - name: Refuse the production Pages project
+        env:
+          PREVIEW_PROJECT: mayan-checkout-consent-preview
+        run: |
+          test "$PREVIEW_PROJECT" != "mayanastrologycalculator"
+          test "$PREVIEW_PROJECT" != "main"
+
+      - name: Create the independent preview project if needed
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create mayan-checkout-consent-preview --production-branch=main
+
+      - name: Deploy branch preview without touching production
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=mayan-checkout-consent-preview --branch=cursor/checkout-consent-clickable-2a99 --commit-dirty=true
