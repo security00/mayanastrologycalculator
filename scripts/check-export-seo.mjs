@@ -52,4 +52,17 @@ const noindexRules = readExport('_headers')
   .map((section) => section.split('\n', 1)[0]);
 assert.deepEqual(noindexRules, ['/samples/*']);
 
+const todayHtml = readExport('today.html');
+assert.match(todayHtml, /id="today-utc"/);
+assert.match(todayHtml, /data-utc-date="\d{4}-\d{2}-\d{2}"/);
+assert.match(todayHtml, /data-tone="(?:[1-9]|1[0-3])"/);
+assert.match(todayHtml, /data-nawal="[^"]+"/);
+assert.doesNotMatch(todayHtml, /Calculating today's Tzolk'in day sign/);
+
+const sitemapXml = readExport('sitemap.xml');
+const todayEntries = [...sitemapXml.matchAll(/<loc>(https:\/\/mayanastrologycalculator\.com\/today[^<]*)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)];
+assert.equal(todayEntries.length, 1, 'sitemap should list one /today URL');
+assert.equal(todayEntries[0][1], 'https://mayanastrologycalculator.com/today');
+assert.match(todayEntries[0][2], /^2026-11-25/);
+
 console.log(`export SEO ok: ${urls.length} canonical pages and ${nonIndexablePages.length} utility pages`);

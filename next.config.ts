@@ -40,6 +40,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/pricing', destination: '/reports', permanent: true },
+      { source: '/nawal-calculator', destination: '/mayan-sign-calculator', statusCode: 301 },
+      { source: '/tzolkin-calculator', destination: '/mayan-calendar-calculator', statusCode: 301 },
+      { source: '/today/', destination: '/today', statusCode: 301 },
       ...legacySignRedirects,
       ...mistypedUtmRedirects,
     ];

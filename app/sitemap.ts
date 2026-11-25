@@ -9,10 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const latestUpdate = new Date("2026-08-10");
   const contentUpdate = new Date("2026-10-10");
   const waveUpdate = new Date("2026-10-30");
+  // /today stays one URL. lastmod moves only when this page changes, not when the UTC day sign rolls.
+  const todayPageUpdate = new Date("2026-11-25");
 
   return [
     { url: baseUrl, lastModified: previousUpdate, changeFrequency: "daily", priority: 1 },
-    { url: `${baseUrl}/today`, lastModified: waveUpdate, changeFrequency: "daily", priority: 0.9 },
+    { url: `${baseUrl}/today`, lastModified: todayPageUpdate, changeFrequency: "daily", priority: 0.9 },
     { url: `${baseUrl}/birth-chart`, lastModified: waveUpdate, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-zodiac-calculator`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.85 },
     { url: `${baseUrl}/mayan-calendar-calculator`, lastModified: previousUpdate, changeFrequency: "monthly", priority: 0.85 },

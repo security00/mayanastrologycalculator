@@ -20,7 +20,7 @@ function redirectSources(filePath) {
 
 const publicRedirects = redirectSources('public/_redirects');
 const routes = JSON.parse(fs.readFileSync('public/_routes.json', 'utf8'));
-assert.deepEqual(routes.include, ['/api/*']);
+assert.deepEqual(routes.include, ['/api/*', '/today']);
 for (const source of publicRedirects) {
   assert.ok(routes.exclude.includes(source), `missing _routes.json exclude for ${source}`);
 }

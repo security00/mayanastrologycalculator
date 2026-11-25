@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import TodayReading from './TodayReading';
+import TodayUtcRefresh from './TodayUtcRefresh';
 import PageHero from '../components/PageHero';
 import { PersonalReportPin } from '../components/content/ReportCtaPin';
+import { calculateTzolkinDateFromParts } from '../lib/mayan-calculator';
 import { seoGraph } from '../lib/seo-schema';
+import { buildUtcTodaySignature, renderTodayUtcSection } from '../../shared/today-signature.js';
 
 const title = 'What Is Today’s Mayan Calendar Date? Current Tzolk’in Day Sign';
 const description = 'See today’s Mayan calendar date in the Tzolk’in: Galactic Tone + Nawal, how GMT correlation works, timezone notes, and how to compare with your birth sign.';
@@ -11,11 +14,11 @@ const description = 'See today’s Mayan calendar date in the Tzolk’in: Galact
 const faqs = [
   {
     question: 'How is today’s Mayan day sign calculated?',
-    answer: 'From your local Gregorian date, using GMT correlation 584283 and the same number/day-name cycles as the birth calculator. The methodology page publishes the formula.',
+    answer: 'From a Gregorian civil date, using GMT correlation 584283 and the same number/day-name cycles as the birth calculator. The page HTML uses the UTC civil date. The methodology page publishes the formula.',
   },
   {
     question: 'Does “today” use my timezone?',
-    answer: 'Yes—the widget follows your local civil date. Crossing local midnight can change the result.',
+    answer: 'The date in the page HTML is the UTC civil date. After the page loads, the widget uses your local civil date when that date is different. Crossing local midnight can change the widget.',
   },
   {
     question: 'How do I compare today’s sign with my birth sign?',
@@ -53,6 +56,8 @@ export const metadata: Metadata = {
 };
 
 export default function TodayPage() {
+  const utc = buildUtcTodaySignature(new Date());
+  const reading = calculateTzolkinDateFromParts({ day: utc.day, month: utc.month, year: utc.year });
   const schema = seoGraph({
     pageName: title,
     description,
@@ -69,19 +74,24 @@ export default function TodayPage() {
           title="Mayan Calendar Today: Current Tzolk’in Date & Day Sign"
           glyphs={['sun', 'moon', 'star']}
         >
-          Quick answer. “Today” on the Tzolk’in is one of 260 day signatures: a Galactic Tone (number 1–13) paired with one of 20 Nawal day signs. This site maps your local Gregorian date to that signature with the same GMT correlation (584283) used by the birth-date calculator (gmt584283-proleptic-gregorian-v1). The date conversion is deterministic; the daily meaning text is reflective, not a scientific prediction.
+          Quick answer. “Today” on the Tzolk’in is one of 260 day signatures: a Galactic Tone (number 1–13) paired with one of 20 Nawal day signs. This page pre-renders the UTC civil date with the same GMT correlation (584283) used by the birth-date calculator (gmt584283-proleptic-gregorian-v1). After load, the widget can follow your local civil date. The date conversion is deterministic; the daily meaning text is reflective, not a scientific prediction.
         </PageHero>
 
         <p className="mb-8 text-sm text-[var(--parchment-dim)]">
           Reviewed 30 October 2026 · Calculation gmt584283-proleptic-gregorian-v1 · The calculation is deterministic, while the daily meaning is reflective and non-predictive.
         </p>
 
-        <TodayReading />
+        <div className="mb-8" dangerouslySetInnerHTML={{ __html: renderTodayUtcSection(utc) }} />
+        <TodayUtcRefresh />
+        <TodayReading
+          initialReading={reading}
+          initialParts={{ day: utc.day, month: utc.month, year: utc.year }}
+        />
 
         <article className="content-prose mt-10">
           <h2>What the widget shows</h2>
           <p>
-            The block above is the local-time reading: “Today in your local time,” plus tone, Nawal, and a short reflection. When the page loads, you should see:
+            The UTC block is in the page HTML before JavaScript runs: tone, Nawal, and the Gregorian date for the UTC civil day. The widget under it uses the same count. When your local date differs, the widget switches to that local civil date after the page loads. You should see:
           </p>
           <ol>
             <li><strong>Today’s number (tone)</strong> — 1 through 13</li>
@@ -89,7 +99,7 @@ export default function TodayPage() {
             <li>A short <strong>daily reflection</strong> — journaling language, not fortune-telling</li>
           </ol>
           <p>
-            The widget links today’s resolved Nawal to its <Link href="/day-signs">day-sign page</Link> and today’s tone to its <Link href="/galactic-tones">Galactic Tone page</Link>. Before the date resolves, those controls point at the hubs.
+            The UTC block and the widget link the resolved Nawal to its <Link href="/day-signs">day-sign page</Link> and the tone to its <Link href="/galactic-tones">Galactic Tone page</Link>.
           </p>
 
           <h2>Tone + Nawal in one sentence</h2>
@@ -99,7 +109,7 @@ export default function TodayPage() {
 
           <h2>How today’s Mayan day sign is calculated</h2>
           <p>
-            We interpret “today” as your browser’s <strong>local civil date</strong>, convert that Gregorian date to a day count with the <strong>GMT correlation constant 584283</strong>, then advance the paired cycles of <strong>13 numbers</strong> and <strong>20 day names</strong>. The same engine powers the <Link href="/birth-chart">birth chart</Link>. Full formulas and cultural scope: <Link href="/methodology">/methodology</Link>. [1]
+            The pre-rendered signature uses the <strong>UTC civil date</strong>. The widget starts from that same date and, after load, uses your browser’s <strong>local civil date</strong> when the two dates differ. Either date is converted with the <strong>GMT correlation constant 584283</strong>, then the paired cycles of <strong>13 numbers</strong> and <strong>20 day names</strong>. The same engine powers the <Link href="/birth-chart">birth chart</Link>. Full formulas and cultural scope: <Link href="/methodology">/methodology</Link>. [1]
           </p>
           <p>
             Other scholarly tools may use nearby constants such as <strong>584285</strong> or <strong>584286</strong>, which shift results by a small number of days. This consumer site keeps <strong>584283</strong> as a stable default. [1]
@@ -107,13 +117,13 @@ export default function TodayPage() {
 
           <h2>Timezone / local date note</h2>
           <p>
-            The widget uses <strong>your local date</strong>, not a single global “Maya midnight.” If you check the page just before or after local midnight—or while traveling across a date line—the displayed signature can change with the civil date. That is expected for a local-date tool. We do not claim a single universal ritual day boundary for every Maya community.
+            The HTML signature is the <strong>UTC civil date</strong>, so a fetch of this page includes that day’s tone and Nawal without running JavaScript. The widget then follows <strong>your local date</strong> when it differs. There is no single global “Maya midnight” on this page. Crossing UTC midnight changes the pre-rendered date; crossing local midnight can change the widget. We do not claim a single universal ritual day boundary for every Maya community.
           </p>
 
           <h2>How to use today’s sign with your birth chart</h2>
           <ul>
             <li>Your <strong>birth signature</strong> (tone + Nawal) stays fixed for a given birth date under this correlation.</li>
-            <li><strong>Today’s signature</strong> moves every local day through the 260-day cycle.</li>
+            <li><strong>Today’s signature</strong> moves with the civil date through the 260-day cycle. The HTML uses UTC; the widget uses your local date when it differs.</li>
             <li>Reading both side by side is a simple reflective practice: “What stays mine, and what is the day’s wider pattern?”</li>
           </ul>
           <p>
@@ -173,10 +183,10 @@ export default function TodayPage() {
           <h2>FAQ</h2>
           <h3>How is today’s Mayan day sign calculated?</h3>
           <p>
-            From your local Gregorian date, using GMT correlation <strong>584283</strong> and the same number/day-name cycles as the birth calculator. Details: <Link href="/methodology">/methodology</Link>.
+            From a Gregorian civil date, using GMT correlation <strong>584283</strong> and the same number/day-name cycles as the birth calculator. The page HTML uses the UTC civil date. Details: <Link href="/methodology">/methodology</Link>.
           </p>
           <h3>Does “today” use my timezone?</h3>
-          <p>Yes—the widget follows your <strong>local civil date</strong>. Crossing local midnight can change the result.</p>
+          <p>The date in the page HTML is the <strong>UTC civil date</strong>. After the page loads, the widget uses your <strong>local civil date</strong> when that date is different. Crossing local midnight can change the widget.</p>
           <h3>How do I compare today’s sign with my birth sign?</h3>
           <p>
             Calculate your birth tone + Nawal on <Link href="/birth-chart">/birth-chart</Link>, then read today’s widget. Use the <Link href="/day-signs">day-sign</Link> and <Link href="/galactic-tones">tone</Link> pages for vocabulary; treat daily text as reflection, not prediction. The free chart is the $0 result; the optional personal PDF is <strong>$7</strong>.
