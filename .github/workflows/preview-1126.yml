@@ -74,4 +74,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name=mayanastrologycalculator-preview-1126 --commit-dirty=true --branch=preview-1126
+          command: pages deploy out --project-name=mayanastrologycalculator-preview-1126 --commit-dirty=true --branch=main
