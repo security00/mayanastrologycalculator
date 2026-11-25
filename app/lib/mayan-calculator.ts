@@ -421,18 +421,12 @@ export const GALACTIC_TONES = [
 ];
 
 /**
- * Calculate the number of days since the Mayan correlation date
- * Using the GMT correlation constant: 584283 (most widely accepted)
+ * Convert a Gregorian civil date to Tzolk'in date.
+ * Callers pass the civil year/month/day they mean. UTC "today" and a
+ * birth date both go through calculateTzolkinPosition.
  */
-/**
- * Convert a Gregorian date to Tzolk'in date
- */
-export function calculateTzolkinDate(birthDate: Date): MayanReading {
-  const position = calculateTzolkinPosition({
-    day: birthDate.getDate(),
-    month: birthDate.getMonth() + 1,
-    year: birthDate.getFullYear(),
-  });
+export function calculateTzolkinDateFromParts({ day, month, year }: { day: number; month: number; year: number }): MayanReading {
+  const position = calculateTzolkinPosition({ day, month, year });
   const tzolkinNumber = position.toneNumber;
   const daySignIndex = position.daySignIndex;
 
@@ -462,6 +456,17 @@ export function calculateTzolkinDate(birthDate: Date): MayanReading {
       color: daySign.color
     }
   };
+}
+
+/**
+ * Convert a Date to Tzolk'in using that Date's local civil year, month, and day.
+ */
+export function calculateTzolkinDate(birthDate: Date): MayanReading {
+  return calculateTzolkinDateFromParts({
+    day: birthDate.getDate(),
+    month: birthDate.getMonth() + 1,
+    year: birthDate.getFullYear(),
+  });
 }
 
 /**

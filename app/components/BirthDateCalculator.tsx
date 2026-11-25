@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { trackEvent } from '../lib/analytics';
 import { calculateTzolkinDate, validateDate } from '../lib/mayan-calculator';
+import { LAST_BIRTH_INPUT_KEY } from '../../shared/last-birth-input.js';
 import { TrackedSampleLink } from './content/SampleAction';
 
 type BirthDateCalculatorProps = {
@@ -16,6 +17,7 @@ type BirthDateCalculatorProps = {
     helper?: string;
     placement: string;
   };
+  onCalculated?: (birthDate: { day: number; month: number; year: number }) => void;
 };
 
 export default function BirthDateCalculator({
@@ -23,6 +25,7 @@ export default function BirthDateCalculator({
   description = "Enter your birth date to calculate your Tzolk'in signature",
   buttonLabel = 'Calculate My Mayan Astrology',
   sampleCta,
+  onCalculated,
 }: BirthDateCalculatorProps) {
   const router = useRouter();
   const [day, setDay] = useState('');
@@ -54,10 +57,16 @@ export default function BirthDateCalculator({
     setIsCalculating(true);
     const reading = calculateTzolkinDate(new Date(yearNumber, monthNumber - 1, dayNumber));
 
+    const birthDate = { day: dayNumber, month: monthNumber, year: yearNumber };
     sessionStorage.setItem('mayanReading', JSON.stringify({
       reading,
-      birthDate: { day: dayNumber, month: monthNumber, year: yearNumber },
+      birthDate,
     }));
+    try {
+      localStorage.setItem(LAST_BIRTH_INPUT_KEY, JSON.stringify(birthDate));
+    } catch {
+      // Private mode can reject storage. The result URL still carries the date.
+    }
 
     trackEvent('mayan_calculator_submit', {
       nawal: reading.nawal.name,
@@ -65,6 +74,7 @@ export default function BirthDateCalculator({
       placement: window.location.pathname,
       tool: 'tzolkin',
     });
+    onCalculated?.(birthDate);
     router.push(`/result?day=${dayNumber}&month=${monthNumber}&year=${yearNumber}`);
   };
 

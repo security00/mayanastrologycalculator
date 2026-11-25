@@ -1,60 +1,57 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { calculateTzolkinDate } from '../lib/mayan-calculator';
+import { MayanReading, calculateTzolkinDateFromParts } from '../lib/mayan-calculator';
 import { displayForColonial } from '../../shared/dual-calendar.js';
+import { formatCivilLong, utcCivilParts } from '../../shared/today-signature.js';
 
-const subscribeToClient = () => () => {};
+type CivilDate = { day: number; month: number; year: number };
 
-function formatToday(date: Date) {
-  return new Intl.DateTimeFormat('en', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(date);
-}
+type TodayReadingProps = {
+  initialReading: MayanReading;
+  initialParts: CivilDate;
+};
 
-export default function TodayReading() {
-  const isClient = useSyncExternalStore(
-    subscribeToClient,
-    () => true,
-    () => false
-  );
-  const today = isClient ? new Date() : null;
+export default function TodayReading({ initialReading, initialParts }: TodayReadingProps) {
+  const [reading, setReading] = useState(initialReading);
+  const [parts, setParts] = useState(initialParts);
+  const [basis, setBasis] = useState<'utc' | 'local'>('utc');
 
-  if (!today) {
-    return (
-      <section
-        id="today-reading"
-        className="panel rounded-2xl p-6 md:p-8"
-      >
-        <p className="text-sm font-semibold text-gold-bright mb-2">Today in your local time</p>
-        <h2 className="text-3xl font-display text-[var(--parchment)] mb-3">Calculating today's Tzolk'in day sign…</h2>
-        <p className="text-[var(--parchment-dim)] mb-4">
-          Your current Galactic Tone and Nawal will appear when the page loads.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Link href="/day-signs" className="link-gold font-semibold">Day sign hub</Link>
-          <Link href="/galactic-tones" className="link-gold font-semibold">Tone hub</Link>
-        </div>
-      </section>
-    );
-  }
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const now = new Date();
+      const utc = utcCivilParts(now);
+      const local = { day: now.getDate(), month: now.getMonth() + 1, year: now.getFullYear() };
+      const useLocal = local.day !== utc.day || local.month !== utc.month || local.year !== utc.year;
+      const next = useLocal ? local : utc;
+      if (
+        next.day === initialParts.day
+        && next.month === initialParts.month
+        && next.year === initialParts.year
+      ) {
+        return;
+      }
+      setParts(next);
+      setReading(calculateTzolkinDateFromParts(next));
+      setBasis(useLocal ? 'local' : 'utc');
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [initialParts.day, initialParts.month, initialParts.year]);
 
-  const reading = calculateTzolkinDate(today);
   const sign = displayForColonial(reading.nawal.name);
   const signHref = sign ? `/day-signs/${sign.slug}` : '/day-signs';
   const toneHref = `/galactic-tones/${reading.galacticTone.number}`;
 
   return (
     <section id="today-reading" className="panel rounded-2xl p-6 md:p-8">
-      <p className="text-sm font-semibold text-gold-bright mb-2">Today in your local time</p>
+      <p className="text-sm font-semibold text-gold-bright mb-2">
+        {basis === 'local' ? 'Today in your local time' : 'UTC civil date'}
+      </p>
       <h2 className="text-3xl md:text-4xl font-display text-[var(--parchment)] mb-2">
         {reading.galacticTone.number} {reading.nawal.name}
       </h2>
-      <p className="text-[var(--parchment-dim)] mb-6">{formatToday(today)}</p>
+      <p className="text-[var(--parchment-dim)] mb-6">{formatCivilLong(parts)}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
         <article className="rounded-xl border border-[rgb(79_209_165/22%)] bg-[rgb(79_209_165/6%)] p-5">

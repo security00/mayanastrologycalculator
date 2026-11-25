@@ -166,7 +166,7 @@ export default function Home() {
           <h3 className="font-display text-2xl mt-10 mb-4">The 20 Day Signs (Nawals)</h3>
 
           <p className="text-[var(--parchment-dim)] leading-relaxed mb-6">
-            Your Nawal, or day sign, represents your spiritual essence and core personality traits. Each of the 20 Nawals carries specific energies, elements, and characteristics that influence your life path. From Imix (Crocodile) representing nurturing and creation, to Ahau (Sun) symbolizing enlightenment and leadership, each Nawal offers unique insights into your spiritual nature and life purpose.
+            The 260-day count combines 20 named days with the numbers 1 to 13. The signs have Yucatec names (Imix, Ik&apos;, Ak&apos;bal …) and highland names (Imox, Iq&apos;, Aq&apos;ab&apos;al …). Several English labels found online are borrowed from Aztec days or from Dreamspell, a modern system begun in 1987. &quot;Crocodile&quot; for Imix is from the Aztec day Cipactli and is debated; &quot;Sun&quot; for Ajaw comes from an Ixil name and from Dreamspell. Some charts give each day an &quot;element&quot; such as fire or water. The day-sign guide found no traditional source for this, and where an element appears on this site it is labeled as a modern convention.
           </p>
 
           <h3 className="font-display text-2xl mt-10 mb-4">The 13 Galactic Tones</h3>
@@ -178,7 +178,7 @@ export default function Home() {
           <h3 className="font-display text-2xl mt-10 mb-4">How to Use This Mayan Astrology Calculator</h3>
 
           <p className="text-[var(--parchment-dim)] leading-relaxed mb-6">
-            Using our Mayan astrology calculator is simple and accurate. Enter your birth date using the dropdown menus above, and our algorithm will instantly calculate your Tzolk&apos;in date using the GMT correlation constant—the most widely accepted method for converting Gregorian dates to the Mayan calendar system. You&apos;ll receive a detailed reading that includes your Nawal, Galactic Tone, and comprehensive interpretation of your Mayan astrology profile.
+            Enter your birth date using the dropdown menus above. This site calculates that date with the GMT correlation 584283, in the proleptic Gregorian calendar. Other correlations shift results by a day or two. You&apos;ll receive a reading that includes your Nawal and your number from 1 to 13.
           </p>
 
           <h3 className="font-display text-2xl mt-10 mb-4">Benefits of Knowing Your Mayan Astrology</h3>

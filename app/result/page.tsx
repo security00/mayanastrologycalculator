@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { MayanReading, calculateTzolkinDate, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
+import { MayanReading, calculateTzolkinDateFromParts, getDetailedInterpretation, validateDate } from '../lib/mayan-calculator';
 import { displayForColonial } from '../../shared/dual-calendar.js';
+import { LAST_BIRTH_INPUT_KEY, parseLastBirthInput } from '../../shared/last-birth-input.js';
+import BirthDateCalculator from '../components/BirthDateCalculator';
 import { PillarChartAside } from '../components/PillarChartLink';
 import ReportUpgradeCard from '../components/ReportUpgradeCard';
 import MayanNumeral from '../components/decor/MayanNumeral';
@@ -16,9 +18,49 @@ import {
   type ReportOfferVariant,
 } from '../lib/report-experiment';
 
+interface BirthParts {
+  day: number;
+  month: number;
+  year: number;
+}
+
 interface StoredReading {
   reading: MayanReading;
-  birthDate: { day: number; month: number; year: number };
+  birthDate: BirthParts;
+}
+
+function readingFromParts(parts: BirthParts): StoredReading {
+  return {
+    reading: calculateTzolkinDateFromParts(parts),
+    birthDate: parts,
+  };
+}
+
+function persistReading(data: StoredReading) {
+  try {
+    sessionStorage.setItem('mayanReading', JSON.stringify(data));
+  } catch {
+    // Private mode can reject storage. The URL still carries the date.
+  }
+  try {
+    localStorage.setItem(LAST_BIRTH_INPUT_KEY, JSON.stringify(data.birthDate));
+  } catch {
+    // Private mode can reject storage. The URL still carries the date.
+  }
+}
+
+function partsFromSession(raw: string | null): BirthParts | null {
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw) as { birthDate?: Partial<BirthParts> };
+    const day = Number(parsed?.birthDate?.day);
+    const month = Number(parsed?.birthDate?.month);
+    const year = Number(parsed?.birthDate?.year);
+    if (!validateDate(day, month, year)) return null;
+    return { day, month, year };
+  } catch {
+    return null;
+  }
 }
 
 const NAWAL_COLOR_DOTS: Record<string, string> = {
@@ -45,19 +87,41 @@ export default function ResultPage() {
     const month = Number(searchParams.get('month'));
     const year = Number(searchParams.get('year'));
 
-    if (validateDate(day, month, year)) {
-      const reading = calculateTzolkinDate(new Date(year, month - 1, day));
-      const nextData = { reading, birthDate: { day, month, year } };
-      sessionStorage.setItem('mayanReading', JSON.stringify(nextData));
-      setStoredData(nextData);
+    let sessionRaw: string | null = null;
+    let storedBirth: string | null = null;
+    try {
+      sessionRaw = sessionStorage.getItem('mayanReading');
+    } catch {
+      sessionRaw = null;
+    }
+    try {
+      storedBirth = localStorage.getItem(LAST_BIRTH_INPUT_KEY);
+    } catch {
+      storedBirth = null;
+    }
+
+    const remembered = validateDate(day, month, year)
+      ? { day, month, year }
+      : partsFromSession(sessionRaw) ?? parseLastBirthInput(storedBirth);
+
+    if (!remembered) {
+      setStoredData(null);
       setReady(true);
       return;
     }
 
-    const data = sessionStorage.getItem('mayanReading');
-    setStoredData(data ? JSON.parse(data) : null);
+    const nextData = readingFromParts(remembered);
+    persistReading(nextData);
+    setStoredData(nextData);
     setReady(true);
   }, []);
+
+  const showCalculatedReading = (parts: BirthParts) => {
+    const nextData = readingFromParts(parts);
+    persistReading(nextData);
+    setStoredData(nextData);
+    setReady(true);
+  };
 
   useEffect(() => {
     setOfferVariant(getOrAssignReportOfferVariant());
@@ -174,16 +238,21 @@ export default function ResultPage() {
 
   if (!storedData) {
     return (
-      <div className="page-shell flex items-center justify-center">
-        <div className="panel text-center max-w-md mx-auto p-10 rounded-2xl">
-          <h2 className="font-display text-3xl text-[var(--parchment)] mb-4">No Reading Found</h2>
-          <p className="text-[var(--parchment-dim)] mb-8">
-            It looks like you haven't calculated your reading yet. Please go back to the calculator to get your reading.
+      <div className="page-shell">
+        <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="text-center mb-8">
+            <h1 className="font-display text-4xl text-[var(--parchment)] mb-4">Calculate your Mayan day sign</h1>
+            <p className="text-[var(--parchment-dim)]">
+              This page needs a birth date. Enter it here, or return to the calculator on the home page.
+            </p>
+          </div>
+          <BirthDateCalculator onCalculated={showCalculatedReading} />
+          <p className="text-center mt-6">
+            <Link href="/#calculator" className="link-gold font-semibold">
+              Open the calculator on the home page
+            </Link>
           </p>
-          <Link href="/" className="btn-ember py-3 px-7">
-            Calculate My Mayan Astrology
-          </Link>
-        </div>
+        </main>
       </div>
     );
   }

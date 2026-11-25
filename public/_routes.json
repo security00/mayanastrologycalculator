@@ -1,9 +1,14 @@
 {
   "version": 1,
-  "include": ["/api/*"],
+  "include": ["/api/*", "/today"],
   "exclude": [
     "/pricing",
     "/pricing/",
+    "/nawal-calculator",
+    "/nawal-calculator/",
+    "/tzolkin-calculator",
+    "/tzolkin-calculator/",
+    "/today/",
     "/day-signs/chicchan",
     "/day-signs/chicchan/",
     "/day-signs/cimi",
