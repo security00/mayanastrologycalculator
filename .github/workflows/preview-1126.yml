@@ -1,0 +1,77 @@
+name: Preview deploy 1126
+
+on:
+  push:
+    branches:
+      - cursor/today-ssr-result-recovery-3bf7
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: |
+          npm run test:report
+          npm run test:compatibility
+          npm run test:checkout
+          npm run test:content
+
+      - name: Build
+        run: npm run build
+
+      - name: Check static export
+        run: |
+          npm run test:export
+          npm run test:seo
+
+      - name: Mark this preview noindex
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          root = Path('out')
+          meta = '<meta name="robots" content="noindex, nofollow">'
+          for path in root.rglob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              head, sep, rest = text.partition('<head>')
+              if not sep:
+                  continue
+              if 'noindex' in head.lower() or 'name="robots"' in text and 'noindex' in text.lower():
+                  continue
+              path.write_text(head + sep + meta + rest, encoding='utf-8')
+          headers_path = root / '_headers'
+          headers = headers_path.read_text(encoding='utf-8')
+          needle = "/*\n  Strict-Transport-Security: max-age=2592000\n"
+          if 'X-Robots-Tag: noindex, nofollow' not in headers.split('/samples', 1)[0]:
+              headers_path.write_text(headers.replace(needle, needle + "  X-Robots-Tag: noindex, nofollow\n", 1), encoding='utf-8')
+          PY
+
+      - name: Create preview Pages project
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler pages project create mayanastrologycalculator-preview-1126 --production-branch=main
+
+      - name: Deploy preview
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=mayanastrologycalculator-preview-1126 --commit-dirty=true --branch=preview-1126
